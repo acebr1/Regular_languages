@@ -48,8 +48,21 @@ public class FA_algorithms {
 /**
    * @return finite automaton complete
 */
-	public void complete(FiniteAutomaton f) {
-            f.setComplete(new FiniteAutomaton());
+	public FiniteAutomaton complete(FiniteAutomaton f) {
+            FiniteAutomaton complete = new FiniteAutomaton(f.states, f.alphabet, f.initial);
+            State ErrorState = new State("ErrorState", false);
+            for(Character c: complete.alphabet) {
+                ErrorState.setTransitions(c, ErrorState);
+            }
+            for(State s: complete.states) {
+                for(Character c: complete.alphabet) {
+                    if(!s.transition.containsKey(c) || s.getListStates(c).size() == 0){
+                        s.setTransitions(c, ErrorState);
+                    }
+                }
+            }
+            f.setComplete(complete);
+            return complete;
 	}
 
 /**

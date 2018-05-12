@@ -146,8 +146,7 @@ public class FA_algorithmsTest {
         FA_algorithms f = new FA_algorithms();
         
         assertEquals(false, f.isComplete(automaton));
-	//f.complete(automaton);
-        //assertEquals(true, f.isComplete(automaton));
+        assertEquals(true, f.isComplete(f.complete(automaton)));
     }
     
     /**

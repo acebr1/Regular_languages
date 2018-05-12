@@ -34,10 +34,6 @@ public class State {
             }
         }
         
-        public void setNewTransition(char c, ArrayList<State> list) {
-            transition.put(c, list);
-        }
-        
         public ArrayList<State> getListStates(char c) {
             return transition.get(c);
         }

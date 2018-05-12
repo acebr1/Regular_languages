@@ -46,5 +46,9 @@ public class FiniteAutomaton{
         public void setComplete (FiniteAutomaton f) {
             this.complete = f;
         }
+        
+        public FiniteAutomaton getComplete() {
+            return this.complete;
+        }
        
 }
