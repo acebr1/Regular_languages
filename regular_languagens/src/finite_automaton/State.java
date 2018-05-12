@@ -19,6 +19,9 @@ public class State {
                 this.isFinal = isFinal;
         }
         
+        public void setTransitions (char c, ArrayList<State> list) {
+            transition.put(c,list);
+        }
         public void setTransitions (char c, State s) {
             if(transition.containsKey(c)) {
                 ArrayList<State> list = transition.get(c);
@@ -27,7 +30,7 @@ public class State {
             } else {
                 ArrayList<State> list = new ArrayList<State>();
                 list.add(s);
-                setTransitions(c, s);
+                setTransitions(c, list);
             }
         }
         
