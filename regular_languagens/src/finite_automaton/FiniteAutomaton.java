@@ -50,5 +50,21 @@ public class FiniteAutomaton{
         public FiniteAutomaton getComplete() {
             return this.complete;
         }
+        
+        public FiniteAutomaton getDeterministic() {
+            return this.deterministic;
+        }
+        
+        public FiniteAutomaton getClone(){
+            ArrayList<State> copy = new ArrayList<>();
+            for(State s : states) {
+                copy.add(s.getClone());
+            }
+            ArrayList<Character> c = new ArrayList<>();
+            for(Character a: alphabet) {
+                c.add(a);
+            }
+            return new FiniteAutomaton(copy,c,initial.getClone());
+        }
        
 }

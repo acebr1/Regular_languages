@@ -41,16 +41,33 @@ public class FA_algorithms {
 /**
    * @return finite automaton deterministic
 */
-	public void determinize(FiniteAutomaton f) {
-            f.setDeterministic(new FiniteAutomaton());
+	public FiniteAutomaton determinize(FiniteAutomaton f) {
+            /*if(isDeterministic(f)) {
+                f.setDeterministic(f);
+                return f;
+            }
+            FiniteAutomaton determinized = new FiniteAutomaton();
+            ArrayList<State> newStates = new ArrayList<>();
+            
+            newStates.add(f.initial);
+            for(Character c: f.alphabet) {
+                if(f.initial.transition.containsKey(c)) {
+                    
+                }
+            }
+            
+            f.setDeterministic(determinized);
+            return determinized;*/
+            return new FiniteAutomaton();
 	}
         
 /**
    * @return finite automaton complete
 */
 	public FiniteAutomaton complete(FiniteAutomaton f) {
-            FiniteAutomaton complete = new FiniteAutomaton(f.states, f.alphabet, f.initial);
-            State ErrorState = new State("ErrorState", false);
+            //FiniteAutomaton complete = new FiniteAutomaton(f.states, f.alphabet, f.initial);
+            FiniteAutomaton complete = f.getClone();
+            State ErrorState = new State("Error", false);
             for(Character c: complete.alphabet) {
                 ErrorState.setTransitions(c, ErrorState);
             }

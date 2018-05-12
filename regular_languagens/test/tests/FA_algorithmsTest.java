@@ -147,6 +147,8 @@ public class FA_algorithmsTest {
         
         assertEquals(false, f.isComplete(automaton));
         assertEquals(true, f.isComplete(f.complete(automaton)));
+        assertEquals(true, f.isComplete(automaton.getComplete()));
+        assertEquals(false, f.isComplete(automaton));
     }
     
     /**
@@ -234,7 +236,9 @@ public class FA_algorithmsTest {
         
         assertEquals(false, f.isDeterministic(automaton));
 	f.determinize(automaton);
-        assertEquals(true, f.isDeterministic(automaton));
+        assertEquals(false, f.isDeterministic(automaton));
+        assertEquals(true, f.isDeterministic(automaton.getDeterministic()));
+        assertEquals(true, f.isDeterministic(f.determinize(automaton)));
     }
     /**
      * Test of complete method, of class FA_algorithms.
@@ -288,7 +292,8 @@ public class FA_algorithmsTest {
         
         assertEquals(false, f.isComplete(automaton));
 	f.complete(automaton);
-        assertEquals(true, f.isComplete(automaton));
+        assertEquals(true, f.isComplete(automaton.getComplete()));
+        assertEquals(false, f.isComplete(automaton));
     }
 
     /**

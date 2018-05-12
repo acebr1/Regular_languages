@@ -53,4 +53,12 @@ public class State {
 	public void setIsFinal(String name) {
             this.isFinal = isFinal;
 	}
+        
+        public State getClone() {
+            Map<Character, ArrayList<State>> transitionClone = new HashMap<>();
+            transitionClone.putAll(transition);
+            State s = new State(this.name, this.isFinal);
+            s.transition = transitionClone;
+            return s;
+        }
 }
