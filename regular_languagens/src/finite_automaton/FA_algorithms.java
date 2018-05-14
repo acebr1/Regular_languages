@@ -137,13 +137,13 @@ public class FA_algorithms {
    * @return finite automaton minimum
 */
 	public FiniteAutomaton minimize(FiniteAutomaton f) {
-            /**if (!isDeterministic(f))
+            /*if (!isDeterministic(f))
                 determinize(f);
             remove_unreachable(f);
             remove_dead(f);
-            equivalent_state(f);*/
-            //f.setMinimized (new FiniteAutomaton());
-            //union states equivalents
+            equivalent_state(f);
+            f.setMinimized (new FiniteAutomaton());
+            union states equivalents*/
             return f;
 	}
 
@@ -188,7 +188,6 @@ public class FA_algorithms {
             return new FiniteAutomaton(alive,f.alphabet, f.getInitial());*/
             return new FiniteAutomaton();
 	}   
-        
         public ArrayList<State> remove_dead_aux(FiniteAutomaton f, ArrayList<State> aux){
             ArrayList<State> alive_aux = new ArrayList<>();
             /**ArrayList<State> temp = new ArrayList<>();
@@ -204,7 +203,7 @@ public class FA_algorithms {
             }*/
             return alive_aux;
         }
-
+        
 /**
    * @return finite automaton withot equivalent states
 */
@@ -230,7 +229,6 @@ public class FA_algorithms {
                 for (char a : f.alphabet){
                 }
             }*/
-
             return new FiniteAutomaton();
 	}
 /**
