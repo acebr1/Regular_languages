@@ -113,6 +113,7 @@ public class FA_algorithms {
             }
             
             FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial);
+            System.out.println(determinized);
             f.setDeterministic(determinized);
             return determinized;
 	}

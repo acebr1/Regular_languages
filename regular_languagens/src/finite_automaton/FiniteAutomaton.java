@@ -55,6 +55,17 @@ public class FiniteAutomaton{
             return this.deterministic;
         }
         
+        @Override
+        public String toString(){
+            String resp = "Name:"+name+"\nStates:"+states+"\nTransitions:\n";
+            for(State s : states) {
+                for(Character key : s.transition.keySet()){
+                    if(s.isFinal) resp += "*";
+                    resp += s.getName()+"("+key+","+s.transition.get(key)+")\n";
+                }  
+            }
+            return resp;
+        }
         
         public FiniteAutomaton getClone(){
             ArrayList<State> copy = new ArrayList<>();

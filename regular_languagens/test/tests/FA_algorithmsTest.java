@@ -70,7 +70,7 @@ public class FA_algorithmsTest {
         State B = new State("B", false);
         State C = new State("C", false);
         State D = new State("D", false);
-        State F = new State("F", true);
+        State E = new State("E", true);
         
         State initialA = S;
        
@@ -80,24 +80,23 @@ public class FA_algorithmsTest {
         statesA.add(B);
         statesA.add(C);
         statesA.add(D);
-        statesA.add(F);
+        statesA.add(E);
         
         S.setTransitions('0', A);
         S.setTransitions('0', D);
-        S.setTransitions('1', F);
+        S.setTransitions('1', E);
         A.setTransitions('0', A);
         A.setTransitions('0', B);
         A.setTransitions('1', C);
-        A.setTransitions('1', F);
+        A.setTransitions('1', E);
         B.setTransitions('0', B);
         C.setTransitions('0', A);
         C.setTransitions('0', B);
         D.setTransitions('0', B);
         D.setTransitions('0', D);
         D.setTransitions('1', C);
-        D.setTransitions('0', B);
-        F.setTransitions('0', F);
-        F.setTransitions('1', F);
+        E.setTransitions('0', E);
+        E.setTransitions('1', E);
 
         ArrayList<Character> alphabet = new ArrayList<>();
         alphabet.add('0');
