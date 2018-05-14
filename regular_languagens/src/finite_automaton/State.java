@@ -50,10 +50,14 @@ public class State {
             return isFinal;
 	}
 
-	public void setIsFinal(String name) {
+	public void setIsFinal(boolean isFinal) {
             this.isFinal = isFinal;
 	}
         
+        @Override
+        public String toString() {
+            return ""+name;
+        }
         public State getClone() {
             Map<Character, ArrayList<State>> transitionClone = new HashMap<>();
             transitionClone.putAll(transition);

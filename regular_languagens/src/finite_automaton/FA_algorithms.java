@@ -1,7 +1,9 @@
 package finite_automaton;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public class FA_algorithms {
@@ -42,23 +44,77 @@ public class FA_algorithms {
    * @return finite automaton deterministic
 */
 	public FiniteAutomaton determinize(FiniteAutomaton f) {
-            /*if(isDeterministic(f)) {
+            if(isDeterministic(f)) {
                 f.setDeterministic(f);
                 return f;
             }
-            FiniteAutomaton determinized = new FiniteAutomaton();
-            ArrayList<State> newStates = new ArrayList<>();
+            FiniteAutomaton FAClone = f.getClone();
             
-            newStates.add(f.initial);
-            for(Character c: f.alphabet) {
-                if(f.initial.transition.containsKey(c)) {
-                    
+            ArrayList<State> newStates = new ArrayList<>();
+            Map<Set<State>,State> equiv = new HashMap<>();
+            Map<State,Set<State>> equiv2 = new HashMap<>();
+            
+            State initial = new State(FAClone.initial.toString(),false);
+            newStates.add(initial);
+            
+            Set<State> help = new HashSet<>();
+            help.add(initial);
+            equiv.put(help, initial);
+            equiv2.put(initial, help);
+            int iterator = 0;
+            int number_states = 1;
+            
+            while(number_states > iterator) {
+                for(Character c : FAClone.alphabet) {
+                    Set<State> statesEquiv = equiv2.get(newStates.get(iterator));
+                    Set<State> set = new HashSet<>();
+                    for(State s: statesEquiv) {
+                        int i = -1;
+                        for(State sf : FAClone.states) {
+                            if(sf.toString().equals(s.toString())){
+                                i = FAClone.states.indexOf(sf);
+                            }
+                        }
+                      
+                        if(FAClone.states.get(i).transition.containsKey(c)) {
+                            ArrayList<State> alc = FAClone.states.get(i).getListStates(c);
+                            for(State s1 : alc){
+                                if(!set.contains(s1))
+                                    set.add(s1);
+                            }
+                        }
+                    }
+                    if(!set.isEmpty()) {
+                        if(!equiv.containsKey(set)) {
+                            State newState = new State("q"+number_states, false);
+                            newStates.add(newState);
+                            number_states++;
+                            equiv.put(set,newState);
+                            equiv2.put(newState,set);
+                            newStates.get(iterator).setTransitions(c, newState);
+                        } else {
+                            newStates.get(iterator).setTransitions(c, equiv.get(set));
+                        }
+                    }
+                }
+                iterator++;
+            }
+            for(State s: FAClone.states) {
+                if(s.isFinal){
+                    for(State s1: newStates) {
+                        Set<State> list = equiv2.get(s1);
+                        for(State l: list){
+                            if(l.toString().equals(s.toString())){
+                                s1.setIsFinal(true);
+                            }
+                        }
+                    }
                 }
             }
             
+            FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial);
             f.setDeterministic(determinized);
-            return determinized;*/
-            return new FiniteAutomaton();
+            return determinized;
 	}
         
 /**

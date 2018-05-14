@@ -55,6 +55,7 @@ public class FiniteAutomaton{
             return this.deterministic;
         }
         
+        
         public FiniteAutomaton getClone(){
             ArrayList<State> copy = new ArrayList<>();
             for(State s : states) {

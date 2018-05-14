@@ -108,8 +108,10 @@ public class FA_algorithmsTest {
         FA_algorithms f = new FA_algorithms();
         
         assertEquals(false, f.isDeterministic(automaton)); 
-        //f.determinize(automaton);
-        //assertEquals(false, f.isDeterministic(automaton)); 
+        f.determinize(automaton);
+        assertEquals(false, f.isDeterministic(automaton)); 
+        assertEquals(true, f.isDeterministic(f.determinize(automaton))); 
+        assertEquals(true, f.isDeterministic(automaton.getDeterministic())); 
        
     }
     /**
