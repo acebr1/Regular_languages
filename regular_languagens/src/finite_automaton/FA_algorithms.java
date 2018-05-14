@@ -315,7 +315,34 @@ public class FA_algorithms {
    * @return Finite Automaton to recognize sentence?
 */
 	public boolean recognize(FiniteAutomaton f, String sentence) {
-            return true;
+            FiniteAutomaton FClone;
+            if(!isDeterministic(f)) {
+                FClone = determinize(f);
+            } else {
+                FClone = f.getClone();
+            }
+            //retirar & transições
+            State actual = FClone.initial;
+            while(sentence.length() > 0) {
+                char c = sentence.charAt(0);
+                if(actual.transition.containsKey(c)){
+                    ArrayList<State> state = actual.getListStates(c);
+                    if(state.size() == 1){
+                        actual = state.get(0);
+                        sentence = sentence.substring(1);
+                    }else {
+                        System.out.println("Isn't deterministic");
+                    }
+                } else {
+                    return false;
+                }
+            }
+            if(actual.isFinal){
+                return true;  
+            } else {
+                return false;
+            }
+            
 	}
 
 /**
