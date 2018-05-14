@@ -352,4 +352,45 @@ public class FA_algorithms {
             ArrayList<String> list = new ArrayList<String>();
             return list;
 	}
+        
+        
+/**
+ * * @return Finite Automaton without & transitions
+ */
+        public FiniteAutomaton removeEpsilonTrasitions(FiniteAutomaton f){
+            if(!hasEpsilonTrasitions(f))
+                return f;
+            for(State s: f.states) {
+                if(s.transition.containsKey('&')) {
+                    ArrayList<State> next = s.transition.get('&');
+                    for(State s1: f.states) {
+                        if(s1.transition.containsKey(s)){
+                            for(Character c: s1.transition.keySet()) {
+                                ArrayList<State> list = s1.transition.get(c);
+                                for(State s2: list){
+                                    if(s2.equals(s)) {
+                                        list.remove(s);
+                                        list.add(next.get(0));
+                                        s1.setTransitions(c, list);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+ * * @return true if AF has & transition
+ */
+        public boolean hasEpsilonTrasitions(FiniteAutomaton f){
+            for(State s: f.states) {
+                if(s.transition.containsKey('&'))
+                    return true;
+            }
+            return false;
+        }
+
 }
+
