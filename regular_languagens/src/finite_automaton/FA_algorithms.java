@@ -136,7 +136,13 @@ public class FA_algorithms {
    * @return finite automaton minimum
 */
 	public FiniteAutomaton minimize(FiniteAutomaton f) {
+            /**if (!isDeterministic(f))
+                determinize(f);
+            remove_unreachable(f);
+            remove_dead(f);
+            equivalent_state(f);*/
             //f.setMinimized (new FiniteAutomaton());
+            //union states equivalents
             return f;
 	}
 
@@ -144,6 +150,21 @@ public class FA_algorithms {
    * @return finite automaton without unreachable states
 */
 	public FiniteAutomaton remove_unreachable(FiniteAutomaton f) {
+            /**ArrayList<State> reachable = new ArrayList<>();
+            reachable.add(f.getInitial());
+            boolean temp = true;
+            while(temp){
+                int size_re = reachable.size();
+                for(State s : reachable){
+                    for(char a : f.alphabet) {
+                        reachable.addAll(s.getListStates(a));
+                    }
+                }
+                if(size_re == reachable.size())
+                    temp = false;
+            }
+            
+            return new FiniteAutomaton(reachable, f.alphabet, f.getInitial());*/
             return new FiniteAutomaton();
 	}
 
@@ -151,13 +172,64 @@ public class FA_algorithms {
    * @return finite automaton without dead states
 */
 	public FiniteAutomaton remove_dead(FiniteAutomaton f) {
+            /**ArrayList<State> alive = new ArrayList<>();
+            ArrayList<State> temp = new ArrayList<>();
+            for(State s : f.states) {
+                if (s.getIsFinal()){
+                    alive.add(s);
+                } else {
+                    for (char a : f.alphabet) {
+                        temp = s.getListStates(a);
+                        alive.addAll(remove_dead_aux(f, temp));
+                    }
+                }
+            }   
+            return new FiniteAutomaton(alive,f.alphabet, f.getInitial());*/
             return new FiniteAutomaton();
 	}   
+        
+        public ArrayList<State> remove_dead_aux(FiniteAutomaton f, ArrayList<State> aux){
+            ArrayList<State> alive_aux = new ArrayList<>();
+            /**ArrayList<State> temp = new ArrayList<>();
+            for (State s : aux) {
+                if (s.getIsFinal()){
+                    alive_aux.add(s);
+                } else {
+                    for (char a : f.alphabet) {
+                        temp = s.getListStates(a);
+                        alive_aux.addAll(remove_dead_aux(f,temp));
+                    }
+                }
+            }*/
+            return alive_aux;
+        }
 
 /**
    * @return finite automaton withot equivalent states
 */
 	public FiniteAutomaton equivalent_state(FiniteAutomaton f) {
+            /**ArrayList<ArrayList> group = new ArrayList<>();
+            ArrayList<State> accept = new ArrayList<>();
+            ArrayList<State> reject = new ArrayList<>();
+            ArrayList<State> accept_aux = new ArrayList<>();
+            group.add(accept);
+            group.add(reject);
+            for (State s : f.states){
+                if (s.getIsFinal()){
+                    accept.add(s);
+                    accept_aux.add(s);
+                } else {
+                    reject.add(s);
+                }
+            }
+            while(accept_aux != null) {
+                int i = 0;
+                accept_aux.remove(i);
+                i++;
+                for (char a : f.alphabet){
+                }
+            }*/
+
             return new FiniteAutomaton();
 	}
 /**
