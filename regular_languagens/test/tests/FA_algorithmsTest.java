@@ -296,6 +296,54 @@ public class FA_algorithmsTest {
         assertEquals(true, f.isComplete(automaton.getComplete()));
         assertEquals(false, f.isComplete(automaton));
     }
+    
+    /**
+     * Test of minimize method, of class FA_algorithms.
+     */
+    @Test
+    public void testRemove_unreachable() {
+        State A = new State("A", false);
+        State B = new State("B", true);
+        State C = new State("C", false);
+        
+        State initialA = A;
+        
+        ArrayList<State> statesA = new ArrayList<>();
+        statesA.add(A);
+        statesA.add(B);
+        statesA.add(C);
+        
+        A.setTransitions('a', B);
+        B.setTransitions('a', A);
+        C.setTransitions('a', B);
+        
+        ArrayList<Character> alphabet = new ArrayList<>();
+        alphabet.add('a');
+        
+        FiniteAutomaton automatonA = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
+        
+        State q0 = new State("A", false);
+        State q1 = new State("B", true);
+
+        State initialB = q0;
+        
+        ArrayList<State> statesB = new ArrayList<>();
+        statesA.add(q0);
+        statesA.add(q1);
+        
+        q0.setTransitions('a', q1);
+        q1.setTransitions('a', q0);
+        
+        FiniteAutomaton automatonB = new FiniteAutomaton(statesB, alphabet, initialB,"A"); 
+
+               
+        FA_algorithms f = new FA_algorithms();
+        
+        FiniteAutomaton copyAutomatonA = automatonA.getClone();
+        //botei toString pq os objetos são diferentes mas tem as mesmas propriedades
+        assertEquals(automatonB.toString(), f.remove_unreachable(automatonA).toString());
+        assertEquals(copyAutomatonA.toString(),automatonA.toString());
+    }
 
     /**
      * Test of minimize method, of class FA_algorithms.

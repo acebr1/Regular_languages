@@ -379,6 +379,8 @@ public class FA_algorithms {
                     }
                 }
             }
+            //apenas para não gerar erro
+            return f;
         }
 
         /**
