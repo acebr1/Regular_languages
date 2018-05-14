@@ -58,7 +58,7 @@ public class FA_algorithms {
             newStates.add(initial);
             
             Set<State> help = new HashSet<>();
-            help.add(initial);
+            help.add(FAClone.initial);
             equiv.put(help, initial);
             equiv2.put(initial, help);
             int iterator = 0;
@@ -69,15 +69,8 @@ public class FA_algorithms {
                     Set<State> statesEquiv = equiv2.get(newStates.get(iterator));
                     Set<State> set = new HashSet<>();
                     for(State s: statesEquiv) {
-                        int i = -1;
-                        for(State sf : FAClone.states) {
-                            if(sf.toString().equals(s.toString())){
-                                i = FAClone.states.indexOf(sf);
-                            }
-                        }
-                      
-                        if(FAClone.states.get(i).transition.containsKey(c)) {
-                            ArrayList<State> alc = FAClone.states.get(i).getListStates(c);
+                        if(s.transition.containsKey(c)) {
+                            ArrayList<State> alc = s.getListStates(c);
                             for(State s1 : alc){
                                 if(!set.contains(s1))
                                     set.add(s1);
@@ -113,7 +106,7 @@ public class FA_algorithms {
             }
             
             FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial);
-            System.out.println(determinized);
+            //System.out.println(determinized);
             f.setDeterministic(determinized);
             return determinized;
 	}
@@ -172,7 +165,41 @@ public class FA_algorithms {
    * @return Finite automaton resulting from the union
 */
 	public FiniteAutomaton union(FiniteAutomaton fa, FiniteAutomaton fb) {
-            return new FiniteAutomaton();
+            FiniteAutomaton FAclone = fa.getClone();
+            FiniteAutomaton FBclone = fb.getClone();
+            for(State s: FAclone.states) {
+                s.setName(s.getName()+"A");
+            }
+            for(State s: FBclone.states) {
+                s.setName(s.getName()+"B");
+            }
+            State newInitial = new State("q0",false);
+            if(FAclone.initial.isFinal || FBclone.initial.isFinal) 
+                newInitial.setIsFinal(true);
+            for(Character c: FAclone.initial.transition.keySet()) {
+                ArrayList<State> list = FAclone.initial.transition.get(c);
+                for (State s: list)
+                    newInitial.setTransitions(c, s);
+            }
+            for(Character c: FBclone.initial.transition.keySet()) {
+                ArrayList<State> list = FBclone.initial.transition.get(c);
+                for (State s: list)
+                    newInitial.setTransitions(c, s);
+            }
+            ArrayList<State> unionStates = new ArrayList<>();
+            unionStates.add(newInitial);
+            for(State s: FAclone.states) {
+                unionStates.add(s);
+            }
+            for(State s: FBclone.states) {
+                unionStates.add(s);
+            }
+            if(!FAclone.alphabet.equals(FBclone.alphabet))
+                return null;
+            
+            FiniteAutomaton union = new FiniteAutomaton(unionStates, FAclone.alphabet, newInitial);
+            //System.out.println(union);
+            return union;
 	}
 
 /**

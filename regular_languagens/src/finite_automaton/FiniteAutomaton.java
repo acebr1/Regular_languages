@@ -61,7 +61,7 @@ public class FiniteAutomaton{
             for(State s : states) {
                 for(Character key : s.transition.keySet()){
                     if(s.isFinal) resp += "*";
-                    resp += s.getName()+"("+key+","+s.transition.get(key)+")\n";
+                    resp += s+"("+key+","+s.transition.get(key)+")\n";
                 }  
             }
             return resp;
@@ -69,14 +69,40 @@ public class FiniteAutomaton{
         
         public FiniteAutomaton getClone(){
             ArrayList<State> copy = new ArrayList<>();
+            State initialCopy = null;
+            
             for(State s : states) {
-                copy.add(s.getClone());
+                State stateCopy = new State(s.getName()+"", s.isFinal);
+                if(s.equals(initial)) {
+                    initialCopy = stateCopy;
+                }
+                copy.add(stateCopy);
+            }
+            for(State s: states) {
+                State copyR = null;
+                for(State sCopy: copy) {
+                    if(s.getName().equals(sCopy.getName()))
+                        copyR = sCopy;
+                }
+                for(Character c: s.transition.keySet()) {
+                    ArrayList<State> l = s.transition.get(c);
+                    for(State s1: l) {
+                        State copy2 = null;
+                        for(State s2: copy) {
+                            if(s1.getName().equals(s2.getName())){
+                                copy2 = s2;
+                            }
+                
+                        }
+                        copyR.setTransitions(c, copy2);
+                    }  
+                }
             }
             ArrayList<Character> c = new ArrayList<>();
             for(Character a: alphabet) {
-                c.add(a);
+                c.add(a.charValue());
             }
-            return new FiniteAutomaton(copy,c,initial.getClone());
+            return new FiniteAutomaton(copy,c,initialCopy);
         }
        
 }

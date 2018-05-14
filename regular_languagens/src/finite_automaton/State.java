@@ -58,11 +58,5 @@ public class State {
         public String toString() {
             return ""+name;
         }
-        public State getClone() {
-            Map<Character, ArrayList<State>> transitionClone = new HashMap<>();
-            transitionClone.putAll(transition);
-            State s = new State(this.name, this.isFinal);
-            s.transition = transitionClone;
-            return s;
-        }
+       
 }

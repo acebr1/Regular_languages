@@ -402,18 +402,18 @@ public class FA_algorithmsTest {
         /**
         * Language not exist (11)
         */
-        State q2 = new State("q2", true);
-        State q3 = new State("q3", true);
+        State q2 = new State("q0", true);
+        State q3 = new State("q1", true);
        
         State initialB = q2;
        
         ArrayList<State> stateB = new ArrayList<>();
-        stateA.add(q2);
-        stateA.add(q3);
+        stateB.add(q2);
+        stateB.add(q3);
        
-        q0.setTransitions('0', q0);
-        q0.setTransitions('1', q1);
-        q1.setTransitions('0', q0);
+        q2.setTransitions('0', q2);
+        q2.setTransitions('1', q3);
+        q3.setTransitions('0', q2);
        
         FiniteAutomaton automatonB = new FiniteAutomaton(stateB, alphabet, initialB);
        
@@ -421,11 +421,11 @@ public class FA_algorithmsTest {
         
         //Resulting union
         
-        State S = new State("S", true);
-        State A = new State("A", true);
-        State B = new State("B", true);
-        State C = new State("C", true);
-        State D = new State("D", true);
+        State S = new State("q0", true);
+        State A = new State("q0A", true);
+        State B = new State("q1A", true);
+        State C = new State("q0B", true);
+        State D = new State("q1B", true);
         
         State init = S;
         
@@ -448,8 +448,10 @@ public class FA_algorithmsTest {
         D.setTransitions('0', C);
         FiniteAutomaton res = new FiniteAutomaton(st, alphabet, init);
         
-        
-        assertEquals(res, f.union(automatonA, automatonB));
+        FiniteAutomaton copyAutomatonA = automatonA.getClone();
+        //botei toString pq os objetos são diferentes mas tem as mesmas propriedades
+        assertEquals(res.toString(), f.union(automatonA, automatonB).toString());
+        assertEquals(copyAutomatonA.toString(),automatonA.toString());
     }
 
     /**
