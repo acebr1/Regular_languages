@@ -49,7 +49,7 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
     
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA );   
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");   
                
         FA_algorithms f = new FA_algorithms();
         
@@ -102,7 +102,7 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
 
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA);   
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");   
                
         FA_algorithms f = new FA_algorithms();
         
@@ -142,7 +142,7 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
                
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA ); 
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
                
         FA_algorithms f = new FA_algorithms();
         
@@ -179,7 +179,7 @@ public class FA_algorithmsTest {
         alphabet.add('a');
         alphabet.add('b');
                
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA );   
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");   
                
         FA_algorithms f = new FA_algorithms();
         
@@ -231,7 +231,7 @@ public class FA_algorithmsTest {
         alphabet.add('b');
         alphabet.add('c');
               
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA ); 
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
                
         FA_algorithms f = new FA_algorithms();
         
@@ -287,7 +287,7 @@ public class FA_algorithmsTest {
         alphabet.add('b');
         alphabet.add('c');
               
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA ); 
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
                
         FA_algorithms f = new FA_algorithms();
         
@@ -343,7 +343,7 @@ public class FA_algorithmsTest {
         alphabet.add('b');
         alphabet.add('c');
               
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA ); 
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
                
         FA_algorithms f = new FA_algorithms();
         
@@ -367,7 +367,7 @@ public class FA_algorithmsTest {
         q2.setTransitions('a', q0);
         q2.setTransitions('b', q2);
         q2.setTransitions('c', q2);
-        FiniteAutomaton min = new FiniteAutomaton(st, alphabet, init); 
+        FiniteAutomaton min = new FiniteAutomaton(st, alphabet, init, "A"); 
         
         assertEquals(min, f.minimize(automaton));
     }
@@ -397,7 +397,7 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
        
-        FiniteAutomaton automatonA = new FiniteAutomaton(stateA, alphabet, initialA);
+        FiniteAutomaton automatonA = new FiniteAutomaton(stateA, alphabet, initialA, "A");
         
         /**
         * Language not exist (11)
@@ -415,7 +415,7 @@ public class FA_algorithmsTest {
         q2.setTransitions('1', q3);
         q3.setTransitions('0', q2);
        
-        FiniteAutomaton automatonB = new FiniteAutomaton(stateB, alphabet, initialB);
+        FiniteAutomaton automatonB = new FiniteAutomaton(stateB, alphabet, initialB,"B");
        
         FA_algorithms f = new FA_algorithms();
         
@@ -446,7 +446,7 @@ public class FA_algorithmsTest {
         C.setTransitions('0', C);
         C.setTransitions('1', D);
         D.setTransitions('0', C);
-        FiniteAutomaton res = new FiniteAutomaton(st, alphabet, init);
+        FiniteAutomaton res = new FiniteAutomaton(st, alphabet, init,"A|B");
         
         FiniteAutomaton copyAutomatonA = automatonA.getClone();
         //botei toString pq os objetos são diferentes mas tem as mesmas propriedades
@@ -479,17 +479,16 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
        
-        FiniteAutomaton automaton = new FiniteAutomaton(stateA, alphabet, initialA);
-        
+        FiniteAutomaton automaton = new FiniteAutomaton(stateA, alphabet, initialA,"B");
         FA_algorithms f = new FA_algorithms();
       
         assertEquals(false, f.isComplete(automaton));
 	f.complete(automaton);
-        assertEquals(true, f.isComplete(automaton));
+        assertEquals(true, f.isComplete(automaton.getComplete()));
         
-        State A = new State("A", false);
-        State B = new State("B", false);
-        State C = new State("C", true);
+        State A = new State("q0", false);
+        State B = new State("q1", false);
+        State C = new State("Error", true);
         
         ArrayList<State> st = new ArrayList<>();
         st.add(A);
@@ -505,9 +504,8 @@ public class FA_algorithmsTest {
         C.setTransitions('0', C);
         C.setTransitions('1', C);
         
-        FiniteAutomaton comp = new FiniteAutomaton(st, alphabet, init);
-       
-        assertEquals(comp, f.complement(automaton));
+        FiniteAutomaton comp = new FiniteAutomaton(st, alphabet, init,"B");
+        assertEquals(comp.toString(), f.complement(automaton).toString());
        
     }
 
@@ -543,7 +541,7 @@ public class FA_algorithmsTest {
         alphabet.add('c');
         alphabet.add('d');
         
-        FiniteAutomaton automaton = new FiniteAutomaton(state, alphabet, initial);
+        FiniteAutomaton automaton = new FiniteAutomaton(state, alphabet, initial,"AUTOMATON");
         
         FA_algorithms f = new FA_algorithms();
         
@@ -583,7 +581,7 @@ public class FA_algorithmsTest {
         alphabet.add('0');
         alphabet.add('1');
                
-        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA); 
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
         
         FA_algorithms f = new FA_algorithms();
         

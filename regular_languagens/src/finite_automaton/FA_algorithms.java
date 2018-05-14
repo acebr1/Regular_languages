@@ -105,7 +105,7 @@ public class FA_algorithms {
                 }
             }
             
-            FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial);
+            FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial,"AFD:"+FAClone.getName());
             //System.out.println(determinized);
             f.setDeterministic(determinized);
             return determinized;
@@ -118,12 +118,13 @@ public class FA_algorithms {
             //FiniteAutomaton complete = new FiniteAutomaton(f.states, f.alphabet, f.initial);
             FiniteAutomaton complete = f.getClone();
             State ErrorState = new State("Error", false);
+            complete.states.add(ErrorState);
             for(Character c: complete.alphabet) {
                 ErrorState.setTransitions(c, ErrorState);
             }
             for(State s: complete.states) {
                 for(Character c: complete.alphabet) {
-                    if(!s.transition.containsKey(c) || s.getListStates(c).size() == 0){
+                    if(!s.transition.containsKey(c) || s.getListStates(c).isEmpty()){
                         s.setTransitions(c, ErrorState);
                     }
                 }
@@ -197,7 +198,7 @@ public class FA_algorithms {
             if(!FAclone.alphabet.equals(FBclone.alphabet))
                 return null;
             
-            FiniteAutomaton union = new FiniteAutomaton(unionStates, FAclone.alphabet, newInitial);
+            FiniteAutomaton union = new FiniteAutomaton(unionStates, FAclone.alphabet, newInitial,FAclone.getName()+"|"+FBclone.getName());
             //System.out.println(union);
             return union;
 	}
@@ -207,8 +208,15 @@ public class FA_algorithms {
    * @return Finite Automaton resulting from the complement
 */
 	public FiniteAutomaton complement(FiniteAutomaton f) {
-            f.setComplement(new FiniteAutomaton());
-            return new FiniteAutomaton();
+            FiniteAutomaton fClone = f.getClone();
+            if(!isComplete(fClone)){
+                fClone = complete(fClone);
+            }
+            for(State s: fClone.states) {
+                s.setIsFinal(!s.isFinal);
+            }
+            f.setComplement(fClone);
+            return fClone;
 	}
 
 /**

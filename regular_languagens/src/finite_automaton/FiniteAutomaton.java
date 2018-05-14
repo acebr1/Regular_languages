@@ -21,10 +21,11 @@ public class FiniteAutomaton{
             
         }
         
-	public FiniteAutomaton(ArrayList<State> states, ArrayList<Character> alphabet, State initial) {
+	public FiniteAutomaton(ArrayList<State> states, ArrayList<Character> alphabet, State initial, String name) {
 		this.states = states;
 		this.alphabet = alphabet;
 		this.initial = initial;
+                this.name = name;
 	}
         
         public void setDeterministic (FiniteAutomaton f) {
@@ -58,6 +59,7 @@ public class FiniteAutomaton{
         @Override
         public String toString(){
             String resp = "Name:"+name+"\nStates:"+states+"\nTransitions:\n";
+            //System.out.println(resp);
             for(State s : states) {
                 for(Character key : s.transition.keySet()){
                     if(s.isFinal) resp += "*";
@@ -65,6 +67,10 @@ public class FiniteAutomaton{
                 }  
             }
             return resp;
+        }
+        
+        public String getName(){
+            return this.name;
         }
         
         public FiniteAutomaton getClone(){
@@ -102,7 +108,7 @@ public class FiniteAutomaton{
             for(Character a: alphabet) {
                 c.add(a.charValue());
             }
-            return new FiniteAutomaton(copy,c,initialCopy);
+            return new FiniteAutomaton(copy,c,initialCopy,getName());
         }
        
 }
