@@ -29,6 +29,10 @@ public class FiniteAutomaton{
                 this.name = name;
 	}
         
+        public State getInitial() {
+            return initial;
+        }
+        
         public void setDeterministic (FiniteAutomaton f) {
             this.deterministic = f;
         }

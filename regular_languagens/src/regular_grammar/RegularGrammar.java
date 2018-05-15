@@ -5,24 +5,35 @@ import java.util.HashMap;
 
 public class RegularGrammar{
 
-	protected char initialSymbol;
-        Map<Character, ArrayList<String>> productions;
-
+	protected String initialSymbol;
+        Map<String, ArrayList<String>> productions;
 /**
    * Constructor.
 */
         public RegularGrammar(){}
         
-	public RegularGrammar(char initialSymbol, ArrayList<String> productions) {
+	public RegularGrammar(String initialSymbol, ArrayList<String> productions) {
             this.initialSymbol = initialSymbol;
             this.productions = new HashMap<>();
 	}
         
-        protected void setProductions (char c, ArrayList<String> list) {
+        public String getInitialSymbol(){
+            return initialSymbol;
+        }
+        
+        public void setInitialSymbol(String initialSymbol){
+            this.initialSymbol = initialSymbol;
+        }
+        
+        public Map<String, ArrayList<String>> getProductions() {
+            return productions;
+        }
+        
+        protected void setProductions (String c, ArrayList<String> list) {
             productions.put(c, list);
         }
         
-        public void setProductions (char c, String prod) {
+        public void setProductions (String c, String prod) {
             if(productions.containsKey(c)) {
                 ArrayList<String> list = productions.get(c);
                 list.add(prod);

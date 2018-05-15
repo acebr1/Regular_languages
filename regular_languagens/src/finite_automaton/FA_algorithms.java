@@ -166,7 +166,7 @@ public class FA_algorithms {
                     temp = false;
             }
             
-            return new FiniteAutomaton(reachable, f.alphabet, f.getInitial());*/
+            return new FiniteAutomaton(reachable, f.alphabet, f.getInitial(), "a");*/
             return new FiniteAutomaton();
 	}
 
