@@ -9,6 +9,7 @@ import finite_automaton.State;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -650,6 +651,32 @@ public class FA_algorithmsTest {
      */
     @Test
     public void testEnumeration() {
+        /**
+        * Language not exist (00)
+        */
+        State q0 = new State("q0", true);
+        State q1 = new State("q1", true);
+       
+        State initialA = q0;
+        
+        ArrayList<State> stateA = new ArrayList<>();
+        stateA.add(q0);
+        stateA.add(q1);
+       
+        q0.setTransitions('0', q1);
+        q0.setTransitions('1', q0);
+        q1.setTransitions('1', q0);
+        
+        ArrayList<Character> alphabet = new ArrayList<>();
+        alphabet.add('0');
+        alphabet.add('1');
+       
+        FiniteAutomaton automaton = new FiniteAutomaton(stateA, alphabet, initialA,"B");
+        FA_algorithms f = new FA_algorithms();
+        Set<String> sentences = f.enumeration(automaton, 6);
+        for(String s: sentences){
+            assertEquals(true, f.recognize(automaton, s));
+        }
         
     }
     

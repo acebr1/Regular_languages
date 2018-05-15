@@ -349,10 +349,42 @@ public class FA_algorithms {
 /**
    * @return Finite Automaton to recognize sentence in size?
 */
-	public ArrayList<String> enumeration(FiniteAutomaton fa, int size) {
-            ArrayList<String> list = new ArrayList<String>();
-            return list;
+	public Set<String> enumeration(FiniteAutomaton fa, int size) {
+            FiniteAutomaton FClone = fa.getClone();
+            if(!isDeterministic(FClone)) {
+                FClone = determinize(FClone);
+            }
+            State actual = FClone.initial;
+            Set<String> sentences = new HashSet<>();
+            if(size == 0) {
+                if(actual.isFinal){
+                    sentences.add("&");
+                    return sentences;
+                } else {
+                    return sentences;
+                }
+            }
+            return enumeration_helper(actual, "", size);
 	}
+        
+        private Set<String> enumeration_helper(State s, String old, int size){
+            Set<String> sentences = new HashSet<>();
+            if(old.length() == size) {
+                if(s.isFinal) {
+                    sentences.add(old);
+                    return sentences;
+                } else {
+                    return null;
+                }
+            }
+            for(Character c: s.transition.keySet()){
+                Set<String> sent = enumeration_helper(s.getListStates(c).get(0), old+""+c, size);
+                if(sent != null){
+                    sentences.addAll(sent);
+                }
+            }
+            return sentences;
+        }
         
         
 /**
