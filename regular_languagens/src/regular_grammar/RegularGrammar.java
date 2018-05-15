@@ -29,6 +29,10 @@ public class RegularGrammar{
             return productions;
         }
         
+        public void setProductions(Map<String, ArrayList<String>> productions){
+            this.productions = productions;
+        }
+        
         protected void setProductions (String c, ArrayList<String> list) {
             productions.put(c, list);
         }
@@ -43,5 +47,14 @@ public class RegularGrammar{
                 list.add(prod);
                 setProductions(c, list);
             }
+        }
+        @Override
+        public String toString(){
+            String resp = "InitialSymbol:"+initialSymbol+"\nProductions:";
+            //System.out.println(resp);
+            for(String key : productions.keySet()){
+                    resp += "("+key+","+productions.get(key)+")\n";  
+            }
+            return resp;
         }
 }
