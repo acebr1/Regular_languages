@@ -8,6 +8,7 @@ public class FiniteAutomaton{
         FiniteAutomaton complement;
         FiniteAutomaton reverse;
         FiniteAutomaton complete;
+        FiniteAutomaton noEpsilon;
         
 	protected ArrayList<State> states;
 	protected ArrayList<Character> alphabet;
@@ -48,8 +49,16 @@ public class FiniteAutomaton{
             this.complete = f;
         }
         
+        public void setNoEpsilon (FiniteAutomaton f) {
+            this.noEpsilon = f;
+        }
+        
         public FiniteAutomaton getComplete() {
             return this.complete;
+        }
+        
+        public FiniteAutomaton getNoEpsilon() {
+            return this.noEpsilon;
         }
         
         public FiniteAutomaton getDeterministic() {

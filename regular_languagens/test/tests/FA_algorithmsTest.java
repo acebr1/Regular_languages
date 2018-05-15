@@ -653,4 +653,37 @@ public class FA_algorithmsTest {
         
     }
     
+    @Test
+    public void testHasEpsilonTransitions() {
+        
+        State q0 = new State("q0", false);
+        State q1 = new State("q1", false);
+        State q2 = new State("q2", true);
+        
+        State initialA = q0;
+        
+        ArrayList<State> statesA = new ArrayList<>();
+        statesA.add(q0);
+        statesA.add(q1);
+        statesA.add(q2);
+        
+        q0.setTransitions('a', q0);
+        q0.setTransitions('&', q1);
+        q1.setTransitions('b', q1);
+        q1.setTransitions('&', q2);
+        q2.setTransitions('c', q2);
+        
+        ArrayList<Character> alphabet = new ArrayList<>();
+        alphabet.add('a');
+        alphabet.add('b');
+        alphabet.add('c');
+               
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");
+        FA_algorithms f = new FA_algorithms();
+        assertEquals(true, f.hasEpsilonTrasitions(automaton));
+        assertEquals(false,f.hasEpsilonTrasitions(f.removeEpsilonTrasitions(automaton)));
+        assertEquals(true, f.hasEpsilonTrasitions(automaton));
+        assertEquals(false,f.hasEpsilonTrasitions(automaton.getNoEpsilon()));
+    }
+    
 }
