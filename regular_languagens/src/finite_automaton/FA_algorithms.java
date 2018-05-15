@@ -49,6 +49,7 @@ public class FA_algorithms {
                 return f;
             }
             FiniteAutomaton FAClone = f.getClone();
+            FAClone = removeEpsilonTrasitions(FAClone);
             
             ArrayList<State> newStates = new ArrayList<>();
             Map<Set<State>,State> equiv = new HashMap<>();
@@ -362,45 +363,35 @@ public class FA_algorithms {
                 return f;
             FiniteAutomaton FAClone = f.getClone();
             Map<State,Set<State>> map = new HashMap<>(); //FAClone STATE TO EQUIV FAClone STATES
-            Map<State,Set<State>> map2 = new HashMap<>(); //NEW STATE to EQUIV FaCloneState
+            //Map<State,Set<State>> map2 = new HashMap<>(); //NEW STATE to EQUIV FaCloneState
             for(State s: FAClone.states) {
-                map.put(s, reachableByEpsilon(s));
+                Set<State> reachable = reachableByEpsilon(s);
+                map.put(s, reachable);
+                for(State s1: reachable) {
+                    if(s1.isFinal) {
+                        s.setIsFinal(true);
+                    }
+                }
             }
-            ArrayList<State> states = new ArrayList<>();
-            State initial = null;
-         
             for(State s: FAClone.states){
-                State newState = new State(map.get(s).toString(),false);
-                map2.put(newState, map.get(s));
-                for(State s1: map.get(s)){
-                    if(s1.isFinal){
-                        newState.setIsFinal(true);
-                    }
+                if(s.transition.containsKey('&')) {
+                    s.transition.remove('&');
                 }
-                if(s.equals(FAClone.initial))
-                    initial = newState;
-                states.add(newState);
             }
-            for(State s: states) {
-                Set<State> set = map2.get(s);
-                for(State s1: set) {
-                    for(Character c: s1.transition.keySet()){
-                        if(c != '&'){
-                            Set<State> union = new HashSet<>();
-                            ArrayList<State> list = s1.getListStates(c);
-                            for(State s2: list) {
-                                union.add(s2);
-                                ArrayList<State> resp = new ArrayList<State>(map.get(s2));
-                                s.setTransitions(c,resp);
-                            }
+            for(State s: FAClone.states) {
+                for(Character c: s.transition.keySet()) {
+                    if(c!='&') {
+                        ArrayList<State> transit = s.getListStates(c);
+                        Set<State> union = new HashSet<>();
+                        for(State s1: transit) {
+                            union.addAll(map.get(s));
                         }
+                        ArrayList<State> uniona = new ArrayList<State>(union);
+                        s.transition.replace(c, uniona);
                     }
                 }
-                
             }
-            FiniteAutomaton resp = new FiniteAutomaton(states, FAClone.alphabet, initial, FAClone.getName());
-            f.setNoEpsilon(resp);
-            return resp;
+            return FAClone;
         }
         
         public Set<State> reachableByEpsilon(State s){

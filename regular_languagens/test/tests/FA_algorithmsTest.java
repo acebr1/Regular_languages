@@ -683,7 +683,6 @@ public class FA_algorithmsTest {
         assertEquals(true, f.hasEpsilonTrasitions(automaton));
         assertEquals(false,f.hasEpsilonTrasitions(f.removeEpsilonTrasitions(automaton)));
         assertEquals(true, f.hasEpsilonTrasitions(automaton));
-        assertEquals(false,f.hasEpsilonTrasitions(automaton.getNoEpsilon()));
     }
     
 }
