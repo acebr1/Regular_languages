@@ -20,6 +20,8 @@ public class RG_Algorithms{
             //Map<String, ArrayList<String>> gbproductions = new HashMap<>();
             String initialSymbol = "U";
             gnew.setInitialSymbol(initialSymbol);
+            gnew.setProductions(ga.getProductions());
+            gnew.setProductions(gb.getProductions());
             for (String key : gb.productions.keySet()) {
                 key = key +"´";
                 ArrayList<String> temp = gb.productions.get(key);

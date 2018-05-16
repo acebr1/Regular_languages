@@ -3,6 +3,9 @@
  */
 package tests;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

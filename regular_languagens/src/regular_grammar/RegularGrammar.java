@@ -57,4 +57,16 @@ public class RegularGrammar{
             }
             return resp;
         }
+        
+        public RegularGrammar getClone(){
+            RegularGrammar gClone = new RegularGrammar();
+            gClone.setInitialSymbol(this.getInitialSymbol());            
+            for(String key : this.productions.keySet()) {
+                ArrayList<String> list = this.productions.get(key);
+                for(String s : list){
+                    gClone.setProductions(key, s);
+                }
+            }
+            return gClone;
+        }
 }
