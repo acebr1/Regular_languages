@@ -69,6 +69,10 @@ public class FiniteAutomaton{
             return this.deterministic;
         }
         
+        public FiniteAutomaton getReverse() {
+            return this.reverse;
+        }
+        
         @Override
         public String toString(){
             String resp = "Name:"+name+"\nStates:"+states+"\nTransitions:\n";

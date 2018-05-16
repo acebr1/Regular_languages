@@ -593,11 +593,14 @@ public class FA_algorithmsTest {
         FiniteAutomaton automaton = new FiniteAutomaton(state, alphabet, initial,"AUTOMATON");
         
         FA_algorithms f = new FA_algorithms();
-        
-        //assertEquals(true, f.recognize(f.reverse(automaton), "ba"));
-        //assertEquals(true, f.recognize(f.reverse(automaton), "dc"));
-        //assertEquals(false, f.recognize(f.reverse(automaton), "ab"));
-        //assertEquals(false, f.recognize(f.reverse(automaton), "cd"));
+        //System.out.println(automaton);
+        //System.out.println(f.reverse(automaton));
+        //System.out.println(f.enumeration(automaton, 2));
+        //System.out.println(f.enumeration(f.reverse(automaton), 2));
+        assertEquals(true, f.recognize(f.reverse(automaton), "ba"));
+        assertEquals(true, f.recognize(f.reverse(automaton), "dc"));
+        assertEquals(false, f.recognize(f.reverse(automaton), "ab"));
+        assertEquals(false, f.recognize(f.reverse(automaton), "cd"));
 
     }
 

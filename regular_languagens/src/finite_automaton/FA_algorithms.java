@@ -44,13 +44,17 @@ public class FA_algorithms {
    * @return finite automaton deterministic
 */
 	public FiniteAutomaton determinize(FiniteAutomaton f) {
-            if(isDeterministic(f)) {
-                f.setDeterministic(f);
-                return f;
-            }
             FiniteAutomaton FAClone = f.getClone();
-            FAClone = removeEpsilonTrasitions(FAClone);
-            
+            if(hasEpsilonTrasitions(FAClone)) {
+                //System.out.println(FAClone);
+                FAClone = removeEpsilonTrasitions(FAClone);
+                //System.out.println(FAClone);
+            }
+            if(isDeterministic(FAClone)) {
+                f.setDeterministic(f);
+                return FAClone;
+            }
+
             ArrayList<State> newStates = new ArrayList<>();
             Map<Set<State>,State> equiv = new HashMap<>();
             Map<State,Set<State>> equiv2 = new HashMap<>();
@@ -308,8 +312,48 @@ public class FA_algorithms {
    * @return Finite Automaton resulting from the reverse
 */
 	public FiniteAutomaton reverse(FiniteAutomaton f) {
-            f.setReverse(new FiniteAutomaton());
-            return new FiniteAutomaton();
+            FiniteAutomaton FClone;
+            if(!isDeterministic(f)){
+                FClone = determinize(f);
+            } else {
+                FClone = f.getClone();
+            }
+            Map<State,State> map = new HashMap<>();
+            State newInitial = new State("R", false);
+            ArrayList<State> states = new ArrayList<>();
+            if(FClone.initial.isFinal){
+                newInitial.setIsFinal(true);
+            }
+            states.add(newInitial);
+            for(State s: FClone.states){
+                if(s.equals(FClone.initial)) {
+                    State s1 = new State(s.getName(),true);
+                    map.put(s, s1);
+                    states.add(s1);
+                } else {
+                    State s1 = new State(s.getName(),false);
+                    map.put(s, s1);
+                    states.add(s1);
+                }  
+            }
+            for(State s: FClone.states){
+                if(s.isFinal){
+                    newInitial.setTransitions('&', map.get(s));
+                }
+            }
+            for(State s: FClone.states){
+                for(Character c: s.transition.keySet()) {
+                    ArrayList<State> list = s.getListStates(c);
+                    for(State s1: list){
+                        map.get(s1).setTransitions(c, map.get(s));
+                    }
+                }
+            }
+            
+            FiniteAutomaton reverse = new FiniteAutomaton(states, FClone.alphabet, newInitial, new StringBuilder(FClone.getName()).reverse().toString());
+            FiniteAutomaton determinized = determinize(reverse);
+            f.setReverse(determinized);
+            return determinized;
 	}
 
 /**
@@ -395,7 +439,7 @@ public class FA_algorithms {
                 return f;
             FiniteAutomaton FAClone = f.getClone();
             Map<State,Set<State>> map = new HashMap<>(); //FAClone STATE TO EQUIV FAClone STATES
-            //Map<State,Set<State>> map2 = new HashMap<>(); //NEW STATE to EQUIV FaCloneState
+            
             for(State s: FAClone.states) {
                 Set<State> reachable = reachableByEpsilon(s);
                 map.put(s, reachable);
@@ -405,21 +449,31 @@ public class FA_algorithms {
                     }
                 }
             }
+
             for(State s: FAClone.states){
                 if(s.transition.containsKey('&')) {
                     s.transition.remove('&');
                 }
             }
+
             for(State s: FAClone.states) {
-                for(Character c: s.transition.keySet()) {
-                    if(c!='&') {
-                        ArrayList<State> transit = s.getListStates(c);
-                        Set<State> union = new HashSet<>();
-                        for(State s1: transit) {
-                            union.addAll(map.get(s));
+                for(Character c: FAClone.alphabet) {
+                    Set<State> unione = new HashSet<>();
+                    for(State se: map.get(s)) {
+                        if(se.transition.containsKey(c)){
+                            ArrayList<State> transit = se.getListStates(c);
+                            Set<State> union = new HashSet<>();
+                            for(State s1: transit) {
+                                union.addAll(map.get(s1));
+                            }
+                            unione.addAll(union);
                         }
-                        ArrayList<State> uniona = new ArrayList<State>(union);
+                    }
+                    ArrayList<State> uniona = new ArrayList<State>(unione);
+                    if(s.transition.containsKey(c)){
                         s.transition.replace(c, uniona);
+                    } else if(!uniona.isEmpty()){
+                        s.setTransitions(c, uniona);
                     }
                 }
             }
