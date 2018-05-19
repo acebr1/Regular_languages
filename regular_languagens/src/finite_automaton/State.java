@@ -54,6 +54,9 @@ public class State {
             this.isFinal = isFinal;
 	}
         
+        public Map<Character, ArrayList<State>> getTransitions(){
+            return this.transition;
+        }
         @Override
         public String toString() {
             return ""+name;

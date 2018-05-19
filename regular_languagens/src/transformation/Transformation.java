@@ -2,6 +2,8 @@ import finite_automaton.*;
 import regular_expression.*;
 import regular_grammar.*;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 /*
  * 
@@ -12,13 +14,32 @@ public class Transformation {
     protected ArrayList<RegularExpression> listRE;
     protected ArrayList<RegularGrammar> listRG;
     FA_algorithms alg;
-    Transformation(){
+    
+    public Transformation(){
         this.alg = new FA_algorithms();
     }
     
     public RegularGrammar AFtoRG(FiniteAutomaton f){
-        //add grammar to list
-        return new RegularGrammar();
+        FiniteAutomaton FAClone = f.getClone();
+	RegularGrammar gnew = new RegularGrammar();
+        gnew.setInitialSymbol(FAClone.getInitial().getName());
+        ArrayList<State> states = FAClone.getStates();
+        for(State s : states) {
+            Set<Character> list = s.getTransitions().keySet();
+            for(Character key : list ){
+                ArrayList<State> list2 = s.getTransitions().get(key);
+                for(State s2 : list2){
+                    gnew.setProductions((String) s.getName(), (String) (key + s.getName()));
+                    if(s2.getIsFinal()){
+                        gnew.setProductions((String) s.getName(), (String) key.toString());
+                    }
+                }
+                
+            }
+            
+        }
+        listRG.add(gnew);
+        return gnew;
     }
     
     public FiniteAutomaton RGtoAF(RegularGrammar g){
