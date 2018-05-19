@@ -6,7 +6,7 @@ package tests;
 import finite_automaton.FA_algorithms;
 import finite_automaton.FiniteAutomaton;
 import finite_automaton.State;
-//import transformation.Transformation;
+import transformation.Transformation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +85,7 @@ public class TransformationTest {
         
         Transformation t = new Transformation();
                 
-        assertEquals(grammar, t.AFtoGR(automaton));
+        assertEquals(grammar.toString(), t.AFtoRG(automaton).toString());
     }
 
     /**
@@ -149,47 +149,8 @@ public class TransformationTest {
         
         FA_algorithms f = new FA_algorithms();
         
-        assertEquals(automaton, f.determinize(t.RGtoAF));
+        assertEquals(automaton, f.determinize(t.RGtoAF(grammar)));
 
-    }
-
-    /**
-     * Test of DeSimone method, of class Transformation.
-     */
-    @Test
-    public void testUnion() {
-        //
-        /*RegularGrammar ga = new RegularGrammar();
-        
-        char initialGA = 'S';
-        ga.getinitialSymbol();
-        
-        ga.setProductions('S', "aA");
-        ga.setProductions('S', "&");
-        ga.setProductions('A', "aB");
-        ga.setProductions('B', "aA");
-        ga.setProductions('B', "a");
-        
-        RegularGrammar gb = new RegularGrammar();
-       
-        char initialGB = 'S';
-        gb.getinitialSymbol();
-        
-        gb.setProductions('S', "aA");
-        gb.setProductions('A', "aB");
-        gb.setProductions('A', "a");
-        gb.setProductions('B', "aA");
-        
-        RG_Algorithms r = new RG_Algorithms();
-        
-        FA_algorithms f = new FA_algorithms();
-        
-        Transformation t = new Transformation();
-        
-        FiniteAutomaton automaton = t.RGtoAF(r.union(ga, gb));
-        
-        assertEquals(true, f.recognize(automaton, "aaaa"));
-        assertEquals(true, f.recognize(automaton, "aaa"));*/
     }
     
 }

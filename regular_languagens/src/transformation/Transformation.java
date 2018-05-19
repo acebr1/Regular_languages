@@ -1,3 +1,5 @@
+package transformation;
+
 import finite_automaton.*;
 import regular_expression.*;
 import regular_grammar.*;
@@ -43,7 +45,25 @@ public class Transformation {
     }
     
     public FiniteAutomaton RGtoAF(RegularGrammar g){
-        return new FiniteAutomaton();
+        RegularGrammar GClone = g.getClone();
+        ArrayList<Character> alphabet = new ArrayList<>();
+        ArrayList<State> states = new ArrayList<>();
+        State initial = new State(GClone.getInitialSymbol(), false);
+        states.add(initial);
+        for (String key : GClone.getProductions().keySet()){
+            State st = new State(key, false);
+            ArrayList<String> list = GClone.getProductions().get(key);
+            for(String s : list){
+                alphabet.add(s.charAt(0));
+                if(s.charAt(1) == ' '){
+                    st.setIsFinal(true);
+                }
+            }
+        }
+        
+        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "");
+        listFA.add(fnew);
+        return fnew;
     }
     
     public FiniteAutomaton DeSimone(RegularExpression e) {
