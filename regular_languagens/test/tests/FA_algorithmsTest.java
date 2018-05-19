@@ -398,6 +398,7 @@ public class FA_algorithmsTest {
         A.setTransitions('a', B);
         A.setTransitions('b', C);
         B.setTransitions('a', B);
+        B.setTransitions('b', B);
         C.setTransitions('a', D);
         D.setTransitions('a', C);
         
@@ -406,8 +407,27 @@ public class FA_algorithmsTest {
         alphabet.add('b');
         
         FiniteAutomaton automatonA = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
+        A = new State("A", false);
+        C = new State("C", false);
+        D = new State("D", true);
+        initialA = A;
+        statesA = new ArrayList<>();
+        statesA.add(A);
+        statesA.add(C);
+        statesA.add(D);
+        A.setTransitions('b', C);
+        C.setTransitions('a', D);
+        D.setTransitions('a', C);
+        alphabet = new ArrayList<>();
+        alphabet.add('a');
+        alphabet.add('b');
+        FiniteAutomaton automatonB = new FiniteAutomaton(statesA, alphabet, initialA,"B"); 
+        
         FA_algorithms f = new FA_algorithms();
-        System.out.println(f.remove_dead(automatonA));
+        for(String s : f.enumeration(automatonB, 10)) {
+            assertEquals(true, f.recognize(automatonA, s));
+        }
+
     }
     /**
      * Test of minimize method, of class FA_algorithms.
