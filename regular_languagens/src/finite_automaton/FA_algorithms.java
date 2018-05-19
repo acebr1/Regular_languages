@@ -156,42 +156,83 @@ public class FA_algorithms {
    * @return finite automaton without unreachable states
 */
 	public FiniteAutomaton remove_unreachable(FiniteAutomaton f) {
-            /**ArrayList<State> reachable = new ArrayList<>();
-            reachable.add(f.getInitial());
-            boolean temp = true;
-            while(temp){
-                int size_re = reachable.size();
-                for(State s : reachable){
-                    for(char a : f.alphabet) {
-                        reachable.addAll(s.getListStates(a));
+            ArrayList<State> reachable = new ArrayList<>();
+            FiniteAutomaton FClone = f.getClone();
+            reachable.add(FClone.getInitial());
+            int iterator = 0;
+            int n = 1;
+            while(n > iterator){
+                for(int cont=iterator; cont < n; cont++){
+                    for(Character a : reachable.get(cont).transition.keySet()) {
+                        ArrayList<State> list = reachable.get(cont).getListStates(a);
+                        for(State s: list) {
+                            if(!reachable.contains(s)){
+                                reachable.add(s);
+                                n++;
+                            }
+                        }
                     }
-                }
-                if(size_re == reachable.size())
-                    temp = false;
+                iterator++;
+                } 
             }
             
-            return new FiniteAutomaton(reachable, f.alphabet, f.getInitial(), "a");*/
-            return new FiniteAutomaton();
+            return new FiniteAutomaton(new ArrayList<State>(reachable), FClone.alphabet, FClone.getInitial(), FClone.getName());
 	}
 
 /**
    * @return finite automaton without dead states
 */
 	public FiniteAutomaton remove_dead(FiniteAutomaton f) {
-            /**ArrayList<State> alive = new ArrayList<>();
-            ArrayList<State> temp = new ArrayList<>();
-            for(State s : f.states) {
-                if (s.getIsFinal()){
+            FiniteAutomaton FClone = f.getClone();
+            Set<State> alive = new HashSet<>();
+            for(State s : FClone.states) 
+                if (s.getIsFinal())
                     alive.add(s);
-                } else {
-                    for (char a : f.alphabet) {
-                        temp = s.getListStates(a);
-                        alive.addAll(remove_dead_aux(f, temp));
+            /*if(alive.isEmpty()) {
+                return new 
+            }*/
+            boolean temp = true;
+            while(temp) {
+                int size_alive = alive.size();
+                for(State s: FClone.states){
+                    for(Character c: s.transition.keySet()){
+                        ArrayList<State> list = s.getListStates(c);
+                        for(State l: list) {
+                            if(alive.contains(l)) {
+                                alive.add(s);
+                            }
+                        }    
                     }
                 }
-            }   
-            return new FiniteAutomaton(alive,f.alphabet, f.getInitial());*/
-            return new FiniteAutomaton();
+                if(size_alive == alive.size()) {
+                    temp = false;
+                }
+            }
+            if(!alive.contains(FClone.initial)){
+                State q0 = new State(FClone.initial.getName(), false);
+                ArrayList<State> states = new ArrayList<>();
+                states.add(q0);
+                return new FiniteAutomaton(states, FClone.alphabet, q0, FClone.getName());
+            }
+            System.out.println("Alive:"+alive);
+            ArrayList<State> states = new ArrayList<>();
+            ArrayList<Character> caracters = new ArrayList<>();
+            for(State s : alive) {
+                for(Character c:s.transition.keySet()){
+                    ArrayList<State> list = s.getListStates(c);
+                    for(State s1: list){
+                        if(!alive.contains(s1)){
+                            states.add(s);
+                            caracters.add(c);
+                        }
+                    }
+                }
+            }
+            for(int i=0; i < states.size(); i++) {
+                states.get(i).transition.remove(caracters.get(i));
+            }
+            return new FiniteAutomaton(new ArrayList<State>(alive),FClone.alphabet, FClone.getInitial(),FClone.getName());
+
 	}   
         public ArrayList<State> remove_dead_aux(FiniteAutomaton f, ArrayList<State> aux){
             ArrayList<State> alive_aux = new ArrayList<>();

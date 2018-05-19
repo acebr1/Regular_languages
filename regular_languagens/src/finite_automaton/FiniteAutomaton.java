@@ -79,6 +79,7 @@ public class FiniteAutomaton{
             //System.out.println(resp);
             for(State s : states) {
                 for(Character key : s.transition.keySet()){
+                    if(initial.equals(s)) resp += "->";
                     if(s.isFinal) resp += "*";
                     resp += s+"("+key+","+s.transition.get(key)+")\n";
                 }  
