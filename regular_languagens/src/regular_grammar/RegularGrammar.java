@@ -10,13 +10,15 @@ public class RegularGrammar{
 /**
    * Constructor.
 */
-        public RegularGrammar(){}
-        
-	public RegularGrammar(String initialSymbol, ArrayList<String> productions) {
+        public RegularGrammar(){
+            this.productions = new HashMap<>();
+        }
+       
+	public RegularGrammar(String initialSymbol) {
             this.initialSymbol = initialSymbol;
             this.productions = new HashMap<>();
-	}
-        
+        }
+    
         public String getInitialSymbol(){
             return initialSymbol;
         }
@@ -59,12 +61,11 @@ public class RegularGrammar{
         }
         
         public RegularGrammar getClone(){
-            RegularGrammar gClone = new RegularGrammar();
-            gClone.setInitialSymbol(this.getInitialSymbol());            
+            RegularGrammar gClone = new RegularGrammar(this.getInitialSymbol()+"");
             for(String key : this.productions.keySet()) {
                 ArrayList<String> list = this.productions.get(key);
                 for(String s : list){
-                    gClone.setProductions(key, s);
+                    gClone.setProductions(key+"", s+"");
                 }
             }
             return gClone;
