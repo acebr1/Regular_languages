@@ -18,8 +18,6 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
-            //Map<String, ArrayList<String>> gaproductions = new HashMap<>();
-            //Map<String, ArrayList<String>> gbproductions = new HashMap<>();
             String initialSymbol = "U";
             gnew.setInitialSymbol(initialSymbol);
             gnew.setProductions(GAClone.getProductions());
@@ -56,8 +54,6 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
-            //Map<String, ArrayList<String>> gaproductions = new HashMap<>();
-            //Map<String, ArrayList<String>> gbproductions = new HashMap<>();
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
             gnew.setProductions(GAClone.getProductions());
             for (String key : GBClone.productions.keySet()) {
@@ -87,7 +83,6 @@ public class RG_Algorithms{
 	public RegularGrammar closure(RegularGrammar ga) {
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar gnew = new RegularGrammar();
-            //Map<String, ArrayList<String>> productions = new HashMap<>();
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
             gnew.setProductions(GAClone.getProductions());
             for (String key : GAClone.productions.keySet() ) {
