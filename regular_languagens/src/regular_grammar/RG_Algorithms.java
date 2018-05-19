@@ -15,16 +15,18 @@ public class RG_Algorithms{
    * @return Regular grammar resulting from the union
 */
 	public RegularGrammar union(RegularGrammar ga, RegularGrammar gb) {
+            RegularGrammar GAClone = ga.getClone();
+            RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
             //Map<String, ArrayList<String>> gaproductions = new HashMap<>();
             //Map<String, ArrayList<String>> gbproductions = new HashMap<>();
             String initialSymbol = "U";
             gnew.setInitialSymbol(initialSymbol);
-            gnew.setProductions(ga.getProductions());
-            gnew.setProductions(gb.getProductions());
-            for (String key : gb.productions.keySet()) {
+            gnew.setProductions(GAClone.getProductions());
+            gnew.setProductions(GBClone.getProductions());
+            for (String key : GAClone.productions.keySet()) {
                 key = key +"´";
-                ArrayList<String> temp = gb.productions.get(key);
+                ArrayList<String> temp = GBClone.productions.get(key);
                 for(String s : temp){
                     s = s.charAt(0) + s.charAt(1) + "´";
                     if (key.equals(gnew.getInitialSymbol()) && s.length() > 2) {
@@ -34,8 +36,8 @@ public class RG_Algorithms{
                     }
                 }
             }
-            for (String key : ga.productions.keySet()) {
-                ArrayList<String> temp = ga.productions.get(key);
+            for (String key : GAClone.productions.keySet()) {
+                ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     if (key.equals(gnew.getInitialSymbol()) && s.length() > 2) {
                         gnew.setProductions(initialSymbol, s.charAt(0) + initialSymbol);
@@ -51,24 +53,26 @@ public class RG_Algorithms{
    * @return Regular grammar resulting from the concatenation
 */
 	public RegularGrammar concatenation(RegularGrammar ga, RegularGrammar gb) {
+            RegularGrammar GAClone = ga.getClone();
+            RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
             //Map<String, ArrayList<String>> gaproductions = new HashMap<>();
             //Map<String, ArrayList<String>> gbproductions = new HashMap<>();
-            gnew.setInitialSymbol(ga.getInitialSymbol());
-            gnew.setProductions(ga.getProductions());
-            for (String key : gb.productions.keySet()) {
+            gnew.setInitialSymbol(GAClone.getInitialSymbol());
+            gnew.setProductions(GAClone.getProductions());
+            for (String key : GBClone.productions.keySet()) {
                 key = key +"´";
-                ArrayList<String> temp = gb.productions.get(key);
+                ArrayList<String> temp = GBClone.productions.get(key);
                 for(String s : temp){
                     s = s.charAt(0) + s.charAt(1) + "´";
                     gnew.setProductions(key, s);
                 }
             }
-            for (String key : ga.productions.keySet()) {
-                ArrayList<String> temp = ga.productions.get(key);
+            for (String key : GAClone.productions.keySet()) {
+                ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     if (s.length() > 2 && !"&".equals(s)) {
-                      gnew.setProductions(key, s.charAt(0) + gb.getInitialSymbol());
+                      gnew.setProductions(key, s.charAt(0) + GBClone.getInitialSymbol());
                     } else {
                       gnew.setProductions(key, s);
                     }
@@ -81,12 +85,13 @@ public class RG_Algorithms{
    * @return Regular grammar resulting from the closure
 */
 	public RegularGrammar closure(RegularGrammar ga) {
+            RegularGrammar GAClone = ga.getClone();
             RegularGrammar gnew = new RegularGrammar();
             //Map<String, ArrayList<String>> productions = new HashMap<>();
-            gnew.setInitialSymbol(ga.getInitialSymbol());
-            gnew.setProductions(ga.getProductions());
-            for (String key : ga.productions.keySet() ) {
-                ArrayList<String> temp = ga.productions.get(key);
+            gnew.setInitialSymbol(GAClone.getInitialSymbol());
+            gnew.setProductions(GAClone.getProductions());
+            for (String key : GAClone.productions.keySet() ) {
+                ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     gnew.setProductions(key, s);
                     if (s.length() < 2 && !"&".equals(s)){
