@@ -495,7 +495,7 @@ public class FA_algorithmsTest {
         q2.setTransitions('c', q2);
         FiniteAutomaton min = new FiniteAutomaton(st, alphabet, init, "A"); 
         
-        FiniteAutomaton res = f.equivalent_state(f.remove_dead(f.remove_unreachable(f.determinize(automaton))));
+        FiniteAutomaton res = f.minimize(automaton);
         Set<String> sentences = f.enumeration(min, 10);
         for(String s: sentences) {
             assertEquals(true, f.recognize(res, s));

@@ -144,14 +144,12 @@ public class FA_algorithms {
    * @return finite automaton minimum
 */
 	public FiniteAutomaton minimize(FiniteAutomaton f) {
-            /*if (!isDeterministic(f))
-                determinize(f);
-            remove_unreachable(f);
-            remove_dead(f);
-            equivalent_state(f);
-            f.setMinimized (new FiniteAutomaton());
-            union states equivalents*/
-            return f;
+            FiniteAutomaton FClone = f.getClone();
+            if (!isDeterministic(FClone))
+                FClone = determinize(FClone);
+            FiniteAutomaton resp = equivalent_state(remove_dead(remove_unreachable(FClone)));
+            f.setMinimized(resp);
+            return resp;
 	}
 
 /**
@@ -317,7 +315,6 @@ public class FA_algorithms {
                 }
             }
             FiniteAutomaton resp = new FiniteAutomaton(states, FClone.alphabet, newInitial, FClone.getName()+" Minimized");
-            f.setMinimized(resp);
             return resp;
 	}
         
