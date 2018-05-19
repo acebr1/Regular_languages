@@ -3,6 +3,7 @@
  */
 package tests;
 
+import finite_automaton.FA_algorithms;
 import finite_automaton.FiniteAutomaton;
 import finite_automaton.State;
 //import transformation.Transformation;
@@ -30,7 +31,7 @@ public class TransformationTest {
      /**
      * Exercise 1 Slides
      */
-     /*   State q0 = new State("q0", true);
+        State q0 = new State("q0", true);
         State q1 = new State("q1", true);
         State q2 = new State("q2", false);
         
@@ -56,36 +57,35 @@ public class TransformationTest {
         alphabet.add('b');
         alphabet.add('c');
               
-        FiniteAutomaton automaton = new FiniteAutomaton(st, alphabet, init); 
-       
-        Transformation t = new Transformation();
+        FiniteAutomaton automaton = new FiniteAutomaton(st, alphabet, init, "a"); 
         
         RegularGrammar grammar = new RegularGrammar();
 
-        char initialG = 'SL';
-        grammar.getInitialSymbol();
+        grammar.setInitialSymbol("S");
         
-        grammar.setProductions('S', "aC");
-        grammar.setProductions('S', "bB");
-        grammar.setProductions('S', "cA");
-        grammar.setProductions('S', "b");
-        grammar.setProductions('S', "c");
-        grammar.setProductions('S', "&");
-        grammar.setProductions('A', "aC");
-        grammar.setProductions('A', "bB");
-        grammar.setProductions('A', "cA");
-        grammar.setProductions('A', "b");
-        grammar.setProductions('A', "c");
-        grammar.setProductions('B', "aC");
-        grammar.setProductions('B', "bC");
-        grammar.setProductions('B', "cA");
-        grammar.setProductions('B', "c");
-        grammar.setProductions('C', "aA");
-        grammar.setProductions('C', "bC");
-        grammar.setProductions('C', "cC");
-        grammar.setProductions('C', "a");
+        grammar.setProductions("S", "aC");
+        grammar.setProductions("S", "bB");
+        grammar.setProductions("S", "cA");
+        grammar.setProductions("S", "b");
+        grammar.setProductions("S", "c");
+        grammar.setProductions("S", "&");
+        grammar.setProductions("A", "aC");
+        grammar.setProductions("A", "bB");
+        grammar.setProductions("A", "cA");
+        grammar.setProductions("A", "b");
+        grammar.setProductions("A", "c");
+        grammar.setProductions("B", "aC");
+        grammar.setProductions("B", "bC");
+        grammar.setProductions("B", "cA");
+        grammar.setProductions("B", "c");
+        grammar.setProductions("C", "aA");
+        grammar.setProductions("C", "bC");
+        grammar.setProductions("C", "cC");
+        grammar.setProductions("C", "a");
+        
+        Transformation t = new Transformation();
                 
-        assertEquals(grammar, t.AFtoGR(automaton));*/
+        assertEquals(grammar, t.AFtoGR(automaton));
     }
 
     /**
@@ -93,30 +93,29 @@ public class TransformationTest {
      */
     @Test
     public void testRGtoAF() {
-       /*RegularGrammar grammar = new RegularGrammar();
+       RegularGrammar grammar = new RegularGrammar();
 
-        char initialG = 'S';
-        grammar.getInitialSymbol();
+        grammar.setInitialSymbol("S");
         
-        grammar.setProductions('S', "aC");
-        grammar.setProductions('S', "bB");
-        grammar.setProductions('S', "cA");
-        grammar.setProductions('S', "b");
-        grammar.setProductions('S', "c");
-        grammar.setProductions('S', "&");
-        grammar.setProductions('A', "aC");
-        grammar.setProductions('A', "bB");
-        grammar.setProductions('A', "cA");
-        grammar.setProductions('A', "b");
-        grammar.setProductions('A', "c");
-        grammar.setProductions('B', "aC");
-        grammar.setProductions('B', "bC");
-        grammar.setProductions('B', "cA");
-        grammar.setProductions('B', "c");
-        grammar.setProductions('C', "aA");
-        grammar.setProductions('C', "bC");
-        grammar.setProductions('C', "cC");
-        grammar.setProductions('C', "a");
+        grammar.setProductions("S", "aC");
+        grammar.setProductions("S", "bB");
+        grammar.setProductions("S", "cA");
+        grammar.setProductions("S", "b");
+        grammar.setProductions("S", "c");
+        grammar.setProductions("S", "&");
+        grammar.setProductions("A", "aC");
+        grammar.setProductions("A", "bB");
+        grammar.setProductions("A", "cA");
+        grammar.setProductions("A", "b");
+        grammar.setProductions("A", "c");
+        grammar.setProductions("B", "aC");
+        grammar.setProductions("B", "bC");
+        grammar.setProductions("B", "cA");
+        grammar.setProductions("B", "c");
+        grammar.setProductions("C", "aA");
+        grammar.setProductions("C", "bC");
+        grammar.setProductions("C", "cC");
+        grammar.setProductions("C", "a");
         
          State q0 = new State("q0", true);
         State q1 = new State("q1", true);
@@ -144,14 +143,14 @@ public class TransformationTest {
         alphabet.add('b');
         alphabet.add('c');
               
-        FiniteAutomaton automaton = new FiniteAutomaton(st, alphabet, init); 
+        FiniteAutomaton automaton = new FiniteAutomaton(st, alphabet, init, "a"); 
        
         Transformation t = new Transformation();
         
         FA_algorithms f = new FA_algorithms();
         
         assertEquals(automaton, f.determinize(t.RGtoAF));
-        */
+
     }
 
     /**

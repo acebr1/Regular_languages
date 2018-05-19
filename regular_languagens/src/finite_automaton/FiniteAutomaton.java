@@ -10,7 +10,7 @@ public class FiniteAutomaton{
         FiniteAutomaton complete;
         FiniteAutomaton noEpsilon;
         
-	protected ArrayList<State> states;
+	public ArrayList<State> states;
 	protected ArrayList<Character> alphabet;
 	protected State initial;
 	public String name = "";
@@ -71,6 +71,10 @@ public class FiniteAutomaton{
         
         public FiniteAutomaton getReverse() {
             return this.reverse;
+        }
+        
+        public ArrayList<State> getStates(){
+            return this.states;
         }
         
         @Override
