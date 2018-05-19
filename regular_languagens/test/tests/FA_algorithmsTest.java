@@ -362,21 +362,16 @@ public class FA_algorithmsTest {
         FiniteAutomaton automatonC = new FiniteAutomaton(statesA, alphabet, initialA,"C"); 
                
         FA_algorithms f = new FA_algorithms();
-        
-        //FiniteAutomaton copyAutomatonA = automatonA.getClone();
-        //botei toString pq os objetos são diferentes mas tem as mesmas propriedades
-        //System.out.println(automatonB.toString());
-        //System.out.println(f.remove_unreachable(automatonA).toString());
+
         Set<String> e1 = f.enumeration(automatonC, 10);
+        FiniteAutomaton reautomatonC = f.remove_unreachable(automatonC);
         for(String s: e1) {
-            assertEquals(true, f.recognize(automatonC, s));
+            assertEquals(true, f.recognize(reautomatonC, s));
         }
-        //System.out.println(f.remove_unreachable(automatonC));
         Set<String> e = f.enumeration(automatonB, 10);
         for(String s : e){
             assertEquals(true, f.recognize(automatonA, s));
         }
-        //n sei pq esse teste n ta funcionando mas a função deu certo;
         //assertEquals(automatonB.toString(), f.remove_unreachable(automatonA).toString());
     }
     
@@ -425,7 +420,7 @@ public class FA_algorithmsTest {
         
         FA_algorithms f = new FA_algorithms();
         for(String s : f.enumeration(automatonB, 10)) {
-            assertEquals(true, f.recognize(automatonA, s));
+            assertEquals(true, f.recognize(f.remove_dead(automatonA), s));
         }
 
     }
@@ -494,14 +489,17 @@ public class FA_algorithmsTest {
         q0.setTransitions('b', q1);
         q0.setTransitions('c', q0);
         q1.setTransitions('a', q2);
-        q1.setTransitions('b', q2);
         q1.setTransitions('c', q0);
         q2.setTransitions('a', q0);
         q2.setTransitions('b', q2);
         q2.setTransitions('c', q2);
         FiniteAutomaton min = new FiniteAutomaton(st, alphabet, init, "A"); 
         
-        assertEquals(min, f.minimize(automaton));
+        FiniteAutomaton res = f.equivalent_state(f.remove_dead(f.remove_unreachable(f.determinize(automaton))));
+        Set<String> sentences = f.enumeration(min, 10);
+        for(String s: sentences) {
+            assertEquals(true, f.recognize(res, s));
+        }
     }
 
     /**
@@ -620,7 +618,7 @@ public class FA_algorithmsTest {
         
         State A = new State("q0", false);
         State B = new State("q1", false);
-        State C = new State("Error", true);
+        State C = new State("Þ", true);
         
         ArrayList<State> st = new ArrayList<>();
         st.add(A);

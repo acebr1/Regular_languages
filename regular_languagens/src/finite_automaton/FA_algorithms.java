@@ -120,9 +120,11 @@ public class FA_algorithms {
    * @return finite automaton complete
 */
 	public FiniteAutomaton complete(FiniteAutomaton f) {
-            //FiniteAutomaton complete = new FiniteAutomaton(f.states, f.alphabet, f.initial);
+            if(isComplete(f))
+                return f.getClone();
+            
             FiniteAutomaton complete = f.getClone();
-            State ErrorState = new State("Error", false);
+            State ErrorState = new State("Þ", false);
             complete.states.add(ErrorState);
             for(Character c: complete.alphabet) {
                 ErrorState.setTransitions(c, ErrorState);
@@ -214,7 +216,6 @@ public class FA_algorithms {
                 states.add(q0);
                 return new FiniteAutomaton(states, FClone.alphabet, q0, FClone.getName());
             }
-            System.out.println("Alive:"+alive);
             ArrayList<State> states = new ArrayList<>();
             ArrayList<Character> caracters = new ArrayList<>();
             for(State s : alive) {
@@ -234,49 +235,113 @@ public class FA_algorithms {
             return new FiniteAutomaton(new ArrayList<State>(alive),FClone.alphabet, FClone.getInitial(),FClone.getName());
 
 	}   
-        public ArrayList<State> remove_dead_aux(FiniteAutomaton f, ArrayList<State> aux){
-            ArrayList<State> alive_aux = new ArrayList<>();
-            /**ArrayList<State> temp = new ArrayList<>();
-            for (State s : aux) {
-                if (s.getIsFinal()){
-                    alive_aux.add(s);
-                } else {
-                    for (char a : f.alphabet) {
-                        temp = s.getListStates(a);
-                        alive_aux.addAll(remove_dead_aux(f,temp));
-                    }
-                }
-            }*/
-            return alive_aux;
-        }
         
 /**
    * @return finite automaton withot equivalent states
 */
 	public FiniteAutomaton equivalent_state(FiniteAutomaton f) {
-            /**ArrayList<ArrayList> group = new ArrayList<>();
+            FiniteAutomaton FClone = complete(f);
+            ArrayList<ArrayList<State>> group = new ArrayList<>();
             ArrayList<State> accept = new ArrayList<>();
             ArrayList<State> reject = new ArrayList<>();
-            ArrayList<State> accept_aux = new ArrayList<>();
+            ArrayList<ArrayList<State>> temp = new ArrayList<>();
+            ArrayList<ArrayList<State>> classesEq = new ArrayList<>();
             group.add(accept);
             group.add(reject);
-            for (State s : f.states){
+            for (State s : FClone.states){
                 if (s.getIsFinal()){
                     accept.add(s);
-                    accept_aux.add(s);
                 } else {
                     reject.add(s);
                 }
             }
-            while(accept_aux != null) {
-                int i = 0;
-                accept_aux.remove(i);
-                i++;
-                for (char a : f.alphabet){
+            
+            for(ArrayList<State> a1: group){
+                for(int i = 0; i < a1.size(); i++){
+                    boolean tem = false;
+                    //System.out.println(temp);
+                    for(ArrayList<State> alist: temp){
+                        if(alist.contains(a1.get(i))){
+                            tem = true;
+                        }
+                    }
+                    if(!tem) {
+                        ArrayList<State> classeN = new ArrayList<State>();
+                        classeN.add(a1.get(i));
+                        temp.add(classeN);
+                    }
+                    for(int j = i+1; j < a1.size(); j++){
+                        //System.out.println("Comparando o estado "+a1.get(i)+" com "+a1.get(j));
+                        if(equivalent_state_aux(a1.get(i), a1.get(j), group, FClone.alphabet)){
+                            for(ArrayList<State> a2: temp){
+                                if(a2.contains(a1.get(i))){
+                                    if(!a2.contains(a1.get(j))){
+                                        a2.add(a1.get(j));
+                                    }
+                                }
+                            }
+                            //temp.get(i).add(j);
+                        } else {
+                            //System.out.println("Não são equivalentes"); 
+                        }
+                    }   
                 }
-            }*/
-            return new FiniteAutomaton();
+                classesEq.addAll(temp);
+                temp.clear();
+            }
+            ArrayList<State> states = new ArrayList<>();
+            Map<ArrayList<State>,State> map = new HashMap<>();
+            Map<State,ArrayList<State>> map2 = new HashMap<>();
+            State newInitial = null;
+            for(ArrayList<State> a: classesEq){
+                State s = new State(a.toString(), false);
+                if(a.get(0).isFinal){
+                    s.setIsFinal(true);
+                }
+                if(a.contains(FClone.initial)){
+                    newInitial = s;
+                }
+                map.put(a, s);
+                map2.put(s, a);
+                states.add(s);
+            }
+            for(State s: states){
+                State old = map2.get(s).get(0);
+                for(Character c: FClone.alphabet){
+                    State olds = old.getListStates(c).get(0);
+                    for(ArrayList<State> a: classesEq){
+                        if(a.contains(olds)){
+                            s.setTransitions(c, map.get(a));
+                        }
+                    }
+                }
+            }
+            FiniteAutomaton resp = new FiniteAutomaton(states, FClone.alphabet, newInitial, FClone.getName()+" Minimized");
+            f.setMinimized(resp);
+            return resp;
 	}
+        
+        public boolean equivalent_state_aux(State a1, State a2, ArrayList<ArrayList<State>> grupo, ArrayList<Character> alf)  {
+            boolean resp = true;
+            for(Character c:alf){
+                State map1 = a1.getListStates(c).get(0);
+                State map2 = a2.getListStates(c).get(0);
+                ArrayList<State> groupA = null;
+                ArrayList<State> groupB = null;
+                for(ArrayList<State> g: grupo){
+                    if(g.contains(map1)){
+                        groupA = g;
+                    }
+                    if(g.contains(map2)){
+                        groupB = g;
+                    }
+                }
+                if(groupA != groupB){
+                    resp = false;
+                }
+            }
+            return resp;
+        }
 /**
    * Used in intersection() and difference()
    * @return Finite automaton resulting from the union
