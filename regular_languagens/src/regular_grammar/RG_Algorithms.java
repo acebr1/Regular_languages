@@ -10,6 +10,31 @@ public class RG_Algorithms{
    * Constructor.
 */
 	public RG_Algorithms() {}
+        
+        public RegularGrammar renameGrammar(RegularGrammar ga, RegularGrammar gb){
+            RegularGrammar GAClone = ga.getClone();
+            RegularGrammar GBClone = gb.getClone();
+            RegularGrammar gnew = new RegularGrammar();
+            char a = 'A';
+            String initial = null;
+            for (String key : GBClone.getProductions().keySet()){
+                if (key == GBClone.getInitialSymbol()) {
+                    initial = key;
+                }
+                while (GAClone.getProductions().containsKey(key)){
+                    a++;
+                }
+                ArrayList<String> list = GBClone.getProductions().get(key);
+                for(String s : list){
+                    if(s.charAt(1) == key.charAt(0)){
+                        gnew.setProductions(key, s.charAt(0)+"" + key);
+                    } else {
+                        gnew.setProductions(key, s.charAt(0)+"" + a);
+                    }
+                }
+            }
+            return new RegularGrammar(initial);
+        }
 
 /**
    * @return Regular grammar resulting from the union

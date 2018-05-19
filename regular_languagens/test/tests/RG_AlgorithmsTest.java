@@ -16,9 +16,43 @@ import regular_grammar.RegularGrammar;
 
 public class RG_AlgorithmsTest {
     
-    public RG_AlgorithmsTest() {
-    }
+    public RG_AlgorithmsTest() {}
     
+     /**
+     * Test of rename method, of class RG_Algorithms.
+     */
+    @Test
+    public void testRenameGrammar() {
+        RegularGrammar ga = new RegularGrammar();
+        ga.setInitialSymbol("S");
+        ga.setProductions("S", "&");
+        ga.setProductions("S", "aA");
+        ga.setProductions("S", "a");
+        ga.setProductions("A", "aA");
+        ga.setProductions("A", "a");
+        
+        RegularGrammar gb = new RegularGrammar();
+        gb.setInitialSymbol("S");
+        gb.setProductions("S", "&");
+        gb.setProductions("S", "bA");
+        gb.setProductions("S", "b");
+        gb.setProductions("A", "bA");
+        gb.setProductions("A", "b");
+        
+        RegularGrammar result = new RegularGrammar();
+        result.setInitialSymbol("S");
+        result.setProductions("S", "&");
+        result.setProductions("S", "bA");
+        result.setProductions("S", "b");
+        result.setProductions("A", "bA");
+        result.setProductions("A", "b");
+        
+        RegularGrammar gnew = new RegularGrammar();
+        
+        RG_Algorithms rg = new RG_Algorithms();
+        
+        assertEquals(result.toString(), rg.renameGrammar(ga, gb).toString());
+    }
 
     /**
      * Test of union method, of class RG_Algorithms.
@@ -63,7 +97,7 @@ public class RG_AlgorithmsTest {
         
         RG_Algorithms rg = new RG_Algorithms();
         
-        assertEquals(result.toString(), rg.concatenation(ga, gb).toString());
+        assertEquals(result.toString(), rg.union(ga, gb).toString());
         
     }
 
