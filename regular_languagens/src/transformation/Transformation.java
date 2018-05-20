@@ -33,12 +33,10 @@ public class Transformation {
         ArrayList<State> states = FAClone.getStates();
         State initial = FAClone.getInitial();
         Map<State,String> StaToStr = new HashMap<>();
-        Map<String,State> StrToSta = new HashMap<>();
         char name = 'A';
         for(State s: states){
             if(name == 'S') name++;
             StaToStr.put(s, ""+name);
-            StrToSta.put(""+name, s);
             name++;
         }
         for(Character c: initial.getTransitions().keySet()){
@@ -75,15 +73,31 @@ public class Transformation {
         RegularGrammar GClone = g.getClone();
         ArrayList<Character> alphabet = new ArrayList<>();
         ArrayList<State> states = new ArrayList<>();
-        State initial = new State(GClone.getInitialSymbol(), false);
-        states.add(initial);
-        for (String key : GClone.getProductions().keySet()){
-            State st = new State(key, false);
-            ArrayList<String> list = GClone.getProductions().get(key);
+        Map<String,State> StrToSta = new HashMap<>();
+        State initial = null;
+        Map<String, ArrayList<String>> productions = GClone.getProductions();
+        for (String key : productions.keySet()){
+            if(key.equals(GClone.getInitialSymbol())){
+                initial = new State(GClone.getInitialSymbol(), false);
+                ArrayList<String> l = productions.get(GClone.getInitialSymbol());
+                if(l.contains("&")) initial.setIsFinal(true);
+                states.add(initial);
+                StrToSta.put(key, initial);
+            }else {
+                State newS = new State(key, false);
+                StrToSta.put(key, newS);
+                states.add(newS);
+            }
+        }
+        for (String key : productions.keySet()){
+            ArrayList<String> list = productions.get(key);
             for(String s : list){
-                alphabet.add(s.charAt(0));
-                if(s.charAt(1) == ' '){
-                    st.setIsFinal(true);
+                if(!alphabet.contains(s.charAt(0)) && s.charAt(0)!= '&')
+                    alphabet.add(s.charAt(0));
+                if(s.length() == 2){
+                    StrToSta.get(key).setTransitions(s.charAt(0), StrToSta.get(s.charAt(1)+""));
+                    if(list.contains(""+s.charAt(0))) 
+                        StrToSta.get(s.charAt(1)+"").setIsFinal(true);
                 }
             }
         }
