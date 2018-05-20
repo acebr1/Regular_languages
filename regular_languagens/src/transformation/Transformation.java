@@ -76,19 +76,24 @@ public class Transformation {
         Map<String,State> StrToSta = new HashMap<>();
         State initial = null;
         Map<String, ArrayList<String>> productions = GClone.getProductions();
+        int n=1;
         for (String key : productions.keySet()){
             if(key.equals(GClone.getInitialSymbol())){
-                initial = new State(GClone.getInitialSymbol(), false);
+                initial = new State("q0", false);
                 ArrayList<String> l = productions.get(GClone.getInitialSymbol());
                 if(l.contains("&")) initial.setIsFinal(true);
                 states.add(initial);
                 StrToSta.put(key, initial);
             }else {
-                State newS = new State(key, false);
+                State newS = new State("q"+n++, false);
                 StrToSta.put(key, newS);
                 states.add(newS);
             }
         }
+        //Create state final
+        State finalS = new State("q"+n++,true);
+        states.add(finalS);
+        
         for (String key : productions.keySet()){
             ArrayList<String> list = productions.get(key);
             for(String s : list){
@@ -96,13 +101,14 @@ public class Transformation {
                     alphabet.add(s.charAt(0));
                 if(s.length() == 2){
                     StrToSta.get(key).setTransitions(s.charAt(0), StrToSta.get(s.charAt(1)+""));
-                    if(list.contains(""+s.charAt(0))) 
-                        StrToSta.get(s.charAt(1)+"").setIsFinal(true);
+                }
+                if(s.length() == 1){
+                    StrToSta.get(key).setTransitions(s.charAt(0), finalS);
                 }
             }
         }
         
-        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "");
+        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "AF:"+GClone.getName());
         listFA.add(fnew);
         return fnew;
     }

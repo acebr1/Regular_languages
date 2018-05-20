@@ -158,6 +158,9 @@ public class TransformationTest {
         FA_algorithms f = new FA_algorithms();
         
         FiniteAutomaton fa = f.minimize(t.RGtoAF(grammar));
+        System.out.println(automaton);
+        System.out.println(t.RGtoAF(grammar));
+        System.out.println(f.minimize(t.RGtoAF(grammar)));
         Set<String> sentences = f.enumeration(automaton, 10);
         for(String s: sentences){
             assertEquals(true, f.recognize(fa, s));

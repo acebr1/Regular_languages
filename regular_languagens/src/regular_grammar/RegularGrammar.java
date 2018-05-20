@@ -7,6 +7,7 @@ public class RegularGrammar{
 
 	protected String initialSymbol;
         Map<String, ArrayList<String>> productions;
+        public String name ="";
 /**
    * Constructor.
 */
@@ -18,7 +19,20 @@ public class RegularGrammar{
             this.initialSymbol = initialSymbol;
             this.productions = new HashMap<>();
         }
-    
+        
+        public RegularGrammar(String initialSymbol,String name) {
+            this.initialSymbol = initialSymbol;
+            this.name = name;
+            this.productions = new HashMap<>();
+        }
+        
+        public String getName(){
+            return this.name;
+        }
+        
+        public void setName(String name){
+            this.name = name;
+        }
         public String getInitialSymbol(){
             return initialSymbol;
         }
