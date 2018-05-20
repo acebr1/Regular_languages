@@ -61,7 +61,9 @@ public class RegularGrammar{
         public String toString(){
             String resp = "InitialSymbol:"+initialSymbol+"\nProductions:";
             //System.out.println(resp);
+            resp += "("+initialSymbol+","+productions.get(initialSymbol)+")\n";          
             for(String key : productions.keySet()){
+                if(!key.equals(initialSymbol))
                     resp += "("+key+","+productions.get(key)+")\n";  
             }
             return resp;

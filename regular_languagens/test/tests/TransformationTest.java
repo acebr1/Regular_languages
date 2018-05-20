@@ -84,7 +84,9 @@ public class TransformationTest {
         grammar.setProductions("C", "a");
         
         Transformation t = new Transformation();
-                
+        System.out.println(automaton);
+        System.out.println(grammar);
+        System.out.println(t.AFtoRG(automaton));
         assertEquals(grammar.toString(), t.AFtoRG(automaton).toString());
     }
 

@@ -8,7 +8,7 @@ public class State {
 
 	protected String name;
 	protected boolean isFinal;
-        protected Map<Character, ArrayList<State>> transition;
+        public Map<Character, ArrayList<State>> transition;
         
 /**
    * Constructor.
