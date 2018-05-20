@@ -15,25 +15,43 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
+            ArrayList<String> alphabet = new ArrayList<>();
             char a = 'A';
-            String initial = null;
+            while(a != 'Z'){
+                alphabet.add(a +"");
+                a++;
+            }
+            for(String key : GAClone.getProductions().keySet()){
+                alphabet.remove(key);
+            }
+            if(alphabet.contains(GBClone.getInitialSymbol())){
+                gnew.setInitialSymbol(GBClone.getInitialSymbol());
+            } else {
+                gnew.setInitialSymbol(alphabet.get(0));
+            }
             for (String key : GBClone.getProductions().keySet()){
-                if (key == GBClone.getInitialSymbol()) {
-                    initial = key;
-                }
-                while (GAClone.getProductions().containsKey(key)){
-                    a++;
-                }
-                ArrayList<String> list = GBClone.getProductions().get(key);
-                for(String s : list){
-                    if(s.charAt(1) == key.charAt(0)){
-                        gnew.setProductions(key, s.charAt(0)+"" + key);
-                    } else {
-                        gnew.setProductions(key, s.charAt(0)+"" + a);
+                if(alphabet.contains(key+"")){
+                    alphabet.remove(key);
+                } else{
+                    for (String key2 : GBClone.productions.keySet()){
+                        ArrayList<String> list = GBClone.getProductions().get(key2);
+                            for(String s : list){
+                                if(s.length() > 1){
+                                    if(alphabet.contains(key2) && s.charAt(1)+"" == key2){
+                                        GBClone.setProductions(key2+"", s.charAt(0)+""+key2+"");
+                                        alphabet.remove(key2);
+                                    } else if(alphabet.contains(key2)){
+                                        GBClone.setProductions(key2+"", s+"");
+                                        alphabet.remove(key2);
+                                    } else if(s.charAt(1)+"" == key2){
+                                        GBClone.setProductions(key2+"", s.charAt(0)+""+key2+"");
+                                    }
+                                }
+                            }
                     }
                 }
             }
-            return new RegularGrammar(initial);
+            return gnew;
         }
 
 /**

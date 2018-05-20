@@ -40,12 +40,12 @@ public class RG_AlgorithmsTest {
         gb.setProductions("A", "b");
         
         RegularGrammar result = new RegularGrammar();
-        result.setInitialSymbol("S");
-        result.setProductions("S", "&");
-        result.setProductions("S", "bA");
-        result.setProductions("S", "b");
-        result.setProductions("A", "bA");
-        result.setProductions("A", "b");
+        result.setInitialSymbol("B");
+        result.setProductions("B", "&");
+        result.setProductions("B", "bC");
+        result.setProductions("B", "b");
+        result.setProductions("C", "bC");
+        result.setProductions("C", "b");
         
         RegularGrammar gnew = new RegularGrammar();
         
