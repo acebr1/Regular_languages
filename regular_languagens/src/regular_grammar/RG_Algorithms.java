@@ -24,25 +24,44 @@ public class RG_Algorithms{
             for(String key : GAClone.getProductions().keySet()){
                 alphabet.remove(key);
             }
-            if(alphabet.contains(GBClone.getInitialSymbol())){
-                gnew.setInitialSymbol(GBClone.getInitialSymbol());
-            } else {
-                gnew.setInitialSymbol(alphabet.get(0));
-            }
-            for (String key : GBClone.getProductions().keySet()){
+            Map<String, String> aux = new HashMap<>();
+            for(String key : GBClone.getProductions().keySet()){
                 if(alphabet.contains(key)){
                     alphabet.remove(key);
-                    gnew.setProductions(key, GBClone.getProductions().get(key));
+                    gnew.setProductions(key+"", GBClone.getProductions().get(key)+"");
                 } else{
-                    String aux = alphabet.get(0)+"";
-                    alphabet.remove(aux);
-                    for (String key2 : GBClone.productions.keySet()){
-                        ArrayList<String> list = GBClone.getProductions().get(key2);
-                        for(String s : list){
-                             GBClone.setProductions(aux+"", s.charAt(0)+"");
+                    aux.put(key, alphabet.get(0));
+                    alphabet.remove(0);
+                }
+            }
+            for(String key : GBClone.getProductions().keySet()){
+                ArrayList<String> list = GBClone.getProductions().get(key);
+                    for(String s : list){
+                        /**if(key.equals(GBClone.getInitialSymbol())){
+                            if(s.length() == 1){
+                                gnew.setProductions(aux.get(key), s);
+                                gnew.setInitialSymbol(aux.get(key));
+                            } else{
+                                String temp = s.charAt(1)+"";
+                                if(aux.containsKey(temp)){
+                                    gnew.setProductions(aux.get(key), s.charAt(0)+""+aux.get(temp));
+                                }
+                            }
+                        }*/
+                        if(aux.containsKey(key)){
+                            if(s.length() == 1){
+                                gnew.setProductions(aux.get(key), s);
+                                gnew.setInitialSymbol(aux.get(key));
+                            } else{
+                                String temp = s.charAt(1)+"";
+                                if(aux.containsKey(temp)){
+                                    gnew.setProductions(aux.get(key), s.charAt(0)+""+aux.get(temp));
+                                }
+                            }
+                        } else {
+                           // gnew.setProductions(key+"", GBClone.getProductions().get(key)+"");
                         }
                     }
-                }
             }
             return gnew;
         }
@@ -56,23 +75,25 @@ public class RG_Algorithms{
             RegularGrammar gnew = new RegularGrammar();
             String initialSymbol = "U";
             gnew.setInitialSymbol(initialSymbol);
-            //RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
-            for (String key : GBClone.productions.keySet()) {
-                ArrayList<String> temp = GBClone.productions.get(key);
+            RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
+            for (String key : gtemp.productions.keySet()) {
+                ArrayList<String> temp = gtemp.productions.get(key);
                 for(String s : temp){
-                    if (key.equals(GBClone.getInitialSymbol())) {
-                        gnew.setProductions(initialSymbol+"", s+"");
+                    if (key.equals(GAClone.getInitialSymbol())) {
+                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
                     }
                     gnew.setProductions(key+"", s+"");
+                    
                 }
             }
             for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
-                    if (key.equals(GAClone.getInitialSymbol())) {
-                        gnew.setProductions(initialSymbol+"", s+"" );
+                    if (key.equals(GBClone.getInitialSymbol())) {
+                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"" );
                     }
                     gnew.setProductions(key+"", s+"");
+
                 }
             }
             return gnew;
@@ -86,24 +107,26 @@ public class RG_Algorithms{
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
-            //RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
+            RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
             for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     if (s.length() == 1 && !"&".equals(s)) {
-                      gnew.setProductions(key+"", s.charAt(0)+"" + GBClone.getInitialSymbol()+"");
+                      gnew.setProductions(key+"", s.charAt(0)+"" + gtemp.getInitialSymbol()+"");
                       gnew.setProductions(key+"", s+"");
                     } else {
                       gnew.setProductions(key, s);
                     }
                 }
             }
-            for (String key : GBClone.productions.keySet()) {
-                ArrayList<String> temp = GBClone.productions.get(key);
+            for (String key : gtemp.productions.keySet()) {
+                ArrayList<String> temp = gtemp.productions.get(key);
                 for(String s : temp){
                     if (!"&".equals(s)) {
                       gnew.setProductions(key+"", s+"");
-                    } 
+                    } else{
+                        
+                    }
                 }
             }
             

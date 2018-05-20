@@ -68,12 +68,12 @@ public class RG_AlgorithmsTest {
         ga.setProductions("A", "a");
         
         RegularGrammar gb = new RegularGrammar();
-        gb.setInitialSymbol("B");
-        gb.setProductions("B", "&");
-        gb.setProductions("B", "bC");
-        gb.setProductions("B", "b");
-        gb.setProductions("C", "bC");
-        gb.setProductions("C", "b");
+        gb.setInitialSymbol("S");
+        gb.setProductions("S", "&");
+        gb.setProductions("S", "bA");
+        gb.setProductions("S", "b");
+        gb.setProductions("A", "bA");
+        gb.setProductions("A", "b");
         
         RegularGrammar result = new RegularGrammar();
         result.setInitialSymbol("U");
@@ -115,12 +115,12 @@ public class RG_AlgorithmsTest {
         ga.setProductions("A", "a");
         
         RegularGrammar gb = new RegularGrammar();
-        gb.setInitialSymbol("B");
-        gb.setProductions("B", "&");
-        gb.setProductions("B", "bC");
-        gb.setProductions("B", "b");
-        gb.setProductions("C", "bC");
-        gb.setProductions("C", "b");
+        gb.setInitialSymbol("S");
+        gb.setProductions("S", "&");
+        gb.setProductions("S", "bA");
+        gb.setProductions("S", "b");
+        gb.setProductions("A", "bA");
+        gb.setProductions("A", "b");
         
         RegularGrammar result = new RegularGrammar();
         result.setInitialSymbol("S");
