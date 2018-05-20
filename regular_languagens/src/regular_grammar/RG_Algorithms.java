@@ -103,8 +103,7 @@ public class RG_Algorithms{
                 for(String s : temp){
                     if (!"&".equals(s)) {
                       gnew.setProductions(key+"", s+"");
-                    }
-                gnew.setProductions(GAClone.getInitialSymbol()+"", s);
+                    } 
                 }
             }
             
