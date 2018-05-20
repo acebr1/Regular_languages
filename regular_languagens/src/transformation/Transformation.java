@@ -4,6 +4,7 @@ import finite_automaton.*;
 import regular_expression.*;
 import regular_grammar.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,21 +20,45 @@ public class Transformation {
     
     public Transformation(){
         this.alg = new FA_algorithms();
+        listRG = new ArrayList<>();
+        listRE = new ArrayList<>();
+        listFA = new ArrayList<>();
+        
     }
     
     public RegularGrammar AFtoRG(FiniteAutomaton f){
         FiniteAutomaton FAClone = f.getClone();
 	RegularGrammar gnew = new RegularGrammar();
-        gnew.setInitialSymbol(FAClone.getInitial().getName());
+        gnew.setInitialSymbol("S");
         ArrayList<State> states = FAClone.getStates();
+        State initial = FAClone.getInitial();
+        Map<State,String> StaToStr = new HashMap<>();
+        char name = 'A';
+        for(State s: states){
+            if(name == 'S') name++;
+            StaToStr.put(s, ""+name);
+            name++;
+        }
+        for(Character c: initial.getTransitions().keySet()){
+            ArrayList<State> list2 = initial.getListStates(c);
+            for(State s: list2){
+                gnew.setProductions("S", c+StaToStr.get(s));
+                if(s.getIsFinal()){
+                    gnew.setProductions("S",c+"");
+                }
+            }
+            if(initial.getIsFinal()){
+                gnew.setProductions("S", "&");
+            }
+        }
         for(State s : states) {
             Set<Character> list = s.getTransitions().keySet();
             for(Character key : list ){
                 ArrayList<State> list2 = s.getTransitions().get(key);
                 for(State s2 : list2){
-                    gnew.setProductions((String) s.getName(), (String) (key + s.getName()));
+                    gnew.setProductions(StaToStr.get(s), key + StaToStr.get(s2));
                     if(s2.getIsFinal()){
-                        gnew.setProductions((String) s.getName(), (String) key.toString());
+                        gnew.setProductions(StaToStr.get(s), key+"");
                     }
                 }
                 
@@ -48,20 +73,42 @@ public class Transformation {
         RegularGrammar GClone = g.getClone();
         ArrayList<Character> alphabet = new ArrayList<>();
         ArrayList<State> states = new ArrayList<>();
-        State initial = new State(GClone.getInitialSymbol(), false);
-        states.add(initial);
-        for (String key : GClone.getProductions().keySet()){
-            State st = new State(key, false);
-            ArrayList<String> list = GClone.getProductions().get(key);
+        Map<String,State> StrToSta = new HashMap<>();
+        State initial = null;
+        Map<String, ArrayList<String>> productions = GClone.getProductions();
+        int n=1;
+        for (String key : productions.keySet()){
+            if(key.equals(GClone.getInitialSymbol())){
+                initial = new State("q0", false);
+                ArrayList<String> l = productions.get(GClone.getInitialSymbol());
+                if(l.contains("&")) initial.setIsFinal(true);
+                states.add(initial);
+                StrToSta.put(key, initial);
+            }else {
+                State newS = new State("q"+n++, false);
+                StrToSta.put(key, newS);
+                states.add(newS);
+            }
+        }
+        //Create state final
+        State finalS = new State("q"+n++,true);
+        states.add(finalS);
+        
+        for (String key : productions.keySet()){
+            ArrayList<String> list = productions.get(key);
             for(String s : list){
-                alphabet.add(s.charAt(0));
-                if(s.charAt(1) == ' '){
-                    st.setIsFinal(true);
+                if(!alphabet.contains(s.charAt(0)) && s.charAt(0)!= '&')
+                    alphabet.add(s.charAt(0));
+                if(s.length() == 2){
+                    StrToSta.get(key).setTransitions(s.charAt(0), StrToSta.get(s.charAt(1)+""));
+                }
+                if(s.length() == 1){
+                    StrToSta.get(key).setTransitions(s.charAt(0), finalS);
                 }
             }
         }
         
-        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "");
+        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "AF:"+GClone.getName());
         listFA.add(fnew);
         return fnew;
     }

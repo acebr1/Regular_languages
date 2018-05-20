@@ -12,7 +12,7 @@ public class FiniteAutomaton{
         
 	public ArrayList<State> states;
 	protected ArrayList<Character> alphabet;
-	protected State initial;
+	State initial;
 	public String name = "";
 
 /**

@@ -10,6 +10,7 @@ import transformation.Transformation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -84,8 +85,15 @@ public class TransformationTest {
         grammar.setProductions("C", "a");
         
         Transformation t = new Transformation();
-                
-        assertEquals(grammar.toString(), t.AFtoRG(automaton).toString());
+        //System.out.println(automaton);
+        //System.out.println(grammar);
+        RegularGrammar rg = t.AFtoRG(automaton);
+        for(String s:grammar.getProductions().keySet()){
+            ArrayList<String> list = grammar.getProductions().get(s);
+            for(String l: list){
+                assertEquals(true, rg.getProductions().get(s+"").contains(l));
+            }
+        }
     }
 
     /**
@@ -149,7 +157,21 @@ public class TransformationTest {
         
         FA_algorithms f = new FA_algorithms();
         
-        assertEquals(automaton, f.determinize(t.RGtoAF(grammar)));
+        FiniteAutomaton fa = f.minimize(t.RGtoAF(grammar));
+        System.out.println(automaton);
+        System.out.println(t.RGtoAF(grammar));
+        System.out.println(f.minimize(t.RGtoAF(grammar)));
+        Set<String> sentences = f.enumeration(automaton, 10);
+        for(String s: sentences){
+            assertEquals(true, f.recognize(fa, s));
+        }
+        //System.out.println(grammar);
+        //System.out.println(fa);
+        //System.out.println(t.AFtoRG(fa));
+        //System.out.println(f.minimize(t.RGtoAF(t.AFtoRG(fa))));
+        
+        
+        //assertEquals(automaton, f.minimize(t.RGtoAF(grammar)));
 
     }
     
