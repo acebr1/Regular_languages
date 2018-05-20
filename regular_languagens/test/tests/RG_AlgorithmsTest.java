@@ -68,12 +68,12 @@ public class RG_AlgorithmsTest {
         ga.setProductions("A", "a");
         
         RegularGrammar gb = new RegularGrammar();
-        gb.setInitialSymbol("S");
-        gb.setProductions("S", "&");
-        gb.setProductions("S", "bA");
-        gb.setProductions("S", "b");
-        gb.setProductions("A", "bA");
-        gb.setProductions("A", "b");
+        gb.setInitialSymbol("B");
+        gb.setProductions("B", "&");
+        gb.setProductions("B", "bC");
+        gb.setProductions("B", "b");
+        gb.setProductions("C", "bC");
+        gb.setProductions("C", "b");
         
         RegularGrammar result = new RegularGrammar();
         result.setInitialSymbol("U");
@@ -81,7 +81,7 @@ public class RG_AlgorithmsTest {
         result.setProductions("U", "aA");
         result.setProductions("U", "a");
         result.setProductions("U", "&");
-        result.setProductions("U", "bA´");
+        result.setProductions("U", "bC");
         result.setProductions("U", "b");
         
         result.setProductions("S", "&");
@@ -89,11 +89,11 @@ public class RG_AlgorithmsTest {
         result.setProductions("S", "a");
         result.setProductions("A", "aA");
         result.setProductions("A", "a");
-        result.setProductions("S´", "&");
-        result.setProductions("S´", "bA´");
-        result.setProductions("S´", "b");
-        result.setProductions("A´", "bA´");
-        result.setProductions("A´", "b");
+        result.setProductions("B", "&");
+        result.setProductions("B", "bC");
+        result.setProductions("B", "b");
+        result.setProductions("C", "bC");
+        result.setProductions("C", "b");
         
         RG_Algorithms rg = new RG_Algorithms();
         
@@ -115,26 +115,26 @@ public class RG_AlgorithmsTest {
         ga.setProductions("A", "a");
         
         RegularGrammar gb = new RegularGrammar();
-        gb.setInitialSymbol("S");
-        gb.setProductions("S", "&");
-        gb.setProductions("S", "bA");
-        gb.setProductions("S", "b");
-        gb.setProductions("A", "bA");
-        gb.setProductions("A", "b");
+        gb.setInitialSymbol("B");
+        gb.setProductions("B", "&");
+        gb.setProductions("B", "bC");
+        gb.setProductions("B", "b");
+        gb.setProductions("C", "bC");
+        gb.setProductions("C", "b");
         
         RegularGrammar result = new RegularGrammar();
         result.setInitialSymbol("S");
         result.setProductions("S", "&");
         result.setProductions("S", "aA");
-        result.setProductions("S", "aS´");
+        result.setProductions("S", "aB");
         result.setProductions("A", "aA");
-        result.setProductions("A", "aS´");
+        result.setProductions("A", "aB");
         
-        result.setProductions("S´", "&");
-        result.setProductions("S´", "bA´");
-        result.setProductions("S´", "b");
-        result.setProductions("A´", "bA´");
-        result.setProductions("A´", "b");
+        result.setProductions("B", "&");
+        result.setProductions("B", "bB");
+        result.setProductions("B", "b");
+        result.setProductions("B", "bB");
+        result.setProductions("B", "b");
         
         RG_Algorithms rg = new RG_Algorithms();
 
