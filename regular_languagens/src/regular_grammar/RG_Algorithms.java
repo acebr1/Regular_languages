@@ -138,25 +138,37 @@ public class RG_Algorithms{
                     for(String s : temp){
                         if(!s.equals("&")){
                             if(key.equals(gnew.getInitialSymbol())){
-                                if(s.length() == 2 || flag)
+                                if(s.length() == 2)
                                     gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                                if(s.length() == 1 && (flag2 ||!flag)) 
+                                if(s.length() == 1 && flag && flag2) 
                                     gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
-                                if(s.length() == 1 && !flag && flag2) 
                                     gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
-                            } else{
-                                if(s.length() == 2 || flag)
-                                    gnew.setProductions(key+"", s);
-                                if(s.length() == 1 && (flag2 ||!flag))
-                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
                                 if(s.length() == 1 && !flag && flag2) 
-                                    gnew.setProductions(key+"", s+"");  
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                                    //gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                                if(s.length() == 1 && flag && !flag2) 
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                                if(s.length() == 1 && !flag && !flag2) 
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                            } else{
+                                if(s.length() == 2)
+                                    gnew.setProductions(key+"", s);
+                                if(s.length() == 1 && flag && flag2) 
+                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                    gnew.setProductions(key+"", s+"");
+                                if(s.length() == 1 && !flag && flag2) 
+                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                    //gnew.setProductions(key+"", s+"");  
+                                if(s.length() == 1 && flag && !flag2) 
+                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                if(s.length() == 1 && !flag && !flag2) 
+                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
                             } 
                         }
-                        if(flag && flag2){
-                            gnew.setProductions(gnew.getInitialSymbol()+"", "&");
-                        }
                     }    
+                }
+                if(flag && flag2){
+                            gnew.setProductions(gnew.getInitialSymbol()+"", "&");
                 }
                 for (String key : gtemp.productions.keySet()) {
                     ArrayList<String> temp = gtemp.productions.get(key);
@@ -165,6 +177,12 @@ public class RG_Algorithms{
                             gnew.setProductions(key+"", s);
                             if(key.equals(gtemp.getInitialSymbol()) && flag && flag2)
                                 gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                            //if(key.equals(gtemp.getInitialSymbol()) && !flag && flag2)
+                              //  gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                            if(key.equals(gtemp.getInitialSymbol()) && flag && !flag2)
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                            //if(key.equals(gtemp.getInitialSymbol()) && !flag && !flag2)
+                                //gnew.setProductions(gnew.getInitialSymbol()+"", s);
                         }
                     }    
                 }
