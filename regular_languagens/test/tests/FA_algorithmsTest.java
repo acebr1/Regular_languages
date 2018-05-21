@@ -474,9 +474,11 @@ public class FA_algorithmsTest {
                
         FA_algorithms f = new FA_algorithms();
         
-        State q0 = new State("q0", true);
-        State q1 = new State("q1", true);
-        State q2 = new State("q2", false);
+        State q0 = new State("S", true);
+        State q1 = new State("q1", false);
+        State q2 = new State("q2", true);
+        State q4 = new State("q4", false);
+        State qE = new State("Þ", false);
         
         State init = q0;
         
@@ -484,15 +486,24 @@ public class FA_algorithmsTest {
         st.add(q0);
         st.add(q1);
         st.add(q2);
+        st.add(q4);
+        st.add(qE);
         
-        q0.setTransitions('a', q2);
-        q0.setTransitions('b', q1);
+        q0.setTransitions('a', q1);
+        q0.setTransitions('b', q2);
         q0.setTransitions('c', q0);
-        q1.setTransitions('a', q2);
-        q1.setTransitions('c', q0);
-        q2.setTransitions('a', q0);
-        q2.setTransitions('b', q2);
-        q2.setTransitions('c', q2);
+        q1.setTransitions('a', q0);
+        q1.setTransitions('b', q4);
+        q1.setTransitions('c', q1);
+        q2.setTransitions('a', q1);
+        q2.setTransitions('b', qE);
+        q2.setTransitions('c', q0);
+        q4.setTransitions('a', q0);
+        q4.setTransitions('b', qE);
+        q4.setTransitions('c', q1);
+        qE.setTransitions('a', qE);
+        qE.setTransitions('b', qE);
+        qE.setTransitions('c', qE);
         FiniteAutomaton min = new FiniteAutomaton(st, alphabet, init, "A"); 
         
         FiniteAutomaton res = f.minimize(automaton);
@@ -500,6 +511,50 @@ public class FA_algorithmsTest {
         for(String s: sentences) {
             assertEquals(true, f.recognize(res, s));
         }
+        
+        S = new State("S", false);
+        State E = new State("[S,F]", true);
+        A = new State("A", false);
+        B = new State("B", false);
+        C = new State("C", false);
+        State D = new State("D", false);
+        
+        initialA = S;
+        
+        statesA = new ArrayList<>();
+        statesA.add(S);
+        statesA.add(E);
+        statesA.add(A);
+        statesA.add(B);
+        statesA.add(C);
+        statesA.add(D);
+        
+        S.setTransitions('0', E);
+        S.setTransitions('1', A);
+        E.setTransitions('0', E);
+        E.setTransitions('1', A);
+        A.setTransitions('0', B);
+        A.setTransitions('1', C);
+        B.setTransitions('0', D);
+        B.setTransitions('1', E);
+        C.setTransitions('0', A);
+        C.setTransitions('1', B);
+        D.setTransitions('0', C);
+        D.setTransitions('1', D);
+        alphabet = new ArrayList<Character>();
+        alphabet.add('0');
+        alphabet.add('1');
+        FiniteAutomaton automatonDivisivel5 = new FiniteAutomaton(statesA, alphabet, initialA,"D"); 
+        res = f.minimize(automatonDivisivel5);
+        for(int i=0; i<=100; i++){
+            if(i%5==0){
+                assertEquals(true, f.recognize(res, Integer.toBinaryString(i)));
+            }else {
+                assertEquals(false, f.recognize(res, Integer.toBinaryString(i)));
+            }
+        }
+        
+        
     }
 
     /**

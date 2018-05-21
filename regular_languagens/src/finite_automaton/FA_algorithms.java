@@ -253,39 +253,54 @@ public class FA_algorithms {
                     reject.add(s);
                 }
             }
-            
-            for(ArrayList<State> a1: group){
-                for(int i = 0; i < a1.size(); i++){
-                    boolean tem = false;
-                    //System.out.println(temp);
-                    for(ArrayList<State> alist: temp){
-                        if(alist.contains(a1.get(i))){
-                            tem = true;
+            boolean control = true;
+            while(control){
+                for(int k = 0; k < group.size(); k++) {
+                    ArrayList<State> a1 = group.get(k);
+                    for(int i = 0; i < a1.size(); i++){
+                        boolean tem = false;
+                        for(ArrayList<State> alist: temp){
+                            if(alist.contains(a1.get(i))){
+                                tem = true;
+                            }
                         }
-                    }
-                    if(!tem) {
-                        ArrayList<State> classeN = new ArrayList<State>();
-                        classeN.add(a1.get(i));
-                        temp.add(classeN);
-                    }
-                    for(int j = i+1; j < a1.size(); j++){
-                        //System.out.println("Comparando o estado "+a1.get(i)+" com "+a1.get(j));
-                        if(equivalent_state_aux(a1.get(i), a1.get(j), group, FClone.alphabet)){
-                            for(ArrayList<State> a2: temp){
-                                if(a2.contains(a1.get(i))){
-                                    if(!a2.contains(a1.get(j))){
-                                        a2.add(a1.get(j));
+                        if(!tem) {
+                            ArrayList<State> classeN = new ArrayList<State>();
+                            classeN.add(a1.get(i));
+                            temp.add(classeN);
+                            
+                        }
+                        for(int j = i+1; j < a1.size(); j++){
+                            //System.out.println("Comparando o estado "+a1.get(i)+" com "+a1.get(j));
+                            if(equivalent_state_aux(a1.get(i), a1.get(j), group, FClone.alphabet)){
+                                for(ArrayList<State> a2: temp){
+                                    if(a2.contains(a1.get(i))){
+                                        if(!a2.contains(a1.get(j))){
+                                            a2.add(a1.get(j));
+                                        }
                                     }
                                 }
+                            } else {
+                                //System.out.println("Não são equivalentes"); 
                             }
-                            //temp.get(i).add(j);
-                        } else {
-                            //System.out.println("Não são equivalentes"); 
-                        }
-                    }   
+                        }   
+                    }
+                    for(ArrayList<State> a: temp){
+                        if(!classesEq.contains(a)){
+                            for(ArrayList<State> at: temp){
+                            }
+                            classesEq.add(a);
+                        }   
+                    }  
+                    temp.clear();
                 }
-                classesEq.addAll(temp);
-                temp.clear();
+                if(group.equals(classesEq)){
+                    control = false;
+                } else {
+                    group.clear();
+                    group.addAll(classesEq);
+                    classesEq.clear();
+                }
             }
             ArrayList<State> states = new ArrayList<>();
             Map<ArrayList<State>,State> map = new HashMap<>();
