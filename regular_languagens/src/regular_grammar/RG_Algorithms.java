@@ -138,14 +138,22 @@ public class RG_Algorithms{
                     for(String s : temp){
                         if(!s.equals("&")){
                             if(key.equals(gnew.getInitialSymbol())){
-                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                                if(s.length() == 2 || flag)
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                                if(s.length() == 1 && (flag2 ||!flag)) 
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                                if(s.length() == 1 && !flag && flag2) 
+                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
                             } else{
-                                gnew.setProductions(key+"", s);
-                                if(s.length() == 1)
+                                if(s.length() == 2 || flag)
+                                    gnew.setProductions(key+"", s);
+                                if(s.length() == 1 && (flag2 ||!flag))
                                     gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                if(s.length() == 1 && !flag && flag2) 
+                                    gnew.setProductions(key+"", s+"");  
                             } 
                         }
-                        if(flag2 && flag2){
+                        if(flag && flag2){
                             gnew.setProductions(gnew.getInitialSymbol()+"", "&");
                         }
                     }    
