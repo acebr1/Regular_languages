@@ -80,7 +80,7 @@ public class RG_Algorithms{
                 ArrayList<String> temp = gtemp.productions.get(key);
                 for(String s : temp){
                     if (key.equals(GAClone.getInitialSymbol())) {
-                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                        gnew.setProductions(initialSymbol+"", s+"");
                     }
                     gnew.setProductions(key+"", s+"");
                     
@@ -90,7 +90,7 @@ public class RG_Algorithms{
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     if (key.equals(GBClone.getInitialSymbol())) {
-                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"" );
+                        gnew.setProductions(initialSymbol+"", s+"" );
                     }
                     gnew.setProductions(key+"", s+"");
 
@@ -111,7 +111,7 @@ public class RG_Algorithms{
             for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
-                    if (s.length() == 1 && !"&".equals(s)) {
+                    if (s.length() == 1 && !s.equals("&")) {
                       gnew.setProductions(key+"", s.charAt(0)+"" + gtemp.getInitialSymbol()+"");
                       gnew.setProductions(key+"", s+"");
                     } else {
@@ -124,9 +124,10 @@ public class RG_Algorithms{
                 for(String s : temp){
                     if (!"&".equals(s)) {
                       gnew.setProductions(key+"", s+"");
-                    } else{
-                        
                     }
+                    if(temp.contains("&"))
+                        gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                    
                 }
             }
             

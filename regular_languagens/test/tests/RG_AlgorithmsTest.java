@@ -116,7 +116,7 @@ public class RG_AlgorithmsTest {
         
         RegularGrammar gb = new RegularGrammar();
         gb.setInitialSymbol("S");
-        gb.setProductions("S", "&");
+        //gb.setProductions("S", "&");
         gb.setProductions("S", "bA");
         gb.setProductions("S", "b");
         gb.setProductions("A", "bA");
