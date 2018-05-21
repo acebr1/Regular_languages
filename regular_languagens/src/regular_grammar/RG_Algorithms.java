@@ -110,14 +110,70 @@ public class RG_Algorithms{
             RegularGrammar gnew = new RegularGrammar();
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
             RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
+            boolean flag = false;
             for (String key : GAClone.productions.keySet()) {
+                ArrayList<String> temp = GAClone.productions.get(key);
+                for(String s : temp){
+                    if(s.equals("&")){
+                        flag = true;
+                    } else{
+                        break;
+                    }
+                }
+            }
+            boolean flag2 = false;
+            for (String key : gtemp.productions.keySet()) {
+                ArrayList<String> temp = gtemp.productions.get(key);
+                for(String s : temp){
+                    if(s.equals("&")){
+                        flag2 = true;
+                    } else{
+                        break;
+                    }
+                }
+            }
+            //if(flag){
+                for (String key : GAClone.productions.keySet()) {
+                    ArrayList<String> temp = GAClone.productions.get(key);
+                    for(String s : temp){
+                        if(!s.equals("&")){
+                            if(key.equals(gnew.getInitialSymbol())){
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                            } else{
+                                gnew.setProductions(key+"", s);
+                                if(s.length() == 1)
+                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                            } 
+                        }
+                        if(flag2 && flag2){
+                            gnew.setProductions(gnew.getInitialSymbol()+"", "&");
+                        }
+                    }    
+                }
+                for (String key : gtemp.productions.keySet()) {
+                    ArrayList<String> temp = gtemp.productions.get(key);
+                    for(String s : temp){
+                        if(!s.equals("&")){
+                            gnew.setProductions(key+"", s);
+                            if(key.equals(gtemp.getInitialSymbol()) && flag && flag2)
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                        }
+                    }    
+                }
+            
+            //}
+            /**for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     if (s.length() == 1 && !s.equals("&")) {
                       gnew.setProductions(key+"", s.charAt(0)+"" + gtemp.getInitialSymbol()+"");
                       gnew.setProductions(key+"", s+"");
-                    } else {
-                      gnew.setProductions(key, s);
+                    } //else if(!"&".equals(s)){
+                      gnew.setProductions(key+"", s+"");
+                    //}
+                    if("&".equals(s)){
+                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                        gnew.setProductions(key+"", s+"");
                     }
                 }
             }
@@ -129,9 +185,12 @@ public class RG_Algorithms{
                     }
                     if(temp.contains("&"))
                         gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                    
+                    if("&".equals(s)){
+                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                        gnew.setProductions(key+"", s+"");
+                    }
                 }
-            }
+            }*/
             
             return gnew;
 	}
