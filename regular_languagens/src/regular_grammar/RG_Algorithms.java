@@ -79,21 +79,23 @@ public class RG_Algorithms{
             for (String key : gtemp.productions.keySet()) {
                 ArrayList<String> temp = gtemp.productions.get(key);
                 for(String s : temp){
-                    if (key.equals(GAClone.getInitialSymbol())) {
+                    if (key.equals(gtemp.getInitialSymbol())) {
                         gnew.setProductions(initialSymbol+"", s+"");
                     }
-                    gnew.setProductions(key+"", s+"");
-                    
+                    if(!s.equals("&")){    
+                        gnew.setProductions(key+"", s+""); 
+                    }
                 }
             }
             for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
-                    if (key.equals(GBClone.getInitialSymbol())) {
+                    if (key.equals(GAClone.getInitialSymbol())) {
                         gnew.setProductions(initialSymbol+"", s+"" );
                     }
-                    gnew.setProductions(key+"", s+"");
-
+                    if(!s.equals("&")){    
+                        gnew.setProductions(key+"", s+""); 
+                    }
                 }
             }
             return gnew;
