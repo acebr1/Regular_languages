@@ -37,17 +37,6 @@ public class RG_Algorithms{
             for(String key : GBClone.getProductions().keySet()){
                 ArrayList<String> list = GBClone.getProductions().get(key);
                     for(String s : list){
-                        /**if(key.equals(GBClone.getInitialSymbol())){
-                            if(s.length() == 1){
-                                gnew.setProductions(aux.get(key), s);
-                                gnew.setInitialSymbol(aux.get(key));
-                            } else{
-                                String temp = s.charAt(1)+"";
-                                if(aux.containsKey(temp)){
-                                    gnew.setProductions(aux.get(key), s.charAt(0)+""+aux.get(temp));
-                                }
-                            }
-                        }*/
                         if(aux.containsKey(key)){
                             if(s.length() == 1){
                                 gnew.setProductions(aux.get(key), s);
@@ -58,8 +47,6 @@ public class RG_Algorithms{
                                     gnew.setProductions(aux.get(key), s.charAt(0)+""+aux.get(temp));
                                 }
                             }
-                        } else {
-                           // gnew.setProductions(key+"", GBClone.getProductions().get(key)+"");
                         }
                     }
             }
@@ -131,93 +118,60 @@ public class RG_Algorithms{
                         break;
                     }
                 }
-            }
-            //if(flag){
-                for (String key : GAClone.productions.keySet()) {
-                    ArrayList<String> temp = GAClone.productions.get(key);
-                    for(String s : temp){
-                        if(!s.equals("&")){
-                            if(key.equals(gnew.getInitialSymbol())){
-                                if(s.length() == 2)
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                                if(s.length() == 1 && flag && flag2) 
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
-                                if(s.length() == 1 && !flag && flag2) 
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
-                                    //gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
-                                if(s.length() == 1 && flag && !flag2) 
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
-                                if(s.length() == 1 && !flag && !flag2) 
-                                    gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
-                            } else{
-                                if(s.length() == 2)
-                                    gnew.setProductions(key+"", s);
-                                if(s.length() == 1 && flag && flag2) 
-                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
-                                    gnew.setProductions(key+"", s+"");
-                                if(s.length() == 1 && !flag && flag2) 
-                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
-                                    //gnew.setProductions(key+"", s+"");  
-                                if(s.length() == 1 && flag && !flag2) 
-                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
-                                if(s.length() == 1 && !flag && !flag2) 
-                                    gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
-                            } 
-                        }
-                    }    
-                }
-                if(flag && flag2){
-                            gnew.setProductions(gnew.getInitialSymbol()+"", "&");
-                }
-                for (String key : gtemp.productions.keySet()) {
-                    ArrayList<String> temp = gtemp.productions.get(key);
-                    for(String s : temp){
-                        if(!s.equals("&")){
-                            gnew.setProductions(key+"", s);
-                            if(key.equals(gtemp.getInitialSymbol()) && flag && flag2)
-                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                            //if(key.equals(gtemp.getInitialSymbol()) && !flag && flag2)
-                              //  gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                            if(key.equals(gtemp.getInitialSymbol()) && flag && !flag2)
-                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                            //if(key.equals(gtemp.getInitialSymbol()) && !flag && !flag2)
-                                //gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                        }
-                    }    
-                }
-            
-            //}
-            /**for (String key : GAClone.productions.keySet()) {
+            }    
+            for (String key : GAClone.productions.keySet()) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
-                    if (s.length() == 1 && !s.equals("&")) {
-                      gnew.setProductions(key+"", s.charAt(0)+"" + gtemp.getInitialSymbol()+"");
-                      gnew.setProductions(key+"", s+"");
-                    } //else if(!"&".equals(s)){
-                      gnew.setProductions(key+"", s+"");
-                    //}
-                    if("&".equals(s)){
-                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
-                        gnew.setProductions(key+"", s+"");
+                    if(!s.equals("&")){
+                        if(key.equals(gnew.getInitialSymbol())){
+                            if(s.length() == 2)
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                            if(s.length() == 1 && flag && flag2) {
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                            }
+                            if(s.length() == 1 && !flag && flag2) {
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
+                            }
+                            if(s.length() == 1 && flag && !flag2) 
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                            if(s.length() == 1 && !flag && !flag2) 
+                                gnew.setProductions(gnew.getInitialSymbol()+"", s+""+gtemp.getInitialSymbol()+"");
+                        } else{
+                            if(s.length() == 2)
+                                gnew.setProductions(key+"", s);
+                            if(s.length() == 1 && flag && flag2) {
+                                gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                gnew.setProductions(key+"", s+"");
+                            }
+                            if(s.length() == 1 && !flag && flag2) {
+                                gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                                gnew.setProductions(key+"", s+"");
+                            }
+                            if(s.length() == 1 && flag && !flag2) 
+                                gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                            if(s.length() == 1 && !flag && !flag2) 
+                                gnew.setProductions(key+"", s+""+gtemp.getInitialSymbol()+"");
+                        } 
                     }
-                }
+                }    
+            }
+            if(flag && flag2){
+                gnew.setProductions(gnew.getInitialSymbol()+"", "&");
             }
             for (String key : gtemp.productions.keySet()) {
                 ArrayList<String> temp = gtemp.productions.get(key);
                 for(String s : temp){
-                    if (!"&".equals(s)) {
-                      gnew.setProductions(key+"", s+"");
+                    if(!s.equals("&")){
+                        gnew.setProductions(key+"", s);
+                        if(key.equals(gtemp.getInitialSymbol()) && flag && flag2)
+                            gnew.setProductions(gnew.getInitialSymbol()+"", s);
+                        if(key.equals(gtemp.getInitialSymbol()) && flag && !flag2)
+                            gnew.setProductions(gnew.getInitialSymbol()+"", s);
                     }
-                    if(temp.contains("&"))
-                        gnew.setProductions(gnew.getInitialSymbol()+"", s);
-                    if("&".equals(s)){
-                        gnew.setProductions(gnew.getInitialSymbol()+"", s+"");
-                        gnew.setProductions(key+"", s+"");
-                    }
-                }
-            }*/
-            
+                }    
+            }            
             return gnew;
 	}
 
