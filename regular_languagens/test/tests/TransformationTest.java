@@ -189,7 +189,6 @@ public class TransformationTest {
         alphabet.add('1');
     
         FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");  
-        
         RegularExpression a12 = new RegularExpression("1?(01)*0?", "12a");
         Transformation t = new Transformation();
         FA_algorithms f = new FA_algorithms();
@@ -246,6 +245,8 @@ public class TransformationTest {
             assertEquals(false, f.recognize(afb12, s));
         }
         
+        RegularExpression erro = new RegularExpression("a***", "erro");
+        assertEquals(true, f.recognize(t.DeSimone(erro), "aaaaaaaaaaaaaaaaa"));
     }
     
 }
