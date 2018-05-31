@@ -5,6 +5,7 @@ import regular_expression.*;
 import regular_grammar.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -114,7 +115,84 @@ public class Transformation {
     }
     
     public FiniteAutomaton DeSimone(RegularExpression e) {
-        return new FiniteAutomaton();
+        Parser p = new Parser(e);
+        Node root = p.parse();
+        p.thread(root);
+            
+        Set<Node> comp = new HashSet<>();
+        Set<Node> all = new HashSet<>();
+        ArrayList<Character> alf = new ArrayList<>();
+        HashMap<Node,Set<Node>> leafComp = new HashMap<>();
+        HashMap<State,Set<Node>> stateComp = new HashMap<>();
+            
+        root.subTree(all);
+            for(Node n: all){
+                if(n.getLabel() != -1){
+                    n.right.up(comp);
+                    for(Node n1: all){
+                        n1.clear();
+                    }
+                    leafComp.put(n, comp);
+                    comp = new HashSet<>();
+                    
+                    if(!alf.contains(n.symbol)){
+                        alf.add(n.symbol);
+                    }
+                }
+            }
+        State initial = new State("q0", false);
+        root.down(comp);
+        stateComp.put(initial, comp);
+        int iterator = 0;
+        int numberStates = 1;
+        ArrayList<State> states = new ArrayList<>();
+        states.add(initial);
+            
+        while(iterator < numberStates){
+            for(Character c:alf){
+                Set<Node> temp = new HashSet<>();
+                for(Node n: stateComp.get(states.get(iterator))) {
+                    if(n.symbol == c){
+                        temp.add(n);
+                    }
+                }
+                if(!temp.isEmpty()) {
+                    Set<Node> newComp = getComposition(temp, leafComp);
+                    if(stateComp.containsValue(newComp)){
+                        Set<State> set = stateComp.keySet();
+                        for(State s: set) {
+                            if(stateComp.get(s).equals(newComp)) {
+                                states.get(iterator).setTransitions(c, s);
+                            }
+                        }
+                    } else {
+                        State newState = new State("q"+numberStates++, false); 
+                        states.add(newState);
+                        stateComp.put(newState, newComp);
+                        states.get(iterator).setTransitions(c, newState);
+                    }
+
+                }
+            }
+            iterator++;
+        }
+   
+        for(State s: stateComp.keySet()){
+            for(Node n: stateComp.get(s)){
+                if(n.symbol == '&')
+                    s.setIsFinal(true);
+            }
+        }
+        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial, e.name+"AFD");
+        listFA.add(fa);
+        return fa;
+    }
+    private Set<Node> getComposition(Set<Node> setNodes, HashMap<Node,Set<Node>> leafComp){
+        Set<Node> comp = new HashSet<>();
+        for(Node n: setNodes) {
+            comp.addAll(leafComp.get(n));
+        }
+        return comp;
     }
     
     public void Intersection(RegularGrammar g1, RegularGrammar g2) {

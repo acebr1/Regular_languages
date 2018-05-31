@@ -158,21 +158,94 @@ public class TransformationTest {
         FA_algorithms f = new FA_algorithms();
         
         FiniteAutomaton fa = f.minimize(t.RGtoAF(grammar));
-        System.out.println(automaton);
-        System.out.println(t.RGtoAF(grammar));
-        System.out.println(f.minimize(t.RGtoAF(grammar)));
         Set<String> sentences = f.enumeration(automaton, 10);
         for(String s: sentences){
             assertEquals(true, f.recognize(fa, s));
         }
-        //System.out.println(grammar);
-        //System.out.println(fa);
-        //System.out.println(t.AFtoRG(fa));
-        //System.out.println(f.minimize(t.RGtoAF(t.AFtoRG(fa))));
-        
-        
-        //assertEquals(automaton, f.minimize(t.RGtoAF(grammar)));
 
+    }
+    
+    
+    @Test
+    public void testDeSimone() {
+        State q0 = new State("q0", true);
+        State q1 = new State("q1", true);
+        State q2 = new State("q2", true);
+        
+        State initialA = q0;
+        
+        ArrayList<State> statesA = new ArrayList<>();
+        statesA.add(q0);
+        statesA.add(q1);
+        statesA.add(q2);
+        
+        q0.setTransitions('0', q1);
+        q0.setTransitions('1', q2);
+        q1.setTransitions('1', q2);
+        q2.setTransitions('0', q1);
+        
+        ArrayList<Character> alphabet = new ArrayList<>();
+        alphabet.add('0');
+        alphabet.add('1');
+    
+        FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");  
+        
+        RegularExpression a12 = new RegularExpression("1?(01)*0?", "12a");
+        Transformation t = new Transformation();
+        FA_algorithms f = new FA_algorithms();
+        FiniteAutomaton REAFD = t.DeSimone(a12);
+        
+        FiniteAutomaton automatonC = f.complement(automaton);
+        Set<String> sentencesA = f.enumeration(automaton, 10);
+        Set<String> sentencesR = f.enumeration(automatonC, 10);
+        for(String s: sentencesA){
+            assertEquals(true, f.recognize(REAFD, s));
+        }
+        for(String s: sentencesR){
+            assertEquals(false, f.recognize(REAFD, s));
+        }
+        
+        RegularExpression b12 = new RegularExpression("1?1?(00?11?)*0?0?", "12b");
+        FiniteAutomaton afb12 = t.DeSimone(b12);
+        
+        q0 = new State("q0", true);
+        q1 = new State("q1", true);
+        q2 = new State("q2", true);
+        State q3 = new State("q3", true);
+        State q6 = new State("q6", true);
+        
+        initialA = q0;
+        
+        statesA = new ArrayList<>();
+        statesA.add(q0);
+        statesA.add(q1);
+        statesA.add(q2);
+        statesA.add(q3);
+        statesA.add(q6);
+        
+        q0.setTransitions('0', q1);
+        q0.setTransitions('1', q2);
+        q1.setTransitions('0', q3);
+        q1.setTransitions('1', q2);
+        q2.setTransitions('0', q1);
+        q2.setTransitions('1', q6);
+        q3.setTransitions('1', q2);
+        q6.setTransitions('0', q1);
+        
+        alphabet = new ArrayList<>();
+        alphabet.add('0');
+        alphabet.add('1');
+        automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A"); 
+        automatonC = f.complement(automaton);
+        Set<String> sentencesC = f.enumeration(automaton, 10);
+        sentencesR = f.enumeration(automatonC, 10);
+        for(String s: sentencesC){
+            assertEquals(true, f.recognize(afb12, s));
+        }
+        for(String s: sentencesR){
+            assertEquals(false, f.recognize(afb12, s));
+        }
+        
     }
     
 }
