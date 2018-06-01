@@ -1,6 +1,7 @@
 //  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
 
 package finite_automaton;
+
 import java.util.ArrayList;
 
 public class FiniteAutomaton{

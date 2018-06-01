@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package transformation;
 
 import finite_automaton.*;
@@ -9,16 +11,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/*
- * 
- */
-
 public class Transformation {
     protected ArrayList<FiniteAutomaton> listFA;
     protected ArrayList<RegularExpression> listRE;
     protected ArrayList<RegularGrammar> listRG;
     FA_algorithms alg;
-    
+ 
+/*
+ * Construtor sem parâmetros com inicilização das listas
+ */
     public Transformation(){
         this.alg = new FA_algorithms();
         listRG = new ArrayList<>();
@@ -26,7 +27,10 @@ public class Transformation {
         listFA = new ArrayList<>();
         
     }
-    
+ 
+/*
+ * Conversão de autômato finito para gramática regular
+ */
     public RegularGrammar AFtoRG(FiniteAutomaton f){
         FiniteAutomaton FAClone = f.getClone();
 	RegularGrammar gnew = new RegularGrammar();
@@ -69,7 +73,10 @@ public class Transformation {
         listRG.add(gnew);
         return gnew;
     }
-    
+
+/*
+ * Conversão de gramática regular para autômato finito
+ */    
     public FiniteAutomaton RGtoAF(RegularGrammar g){
         RegularGrammar GClone = g.getClone();
         ArrayList<Character> alphabet = new ArrayList<>();
@@ -113,7 +120,10 @@ public class Transformation {
         listFA.add(fnew);
         return fnew;
     }
-    
+ 
+/*
+ * Conversão de expressão regular para autômato finito
+ */
     public FiniteAutomaton DeSimone(RegularExpression e) {
         Parser p = new Parser(e);
         Node root = p.parse();
@@ -187,6 +197,10 @@ public class Transformation {
         listFA.add(fa);
         return fa;
     }
+    
+/*
+ * Pegar composição dos nodos da árvore costurada
+ */
     private Set<Node> getComposition(Set<Node> setNodes, HashMap<Node,Set<Node>> leafComp){
         Set<Node> comp = new HashSet<>();
         for(Node n: setNodes) {
@@ -194,44 +208,63 @@ public class Transformation {
         }
         return comp;
     }
-    
+ 
+/**
+   * @return Finite automaton resulting from the Intersection the Regular Grammars
+*/
     public void Intersection(RegularGrammar g1, RegularGrammar g2) {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
         listFA.add(a3);
     }
+    
+/**
+   * @return Finite automaton resulting from the Intersection the Regular Expressions
+*/
     public void Intersection(RegularExpression e1, RegularExpression e2) {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
         listFA.add(a3);
     }
-    
+ 
+/**
+   * @return Finite automaton resulting from the difference the Regular Grammars
+*/
     public void Difference(RegularGrammar g1, RegularGrammar g2) {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
         listFA.add(a3);
     }
+
+/**
+   * @return Finite automaton resulting from the difference the Regular Expressions
+*/
     public void Difference(RegularExpression e1, RegularExpression e2) {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
         listFA.add(a3);
     }
-    
+
+/**
+   * @return Finite automaton resulting from the reverse the Regular Grammars
+*/    
     public void Reverse(RegularGrammar g1) {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a3 = alg.reverse(a1);
         listFA.add(a3);
     }
+    
+/**
+   * @return Finite automaton resulting from the reverse the Regular Expression
+*/
     public void Reverse(RegularExpression e1) {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a3 = alg.reverse(a1);
         listFA.add(a3);
     }
-    
-    //falta diferença e reverso
         
 }

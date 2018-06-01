@@ -1,12 +1,12 @@
 //  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
 
 package finite_automaton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 
 public class FA_algorithms {
 
