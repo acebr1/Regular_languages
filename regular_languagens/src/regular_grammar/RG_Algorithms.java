@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package regular_grammar;
 
 import java.util.ArrayList;
@@ -7,10 +9,14 @@ import java.util.Map;
 public class RG_Algorithms{
 
 /**
-   * Constructor.
+   * Construtor sem parâmetros.
 */
 	public RG_Algorithms() {}
-        
+
+/**
+   * Renomear os símbolos não-terminais da gramática gb,
+   * para que os símbolos de ga e gb sejam diferentes
+*/        
         public RegularGrammar renameGrammar(RegularGrammar ga, RegularGrammar gb){
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
@@ -194,4 +200,5 @@ public class RG_Algorithms{
             }
             return gnew;
 	}
+        
 }
