@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 /*
  * Tests to Transformation.java
  */
@@ -20,13 +22,11 @@ import regular_grammar.RegularGrammar;
 
 public class TransformationTest {
     
-    public TransformationTest() {
-        
-    }
+    public TransformationTest() {}
 
-    /**
-     * Test of AFtoRG method, of class Transformation.
-     */
+/**
+ * Test of AFtoRG method, of class Transformation.
+*/
     @Test
     public void testAFtoRG() {
      /**
@@ -96,9 +96,9 @@ public class TransformationTest {
         }
     }
 
-    /**
-     * Test of RGtoAF method, of class Transformation.
-     */
+/**
+ * Test of RGtoAF method, of class Transformation.
+*/
     @Test
     public void testRGtoAF() {
        RegularGrammar grammar = new RegularGrammar();
@@ -125,7 +125,7 @@ public class TransformationTest {
         grammar.setProductions("C", "cC");
         grammar.setProductions("C", "a");
         
-         State q0 = new State("q0", true);
+        State q0 = new State("q0", true);
         State q1 = new State("q1", true);
         State q2 = new State("q2", false);
         
@@ -162,10 +162,11 @@ public class TransformationTest {
         for(String s: sentences){
             assertEquals(true, f.recognize(fa, s));
         }
-
     }
     
-    
+/**
+ * Test of deSimone method, of class Transformation.
+*/   
     @Test
     public void testDeSimone() {
         State q0 = new State("q0", true);

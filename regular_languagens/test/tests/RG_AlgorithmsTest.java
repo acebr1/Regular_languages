@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 /*
  * Tests to RG_Algorithms.java
  */
@@ -18,9 +20,9 @@ public class RG_AlgorithmsTest {
     
     public RG_AlgorithmsTest() {}
     
-     /**
-     * Test of rename method, of class RG_Algorithms.
-     */
+/**
+ * Test of rename method, of class RG_Algorithms.
+*/
     @Test
     public void testRenameGrammar() {
         RegularGrammar ga = new RegularGrammar();
@@ -54,9 +56,9 @@ public class RG_AlgorithmsTest {
         assertEquals(result.toString(), rg.renameGrammar(ga, gb).toString());
     }
 
-    /**
-     * Test of union method, of class RG_Algorithms.
-     */
+/**
+ * Test of union method, of class RG_Algorithms.
+*/
     @Test
     public void testUnion() {
         RegularGrammar ga = new RegularGrammar();
@@ -97,13 +99,12 @@ public class RG_AlgorithmsTest {
         
         RG_Algorithms rg = new RG_Algorithms();
         
-        assertEquals(result.toString(), rg.union(ga, gb).toString());
-        
+        assertEquals(result.toString(), rg.union(ga, gb).toString());     
     }
 
-    /**
-     * Test of concatenation method, of class RG_Algorithms.
-     */
+/**
+ * Test of concatenation method, of class RG_Algorithms.
+*/
     @Test
     public void testConcatenation() {
         RegularGrammar ga = new RegularGrammar();
@@ -142,9 +143,9 @@ public class RG_AlgorithmsTest {
         assertEquals(result.toString(), rg.concatenation(ga, gb).toString());
     }
 
-    /**
-     * Test of closure method, of class RG_Algorithms.
-     */
+/**
+ * Test of closure method, of class RG_Algorithms.
+*/
     @Test
     public void testClosure() {
         RegularGrammar ga = new RegularGrammar();
@@ -182,8 +183,7 @@ public class RG_AlgorithmsTest {
         
         RG_Algorithms rg = new RG_Algorithms();
         
-        assertEquals(result.toString(), rg.closure(ga).toString());
-        
+        assertEquals(result.toString(), rg.closure(ga).toString());    
     }
     
 }

@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 /*
  * Tests to FA_algorithms.java
  */
@@ -18,12 +20,11 @@ import static org.junit.Assert.*;
 
 public class FA_algorithmsTest {
     
-    public FA_algorithmsTest() {
-    }
+    public FA_algorithmsTest() {}
     
-    /**
-     * Test of isDeterministic method, of class FA_algorithms.
-     */
+/**
+ * Test of isDeterministic method, of class FA_algorithms.
+*/
     @Test
     public void testIsDeterministic() {
         /**
@@ -57,9 +58,9 @@ public class FA_algorithmsTest {
         assertEquals(true, f.isDeterministic(automaton)); 
     }
     
-    /**
-     * Test of isDeterministic method, of class FA_algorithms.
-     */
+/**
+ * Test of isDeterministic method, of class FA_algorithms.
+*/
   @Test
     public void testIsDeterministic2() {
         /**
@@ -111,12 +112,12 @@ public class FA_algorithmsTest {
         f.determinize(automaton);
         assertEquals(false, f.isDeterministic(automaton)); 
         assertEquals(true, f.isDeterministic(f.determinize(automaton))); 
-        assertEquals(true, f.isDeterministic(automaton.getDeterministic())); 
-       
+        assertEquals(true, f.isDeterministic(automaton.getDeterministic()));    
     }
-    /**
-     * Test of isComplete method, of class FA_algorithms.
-     */
+    
+/**
+ * Test of isComplete method, of class FA_algorithms.
+*/
     @Test
     public void testIsComplete() {
         /**
@@ -153,9 +154,9 @@ public class FA_algorithmsTest {
         assertEquals(false, f.isComplete(automaton));
     }
     
-    /**
-     * Test of isComplete method, of class FA_algorithms.
-     */
+/**
+ * Test of isComplete method, of class FA_algorithms.
+*/
     @Test
     public void testIsComplete2() {
         /**
@@ -186,9 +187,10 @@ public class FA_algorithmsTest {
         
         assertEquals(true, f.isComplete(automaton));
     }
-    /**
-     * Test of determinize method, of class FA_algorithms.
-     */
+    
+/**
+ * Test of determinize method, of class FA_algorithms.
+*/
     @Test
     public void testDeterminize() {
         /**
@@ -242,9 +244,10 @@ public class FA_algorithmsTest {
         assertEquals(true, f.isDeterministic(automaton.getDeterministic()));
         assertEquals(true, f.isDeterministic(f.determinize(automaton)));
     }
-    /**
-     * Test of complete method, of class FA_algorithms.
-     */
+    
+/**
+ * Test of complete method, of class FA_algorithms.
+*/
     @Test
     public void testComplete() {
         /**
@@ -298,9 +301,9 @@ public class FA_algorithmsTest {
         assertEquals(false, f.isComplete(automaton));
     }
     
-    /**
-     * Test of minimize method, of class FA_algorithms.
-     */
+/**
+ * Test of minimize method, of class FA_algorithms.
+*/
     @Test
     public void testRemove_unreachable() {
         State A = new State("A", false);
@@ -374,7 +377,10 @@ public class FA_algorithmsTest {
         }
         //assertEquals(automatonB.toString(), f.remove_unreachable(automatonA).toString());
     }
-    
+
+/**
+ * Test of remove_dead method, of class FA_algorithms.
+*/    
     @Test
     public void testRemove_dead() {
         State A = new State("A", false);
@@ -424,9 +430,10 @@ public class FA_algorithmsTest {
         }
 
     }
-    /**
-     * Test of minimize method, of class FA_algorithms.
-     */
+ 
+/**
+ * Test of minimize method, of class FA_algorithms.
+*/
     @Test
     public void testMinimize() {
          /**
@@ -552,14 +559,12 @@ public class FA_algorithmsTest {
             }else {
                 assertEquals(false, f.recognize(res, Integer.toBinaryString(i)));
             }
-        }
-        
-        
+        }   
     }
 
-    /**
-     * Test of union method, of class FA_algorithms.
-     */
+/**
+ * Test of union method, of class FA_algorithms.
+*/
     @Test
     public void testUnion() {
         /**
@@ -639,9 +644,9 @@ public class FA_algorithmsTest {
         assertEquals(copyAutomatonA.toString(),automatonA.toString());
     }
 
-    /**
-     * Test of complement method, of class FA_algorithms.
-     */
+/**
+ * Test of complement method, of class FA_algorithms.
+*/
     @Test
     public void testComplement() {
     /**
@@ -694,10 +699,9 @@ public class FA_algorithmsTest {
        
     }
 
-
-    /**
-     * Test of reverse method, of class FA_algorithms.
-     */
+/**
+ * Test of reverse method, of class FA_algorithms.
+*/
     @Test
     public void testReverse() {
         State q0 = new State("q0", false);
@@ -737,15 +741,14 @@ public class FA_algorithmsTest {
         assertEquals(true, f.recognize(f.reverse(automaton), "dc"));
         assertEquals(false, f.recognize(f.reverse(automaton), "ab"));
         assertEquals(false, f.recognize(f.reverse(automaton), "cd"));
-
     }
 
-    /**
-     * Test of recognize method, of class FA_algorithms.
-     */
+/**
+ * Test of recognize method, of class FA_algorithms.
+*/
     @Test
     public void testRecognize() {
-                /**
+        /**
         * Language not exist (00) and not exist (11)
         */
         
@@ -785,9 +788,9 @@ public class FA_algorithmsTest {
         assertEquals(false, f.recognize(automaton, "110101"));
     }
 
-    /**
-     * Test of enumeration method, of class FA_algorithms.
-     */
+/**
+* Test of enumeration method, of class FA_algorithms.
+*/
     @Test
     public void testEnumeration() {
         /**
@@ -815,10 +818,12 @@ public class FA_algorithmsTest {
         Set<String> sentences = f.enumeration(automaton, 6);
         for(String s: sentences){
             assertEquals(true, f.recognize(automaton, s));
-        }
-        
+        }    
     }
-    
+
+/**
+* Test of hasEpsilonTransitions method, of class FA_algorithms.
+*/
     @Test
     public void testHasEpsilonTransitions() {
         

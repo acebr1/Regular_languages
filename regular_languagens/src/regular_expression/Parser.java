@@ -1,4 +1,7 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package regular_expression;
+
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.*;
@@ -6,11 +9,17 @@ import java.util.regex.*;
 public class Parser {
     String regex;
     int pos=0;
-    
+
+/**
+   * Constructor que tem como parâmetro a expressão regular
+*/    
     public Parser(RegularExpression e) {
         this.regex=e.regularExpression.replace(".","");
     }
-    
+ 
+/**
+   * Retorna o nó raiz da árvore de sintaxe regex
+*/ 
     public Node parse () {
         Node root = regex();
         
@@ -32,6 +41,7 @@ public class Parser {
             System.out.println("Esperando:"+ c +"; recebi:" + peek());
         }
     }
+    
     private char next(){
         char c = peek();
         eat(c);
@@ -64,7 +74,6 @@ public class Parser {
         return factor;
     }
     
-    
     private Node factor() {
     //<factor> ::= <base> { '*' } | <base> { '?' }
         Node base = base();
@@ -73,6 +82,7 @@ public class Parser {
         }
         return base;
     }
+    
     private Node base() {
     //<base> ::= <char> | '(' <regex> ')'
         Pattern p = Pattern.compile("[A-z0-9&]");
@@ -88,6 +98,9 @@ public class Parser {
         return null;
     }
     
+/**
+   * Encadeia a árvore, facilitando o acompanhamento na ordem de qualquer nó
+*/    
     public void thread(Node root){
         ArrayList<Node> list = new ArrayList<>();
         Node node = root;

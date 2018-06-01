@@ -1,7 +1,7 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tests to RegularGrammar.java
  */
 package tests;
 
@@ -13,18 +13,14 @@ import org.junit.Test;
 import regular_grammar.RegularGrammar;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author fabiola
- */
+
 public class RegularGrammarTest {
     
-    public RegularGrammarTest() {
-    }
+    public RegularGrammarTest() {}
 
-    /**
-     * Test of getClone method, of class RegularGrammar.
-     */
+/**
+ * Test of getClone method, of class RegularGrammar.
+*/
     @Test
     public void testGetClone() {
         RegularGrammar ga = new RegularGrammar();

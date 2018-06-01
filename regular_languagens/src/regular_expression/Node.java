@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package regular_expression;
 
 import java.util.Set;
@@ -10,6 +12,9 @@ public class Node {
     int label;
     boolean up = false, down = false;
 
+/**
+ * Constructor com parâmetros
+*/ 
     public Node(char symb, Node left, Node right) {
         this.symbol = symb;
         this.left = left;
@@ -21,7 +26,10 @@ public class Node {
         }
 
     }
-    
+
+/**
+   * Retorna o conjunto de nós alcançáveissubindo neste nó
+*/ 
     public void up(Set<Node> set){
         if(up)
             return;
@@ -50,7 +58,10 @@ public class Node {
         }
         return;
     }
-    
+
+/**
+   * Retorna o conjunto de nós acessíveis ao descer neste nó
+*/     
     public void down(Set<Node> set){
         if(down)
             return;
@@ -76,21 +87,33 @@ public class Node {
                 break;
         }
     }
-    
+
+/**
+   * Pegar a variável label
+*/    
     public int getLabel() {
         return label;
     }
 
+/**
+   * Visualizar
+*/   
     @Override
     public String toString() {
         return "("+this.symbol+""+this.label+")"; //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+/**
+   * Reiniciar variáveis
+*/     
     public void clear(){
         up = false;
         down = false;
     }
-    
+
+/**
+   * Sub-árvore
+*/    
     public void subTree(Set<Node> set){
         if(!set.contains(this)){
             set.add(this);
