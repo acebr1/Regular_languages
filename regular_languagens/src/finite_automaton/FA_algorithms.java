@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package finite_automaton;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public class FA_algorithms {
 
 
 /**
-   * @return Is deterministic?
+   * @return Is determinist
 */
 	public boolean isDeterministic(FiniteAutomaton f) {
             for(State s : f.states) {
@@ -332,7 +334,10 @@ public class FA_algorithms {
             FiniteAutomaton resp = new FiniteAutomaton(states, FClone.alphabet, newInitial, FClone.getName()+" Minimized");
             return resp;
 	}
-        
+ 
+/**
+   * @return State a1 and State a2 is same group?
+*/
         public boolean equivalent_state_aux(State a1, State a2, ArrayList<ArrayList<State>> grupo, ArrayList<Character> alf)  {
             boolean resp = true;
             for(Character c:alf){
@@ -354,6 +359,7 @@ public class FA_algorithms {
             }
             return resp;
         }
+        
 /**
    * Used in intersection() and difference()
    * @return Finite automaton resulting from the union
@@ -509,7 +515,7 @@ public class FA_algorithms {
 	}
 
 /**
-   * @return Finite Automaton to recognize sentence in size?
+   * @return Finite Automaton to recognize sentence in size
 */
 	public Set<String> enumeration(FiniteAutomaton fa, int size) {
             FiniteAutomaton FClone = fa.getClone();
@@ -528,7 +534,10 @@ public class FA_algorithms {
             }
             return enumeration_helper(actual, "", size);
 	}
-        
+ 
+/**
+   * @return Finite Automaton to recognize sentence in size
+*/
         private Set<String> enumeration_helper(State s, String old, int size){
             Set<String> sentences = new HashSet<>();
             if(old.length() == size) {
@@ -598,6 +607,9 @@ public class FA_algorithms {
             return FAClone;
         }
         
+/**
+ * * @return Finite Automaton without & reachable transitions
+ */        
         public Set<State> reachableByEpsilon(State s){
             ArrayList<State> equiv_s = new ArrayList<>();
             equiv_s.add(s);
@@ -619,7 +631,7 @@ public class FA_algorithms {
             return new HashSet<State>(equiv_s);
         }
 
-        /**
+/**
  * * @return true if AF has & transition
  */
         public boolean hasEpsilonTrasitions(FiniteAutomaton f){

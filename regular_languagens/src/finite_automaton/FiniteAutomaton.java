@@ -1,3 +1,5 @@
+//  Copyright 2018 <Fabíola Maria Kretzer> <Maurício Machado Barbosa>
+
 package finite_automaton;
 import java.util.ArrayList;
 
@@ -16,67 +18,107 @@ public class FiniteAutomaton{
 	public String name = "";
 
 /**
-   * Constructor.
+   * Constructor sem parâmetros
 */
-        public FiniteAutomaton() {
-            
-        }
+        public FiniteAutomaton() {}
         
+/**
+   * Constructor com parâmetros
+*/
 	public FiniteAutomaton(ArrayList<State> states, ArrayList<Character> alphabet, State initial, String name) {
 		this.states = states;
 		this.alphabet = alphabet;
 		this.initial = initial;
                 this.name = name;
 	}
-        
+
+/**
+   * Pegar o estado inicial do autômato finito
+*/        
         public State getInitial() {
             return initial;
         }
-        
+
+/**
+   * Atribuir o automato finito deterministico a variável
+*/        
         public void setDeterministic (FiniteAutomaton f) {
             this.deterministic = f;
         }
-        
+ 
+/**
+   * Atribuir o automato finito mínimo a variável
+*/ 
         public void setMinimized (FiniteAutomaton f) {
             this.minimized = f;
         }
-        
+
+/**
+   * Atribuir o complemento do automato finito a variável
+*/         
         public void setComplement (FiniteAutomaton f) {
             this.complement = f;
         }
-        
+
+/**
+   * Atribuir o automato finito reverso a variável
+*/       
         public void setReverse (FiniteAutomaton f) {
             this.reverse = f;
         }
-        
+ 
+/**
+   * Atribuir o automato finito completo a variável
+*/
         public void setComplete (FiniteAutomaton f) {
             this.complete = f;
         }
-        
+ 
+/**
+   * Atribuir o automato finito sem epsilon transições a variável
+*/
         public void setNoEpsilon (FiniteAutomaton f) {
             this.noEpsilon = f;
         }
         
+/**
+   * Pegar o automato finito completo
+*/
         public FiniteAutomaton getComplete() {
             return this.complete;
         }
-        
+
+/**
+   * Pegar o automato finito sem epsilon transições
+*/        
         public FiniteAutomaton getNoEpsilon() {
             return this.noEpsilon;
         }
-        
+  
+/**
+   * Pegar o automato finito deterministico
+*/
         public FiniteAutomaton getDeterministic() {
             return this.deterministic;
         }
-        
+ 
+/**
+   * Pegar o automato finito reverso 
+*/
         public FiniteAutomaton getReverse() {
             return this.reverse;
         }
-        
+ 
+/**
+   * Pegar os estados do automato finito x
+*/
         public ArrayList<State> getStates(){
             return this.states;
         }
-        
+
+/**
+   * Visualizar o autômato finito
+*/        
         @Override
         public String toString(){
             String resp = "Name:"+name+"\nStates:"+states+"\nTransitions:\n";
@@ -90,11 +132,17 @@ public class FiniteAutomaton{
             }
             return resp;
         }
-        
+
+/**
+   * Pegar o nome do automato finito x
+*/        
         public String getName(){
             return this.name;
         }
-        
+ 
+/**
+   * Fazer uma cópia do automato finito
+*/ 
         public FiniteAutomaton getClone(){
             ArrayList<State> copy = new ArrayList<>();
             State initialCopy = null;
