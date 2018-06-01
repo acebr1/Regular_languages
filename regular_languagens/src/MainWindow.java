@@ -58,68 +58,69 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLReconhecer = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton7 = new javax.swing.JButton();
+        jBAFtoGR = new javax.swing.JButton();
         jCBAF = new javax.swing.JComboBox<>();
         jSNum = new javax.swing.JSpinner();
         jTSentAF = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        jCCompleto = new javax.swing.JCheckBox();
+        jCSemInal = new javax.swing.JCheckBox();
+        jCSemMort = new javax.swing.JCheckBox();
+        jCComEquiv = new javax.swing.JCheckBox();
+        jCUniao = new javax.swing.JCheckBox();
+        jCComplem = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton18 = new javax.swing.JButton();
+        jBGRtoAF = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
+        jBIntersGR = new javax.swing.JButton();
+        jBDifGR = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jButton17 = new javax.swing.JButton();
-        jComboBox9 = new javax.swing.JComboBox<>();
+        jCBGR1 = new javax.swing.JComboBox<>();
+        jBRevGR = new javax.swing.JButton();
+        jCBGR2 = new javax.swing.JComboBox<>();
+        jCBGR3 = new javax.swing.JComboBox<>();
         jPanel10 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        jButton23 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jComboBox10 = new javax.swing.JComboBox<>();
-        jComboBox11 = new javax.swing.JComboBox<>();
+        jBFechoGR = new javax.swing.JButton();
+        jBUniaoGR = new javax.swing.JButton();
+        jBConcGR = new javax.swing.JButton();
+        jCBGR4 = new javax.swing.JComboBox<>();
+        jCBGR5 = new javax.swing.JComboBox<>();
         jPanel16 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jButton34 = new javax.swing.JButton();
+        jBEditGR = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jList7 = new javax.swing.JList<>();
-        jButton35 = new javax.swing.JButton();
-        jButton36 = new javax.swing.JButton();
+        jListGR = new javax.swing.JList<>();
+        jBAdicGR = new javax.swing.JButton();
+        jBExcluirGR = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
+        jBRevER = new javax.swing.JButton();
+        jBDeSimone = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JSeparator();
-        jButton27 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
+        jBIntersER = new javax.swing.JButton();
+        jBDifER = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        jComboBox13 = new javax.swing.JComboBox<>();
-        jComboBox14 = new javax.swing.JComboBox<>();
+        jCBER1 = new javax.swing.JComboBox<>();
+        jCBER2 = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jButton31 = new javax.swing.JButton();
+        jBEditER = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList6 = new javax.swing.JList<>();
-        jButton32 = new javax.swing.JButton();
-        jButton33 = new javax.swing.JButton();
+        jListER = new javax.swing.JList<>();
+        jBAdicER = new javax.swing.JButton();
+        jBExcluirER = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -307,9 +308,9 @@ public class MainWindow extends javax.swing.JFrame {
         jLReconhecer.setBackground(new java.awt.Color(255, 255, 255));
         jLReconhecer.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
 
-        jButton7.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton7.setText("Conversão de AF para GR");
-        jButton7.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBAFtoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBAFtoGR.setText("Conversão de AF para GR");
+        jBAFtoGR.setPreferredSize(new java.awt.Dimension(100, 25));
 
         jCBAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCBAF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -340,7 +341,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jBDetAF, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBMinAF, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBRevAF, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBAFtoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBRecAF, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,7 +371,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBRevAF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBAFtoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -399,33 +400,33 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel9.setText("Selecione os AF Intermedários");
 
-        jCheckBox1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox1.setText("Completo");
+        jCCompleto.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCCompleto.setText("Completo");
 
-        jCheckBox2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox2.setText("Sem estados inalcançaveis");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        jCSemInal.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCSemInal.setText("Sem estados inalcançaveis");
+        jCSemInal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                jCSemInalActionPerformed(evt);
             }
         });
 
-        jCheckBox3.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox3.setText("Sem estados mortos");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        jCSemMort.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCSemMort.setText("Sem estados mortos");
+        jCSemMort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                jCSemMortActionPerformed(evt);
             }
         });
 
-        jCheckBox4.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox4.setText("Com estados equivalentes");
+        jCComEquiv.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCComEquiv.setText("Com estados equivalentes");
 
-        jCheckBox5.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox5.setText("União");
+        jCUniao.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCUniao.setText("União");
 
-        jCheckBox6.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCheckBox6.setText("Complemento");
+        jCComplem.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCComplem.setText("Complemento");
 
         jLabel10.setFont(new java.awt.Font("Source Sans Pro Light", 0, 12)); // NOI18N
         jLabel10.setText("(caso sejam gerados, serão salvos)");
@@ -437,14 +438,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox3)
+                    .addComponent(jCComplem)
+                    .addComponent(jCUniao)
+                    .addComponent(jCComEquiv)
+                    .addComponent(jCSemMort)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jCSemInal)
+                    .addComponent(jCCompleto))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -455,17 +456,17 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(jCCompleto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(jCSemInal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(jCSemMort)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(jCComEquiv)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox5)
+                .addComponent(jCUniao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox6)
+                .addComponent(jCComplem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -510,31 +511,34 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel13.setText("Selecione a Gramática:");
 
-        jButton18.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton18.setText("Conversão de GR para AF");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        jBGRtoAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBGRtoAF.setText("Conversão de GR para AF");
+        jBGRtoAF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                jBGRtoAFActionPerformed(evt);
             }
         });
 
-        jButton21.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton21.setText("Intersecção");
+        jBIntersGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBIntersGR.setText("Intersecção");
 
-        jButton22.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton22.setText("Diferença");
+        jBDifGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBDifGR.setText("Diferença");
 
         jLabel19.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel19.setText("Selecione as Gramáticas:");
 
-        jComboBox4.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBGR1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBGR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton17.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton17.setText("Reverso");
+        jBRevGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBRevGR.setText("Reverso");
 
-        jComboBox9.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBGR2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jCBGR3.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBGR3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -546,22 +550,23 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18))
                         .addGroup(jPanel9Layout.createSequentialGroup()
                             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap()))
-                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                     .addComponent(jLabel19)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox9, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE))))
+                        .addComponent(jBDifGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBIntersGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBGR2, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE)
+                        .addComponent(jCBGR3, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -571,23 +576,25 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBGRtoAF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBGR2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBGR3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBIntersGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBDifGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -600,20 +607,20 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel18.setText("Selecione as Gramáticas:");
 
-        jButton23.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton23.setText("Fechamento");
+        jBFechoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBFechoGR.setText("Fechamento");
 
-        jButton19.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton19.setText("União");
+        jBUniaoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBUniaoGR.setText("União");
 
-        jButton24.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton24.setText("Concatenação");
+        jBConcGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBConcGR.setText("Concatenação");
 
-        jComboBox10.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBGR4.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBGR4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox11.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBGR5.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBGR5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -627,11 +634,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel18)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBConcGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBFechoGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCBGR4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBGR5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBUniaoGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
         jPanel10Layout.setVerticalGroup(
@@ -642,17 +649,17 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBGR4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBGR5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBUniaoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBConcGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBFechoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -660,27 +667,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Lista de Autômatos");
+        jLabel23.setText("Lista de Gramáticas");
 
-        jButton34.setBackground(new java.awt.Color(204, 204, 204));
-        jButton34.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton34.setText("Editar");
-        jButton34.addActionListener(new java.awt.event.ActionListener() {
+        jBEditGR.setBackground(new java.awt.Color(204, 204, 204));
+        jBEditGR.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBEditGR.setText("Editar");
+        jBEditGR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton34ActionPerformed(evt);
+                jBEditGRActionPerformed(evt);
             }
         });
 
-        jList7.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
-        jScrollPane7.setViewportView(jList7);
+        jListGR.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
+        jScrollPane7.setViewportView(jListGR);
 
-        jButton35.setBackground(new java.awt.Color(204, 204, 204));
-        jButton35.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton35.setText("Adicionar");
+        jBAdicGR.setBackground(new java.awt.Color(204, 204, 204));
+        jBAdicGR.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBAdicGR.setText("Adicionar");
 
-        jButton36.setBackground(new java.awt.Color(204, 204, 204));
-        jButton36.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton36.setText("Excluir");
+        jBExcluirGR.setBackground(new java.awt.Color(204, 204, 204));
+        jBExcluirGR.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBExcluirGR.setText("Excluir");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -689,10 +696,10 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBAdicGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBExcluirGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBEditGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
@@ -704,11 +711,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBAdicGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBExcluirGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBEditGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -748,26 +755,26 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel16.setText("Selecione a Expressão:");
 
-        jButton25.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton25.setText("Reverso");
+        jBRevER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBRevER.setText("Reverso");
 
-        jButton26.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton26.setText("DeSimone");
+        jBDeSimone.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBDeSimone.setText("DeSimone");
 
-        jButton27.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton27.setText("Intersecção");
+        jBIntersER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBIntersER.setText("Intersecção");
 
-        jButton28.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jButton28.setText("Diferença");
+        jBDifER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBDifER.setText("Diferença");
 
         jLabel20.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel20.setText("Selecione as Expressões:");
 
-        jComboBox13.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBER1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBER1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox14.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBER2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBER2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -776,18 +783,18 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton27, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBDifER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBIntersER, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBDeSimone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBRevER, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jSeparator10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox13, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBER1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCBER2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -798,23 +805,23 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBER1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBRevER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBDeSimone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBER2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBIntersER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBDifER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -822,27 +829,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel22.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText("Lista de Autômatos");
+        jLabel22.setText("Lista de Expressões");
 
-        jButton31.setBackground(new java.awt.Color(204, 204, 204));
-        jButton31.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton31.setText("Editar");
-        jButton31.addActionListener(new java.awt.event.ActionListener() {
+        jBEditER.setBackground(new java.awt.Color(204, 204, 204));
+        jBEditER.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBEditER.setText("Editar");
+        jBEditER.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton31ActionPerformed(evt);
+                jBEditERActionPerformed(evt);
             }
         });
 
-        jList6.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
-        jScrollPane6.setViewportView(jList6);
+        jListER.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
+        jScrollPane6.setViewportView(jListER);
 
-        jButton32.setBackground(new java.awt.Color(204, 204, 204));
-        jButton32.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton32.setText("Adicionar");
+        jBAdicER.setBackground(new java.awt.Color(204, 204, 204));
+        jBAdicER.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBAdicER.setText("Adicionar");
 
-        jButton33.setBackground(new java.awt.Color(204, 204, 204));
-        jButton33.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton33.setText("Excluir");
+        jBExcluirER.setBackground(new java.awt.Color(204, 204, 204));
+        jBExcluirER.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBExcluirER.setText("Excluir");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -856,9 +863,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel15Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBAdicER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBExcluirER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBEditER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -870,11 +877,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBAdicER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBExcluirER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBEditER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -915,29 +922,29 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void jCSemInalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSemInalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_jCSemInalActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void jCSemMortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSemMortActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_jCSemMortActionPerformed
 
     private void jBRecAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRecAFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBRecAFActionPerformed
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    private void jBEditERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditERActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton31ActionPerformed
+    }//GEN-LAST:event_jBEditERActionPerformed
 
-    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+    private void jBEditGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditGRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton34ActionPerformed
+    }//GEN-LAST:event_jBEditGRActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void jBGRtoAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGRtoAFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_jBGRtoAFActionPerformed
 
     private void jBExcluirAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirAFActionPerformed
         // TODO add your handling code here:
@@ -983,50 +990,51 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAFtoGR;
+    private javax.swing.JButton jBAdicER;
+    private javax.swing.JButton jBAdicGR;
+    private javax.swing.JButton jBConcGR;
+    private javax.swing.JButton jBDeSimone;
     private javax.swing.JButton jBDetAF;
     private javax.swing.JButton jBDifAF;
+    private javax.swing.JButton jBDifER;
+    private javax.swing.JButton jBDifGR;
+    private javax.swing.JButton jBEditER;
+    private javax.swing.JButton jBEditGR;
     private javax.swing.JButton jBEnumAF;
     private javax.swing.JButton jBExcluirAF;
+    private javax.swing.JButton jBExcluirER;
+    private javax.swing.JButton jBExcluirGR;
+    private javax.swing.JButton jBFechoGR;
+    private javax.swing.JButton jBGRtoAF;
     private javax.swing.JButton jBIntersAF;
+    private javax.swing.JButton jBIntersER;
+    private javax.swing.JButton jBIntersGR;
     private javax.swing.JButton jBMinAF;
     private javax.swing.JButton jBRecAF;
     private javax.swing.JButton jBRevAF;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jBRevER;
+    private javax.swing.JButton jBRevGR;
+    private javax.swing.JButton jBUniaoGR;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jCBAF;
     private javax.swing.JComboBox<String> jCBAF1;
     private javax.swing.JComboBox<String> jCBAF2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox13;
-    private javax.swing.JComboBox<String> jComboBox14;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JComboBox<String> jCBER1;
+    private javax.swing.JComboBox<String> jCBER2;
+    private javax.swing.JComboBox<String> jCBGR1;
+    private javax.swing.JComboBox<String> jCBGR2;
+    private javax.swing.JComboBox<String> jCBGR3;
+    private javax.swing.JComboBox<String> jCBGR4;
+    private javax.swing.JComboBox<String> jCBGR5;
+    private javax.swing.JCheckBox jCComEquiv;
+    private javax.swing.JCheckBox jCComplem;
+    private javax.swing.JCheckBox jCCompleto;
+    private javax.swing.JCheckBox jCSemInal;
+    private javax.swing.JCheckBox jCSemMort;
+    private javax.swing.JCheckBox jCUniao;
     private javax.swing.JLabel jLReconhecer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1050,9 +1058,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList5;
-    private javax.swing.JList<String> jList6;
-    private javax.swing.JList<String> jList7;
     private javax.swing.JList<String> jListAF;
+    private javax.swing.JList<String> jListER;
+    private javax.swing.JList<String> jListGR;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
