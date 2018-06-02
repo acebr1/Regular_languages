@@ -20,11 +20,11 @@ public class Parser {
 /**
    * Retorna o nó raiz da árvore de sintaxe regex
 */ 
-    public Node parse () {
+    public Node parse (){
         Node root = regex();
         
         if(pos != regex.length()) {
-            System.out.println("Regex invalido");
+            System.out.println("erro");
         }
         
         return root;

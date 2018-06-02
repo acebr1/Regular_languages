@@ -563,7 +563,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, Short.MAX_VALUE))
+                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                     .addComponent(jLabel19)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jBDifGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -828,6 +828,18 @@ public class MainWindow extends javax.swing.JFrame {
         jCBER1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
 
         jCBER2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBER2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBER2ActionPerformed(evt);
+            }
+        });
+
+        jCBER3.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCBER3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBER3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -836,6 +848,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCBER3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jBDifER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBIntersER, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -847,8 +860,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCBER1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCBER2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCBER3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBER2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -872,9 +884,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(jCBER2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBER3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCBER3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
                 .addComponent(jBIntersER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBDifER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1107,26 +1119,35 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBExcluirERActionPerformed
 
     private void jBRevERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevERActionPerformed
-        RegularExpression e = new RegularExpression("", jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+        RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()),"");
         transformation.Reverse(e);
     }//GEN-LAST:event_jBRevERActionPerformed
 
     private void jBDeSimoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeSimoneActionPerformed
-        RegularExpression e = new RegularExpression("", jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+        
+        RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()),"");
         transformation.DeSimone(e);
     }//GEN-LAST:event_jBDeSimoneActionPerformed
 
     private void jBIntersERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersERActionPerformed
-        RegularExpression e1 = new RegularExpression("", jCBER2.getItemAt(jCBER2.getSelectedIndex()));
-        RegularExpression e2 = new RegularExpression("", jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+        RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()),"");
+        RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()),"");
         transformation.Intersection(e1, e2);
     }//GEN-LAST:event_jBIntersERActionPerformed
 
     private void jBDifERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifERActionPerformed
-        RegularExpression e1 = new RegularExpression("", jCBER2.getItemAt(jCBER2.getSelectedIndex()));
-        RegularExpression e2 = new RegularExpression("", jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+        RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()),"");
+        RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()),"");
         transformation.Difference(e1, e2);
     }//GEN-LAST:event_jBDifERActionPerformed
+
+    private void jCBER2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBER2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBER2ActionPerformed
+
+    private void jCBER3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBER3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBER3ActionPerformed
 
     /**
      * @param args the command line arguments

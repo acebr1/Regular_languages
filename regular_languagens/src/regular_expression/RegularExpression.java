@@ -13,4 +13,12 @@ public class RegularExpression {
 		this.regularExpression = regularExpression;
                 this.name = name;
 	}
+        
+        public void setExpression(String s){
+            this.regularExpression = s;
+        }
+        
+        public String getExpression(){
+            return this.regularExpression;
+        }
 }

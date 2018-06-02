@@ -394,11 +394,15 @@ public class FA_algorithms {
             for(State s: FBclone.states) {
                 unionStates.add(s);
             }
-            if(!FAclone.alphabet.equals(FBclone.alphabet))
-                return null;
-            
+            if(!FAclone.alphabet.equals(FBclone.alphabet)) {
+                for(Character c: FBclone.alphabet){
+                    if(!FAclone.alphabet.contains(c))
+                        FAclone.alphabet.add(c);
+                }
+            }
+                
+       
             FiniteAutomaton union = new FiniteAutomaton(unionStates, FAclone.alphabet, newInitial,FAclone.getName()+"|"+FBclone.getName());
-            //System.out.println(union);
             return union;
 	}
 
@@ -411,6 +415,9 @@ public class FA_algorithms {
             if(!isComplete(fClone)){
                 fClone = complete(fClone);
             }
+            if(!isDeterministic(fClone)){
+                fClone = determinize(fClone);
+            }
             for(State s: fClone.states) {
                 s.setIsFinal(!s.isFinal);
             }
@@ -422,7 +429,25 @@ public class FA_algorithms {
    * @return Finite Automaton resulting from the intersection
 */
 	public FiniteAutomaton intersection(FiniteAutomaton fa, FiniteAutomaton fb) {
-            return complement(union(complement(fa), complement(fb)));
+            FiniteAutomaton FAclone = fa.getClone();
+            FiniteAutomaton FBclone = fb.getClone();
+            if(!FAclone.alphabet.equals(FBclone.alphabet)){
+                for(Character c: FAclone.alphabet){
+                    if(!FBclone.alphabet.contains(c)){
+                        FBclone.alphabet.add(c);
+                    }
+                }
+                for(Character c: FBclone.alphabet){
+                    if(!FAclone.alphabet.contains(c)){
+                        FAclone.alphabet.add(c);
+                    }
+                }
+            }
+            FiniteAutomaton CompA = complement(FAclone);
+            FiniteAutomaton CompB = complement(FBclone);
+            FiniteAutomaton unio = union(CompA, CompB);
+            FiniteAutomaton compR = complement(unio);
+            return minimize(compR);
 	}
 
 /**

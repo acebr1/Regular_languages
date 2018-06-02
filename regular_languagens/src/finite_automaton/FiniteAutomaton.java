@@ -177,7 +177,7 @@ public class FiniteAutomaton{
             }
             ArrayList<Character> c = new ArrayList<>();
             for(Character a: alphabet) {
-                c.add(a.charValue());
+                c.add(a);
             }
             return new FiniteAutomaton(copy,c,initialCopy,getName());
         }

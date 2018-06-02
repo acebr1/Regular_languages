@@ -226,6 +226,7 @@ public class Transformation {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
+        System.out.println(a3);
         listFA.add(a3);
     }
  
@@ -246,6 +247,7 @@ public class Transformation {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
+        System.out.println(a3);
         listFA.add(a3);
     }
 
