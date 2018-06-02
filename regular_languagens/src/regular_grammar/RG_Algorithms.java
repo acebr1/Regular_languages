@@ -12,6 +12,14 @@ public class RG_Algorithms{
    * Construtor sem parâmetros.
 */
 	public RG_Algorithms() {}
+        
+/**
+   * Transforma uma String em uma Gramática
+*/
+    public RegularGrammar stringINgrammar(String s){
+        RegularGrammar gnew = new RegularGrammar();      
+        return gnew;
+    } 
 
 /**
    * Renomear os símbolos não-terminais da gramática gb,
