@@ -1,9 +1,16 @@
 
+import javax.swing.DefaultListModel;
+import regular_expression.RegularExpression;
+import transformation.Transformation;
+
+
 public class MainWindow extends javax.swing.JFrame {
 
+    Transformation transformation;
     
     public MainWindow() {
         initComponents();
+        transformation = new Transformation();
     }
 
     @SuppressWarnings("unchecked")
@@ -116,7 +123,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTANovaER = new javax.swing.JTextArea();
         jTNomeER = new javax.swing.JTextField();
-        jBUniaoGR3 = new javax.swing.JButton();
+        jBCriarER = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -479,7 +486,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +563,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, Short.MAX_VALUE))
                     .addComponent(jLabel19)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jBDifGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -758,7 +765,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,26 +792,42 @@ public class MainWindow extends javax.swing.JFrame {
 
         jBRevER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBRevER.setText("Reverso");
+        jBRevER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRevERActionPerformed(evt);
+            }
+        });
 
         jBDeSimone.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBDeSimone.setText("DeSimone");
+        jBDeSimone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDeSimoneActionPerformed(evt);
+            }
+        });
 
         jBIntersER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBIntersER.setText("Intersecção");
+        jBIntersER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBIntersERActionPerformed(evt);
+            }
+        });
 
         jBDifER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBDifER.setText("Diferença");
+        jBDifER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDifERActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel20.setText("Selecione as Expressões:");
 
         jCBER1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBER1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jCBER2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBER2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jCBER3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -879,6 +902,11 @@ public class MainWindow extends javax.swing.JFrame {
         jBExcluirER.setBackground(new java.awt.Color(204, 204, 204));
         jBExcluirER.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jBExcluirER.setText("Excluir");
+        jBExcluirER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirERActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -922,13 +950,17 @@ public class MainWindow extends javax.swing.JFrame {
         jTANovaER.setColumns(20);
         jTANovaER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jTANovaER.setRows(5);
-        jTANovaER.setText("0?(10)*1?");
         jScrollPane3.setViewportView(jTANovaER);
 
         jTNomeER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
 
-        jBUniaoGR3.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jBUniaoGR3.setText("Criar Expressão");
+        jBCriarER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBCriarER.setText("Criar Expressão");
+        jBCriarER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCriarERActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -943,7 +975,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jLabel28)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jTNomeER, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jBUniaoGR3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBCriarER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
@@ -962,7 +994,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jBUniaoGR3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBCriarER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -977,7 +1009,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1017,9 +1049,24 @@ public class MainWindow extends javax.swing.JFrame {
     private void jBRecAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRecAFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBRecAFActionPerformed
-
+    DefaultListModel model1 = new DefaultListModel();
     private void jBEditERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditERActionPerformed
-        // TODO add your handling code here:
+        //remove dos combobox
+        jCBER1.removeItemAt(jCBER1.getSelectedIndex());
+        jCBER2.removeItemAt(jCBER2.getSelectedIndex());
+        jCBER3.removeItemAt(jCBER3.getSelectedIndex());
+        
+        //altera
+        String aux = jTANovaER.getText();
+        jTANovaER.setName(aux);
+        
+        //add nos combobox
+        jCBER1.addItem(jTANovaER.getText());
+        jCBER2.addItem(jTANovaER.getText());
+        jCBER3.addItem(jTANovaER.getText());
+        
+        model1.addElement(jTANovaER.getText());
+        jListER.setModel(model1);  
     }//GEN-LAST:event_jBEditERActionPerformed
 
     private void jBEditGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditGRActionPerformed
@@ -1037,6 +1084,49 @@ public class MainWindow extends javax.swing.JFrame {
     private void jBIntersAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersAFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBIntersAFActionPerformed
+    
+    private void jBCriarERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarERActionPerformed
+        jCBER1.addItem(jTANovaER.getText());
+        jCBER2.addItem(jTANovaER.getText());
+        jCBER3.addItem(jTANovaER.getText());
+        
+        model1.addElement(jTANovaER.getText());
+        jListER.setModel(model1);
+    }//GEN-LAST:event_jBCriarERActionPerformed
+
+    private void jBExcluirERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirERActionPerformed
+        if(jCBER1.getItemCount() != 0 && !model1.isEmpty()){
+            jCBER1.removeItemAt(jCBER1.getSelectedIndex());
+            jCBER2.removeItemAt(jCBER2.getSelectedIndex());
+            jCBER3.removeItemAt(jCBER3.getSelectedIndex());
+
+            model1.removeElement(jTANovaER.getSelectedText());
+            jListER.setModel(model1);
+        }
+        
+    }//GEN-LAST:event_jBExcluirERActionPerformed
+
+    private void jBRevERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevERActionPerformed
+        RegularExpression e = new RegularExpression("", jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+        transformation.Reverse(e);
+    }//GEN-LAST:event_jBRevERActionPerformed
+
+    private void jBDeSimoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeSimoneActionPerformed
+        RegularExpression e = new RegularExpression("", jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+        transformation.DeSimone(e);
+    }//GEN-LAST:event_jBDeSimoneActionPerformed
+
+    private void jBIntersERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersERActionPerformed
+        RegularExpression e1 = new RegularExpression("", jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+        RegularExpression e2 = new RegularExpression("", jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+        transformation.Intersection(e1, e2);
+    }//GEN-LAST:event_jBIntersERActionPerformed
+
+    private void jBDifERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifERActionPerformed
+        RegularExpression e1 = new RegularExpression("", jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+        RegularExpression e2 = new RegularExpression("", jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+        transformation.Difference(e1, e2);
+    }//GEN-LAST:event_jBDifERActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1076,6 +1166,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAFtoGR;
     private javax.swing.JButton jBConcGR;
+    private javax.swing.JButton jBCriarER;
     private javax.swing.JButton jBDeSimone;
     private javax.swing.JButton jBDetAF;
     private javax.swing.JButton jBDifAF;
@@ -1099,7 +1190,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBRevGR;
     private javax.swing.JButton jBUniaoGR;
     private javax.swing.JButton jBUniaoGR1;
-    private javax.swing.JButton jBUniaoGR3;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCBAF;
     private javax.swing.JComboBox<String> jCBAF1;
