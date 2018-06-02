@@ -196,7 +196,7 @@ public class Transformation {
                     s.setIsFinal(true);
             }
         }
-        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial,"AF:"+e.getExpression());
+        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial,"deSimone:"+e.getExpression());
         addNewFiniteAutomaton(fa);
         return fa;
     }
@@ -219,6 +219,7 @@ public class Transformation {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
+        a3.setName("Intersecção "+a1.getName()+","+a2.getName());
         addNewFiniteAutomaton(a3);
     }
     
@@ -229,7 +230,7 @@ public class Transformation {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
-        System.out.println(a3);
+        a3.setName("Intersecção "+a1.getName()+","+a2.getName());
         addNewFiniteAutomaton(a3);
     }
  
@@ -240,6 +241,7 @@ public class Transformation {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
+        a3.setName("Diferença "+a1.getName()+","+a2.getName());
         addNewFiniteAutomaton(a3);
     }
 
@@ -251,6 +253,7 @@ public class Transformation {
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
         System.out.println(a3);
+        a3.setName("Diferença "+a1.getName()+","+a2.getName());
         addNewFiniteAutomaton(a3);
     }
 
@@ -260,6 +263,7 @@ public class Transformation {
     public void Reverse(RegularGrammar g1) {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a3 = alg.reverse(a1);
+        a3.setName("Reverso "+a1.getName());
         addNewFiniteAutomaton(a3);
     }
     
@@ -269,6 +273,7 @@ public class Transformation {
     public void Reverse(RegularExpression e1) {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a3 = alg.reverse(a1);
+        a3.setName("Reverso "+a1.getName());
         addNewFiniteAutomaton(a3);
     }
     

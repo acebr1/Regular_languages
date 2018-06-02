@@ -140,6 +140,10 @@ public class FiniteAutomaton{
         public String getName(){
             return this.name;
         }
+        
+        public void setName(String name){
+            this.name = name;
+        }
  
 /**
    * Fazer uma cópia do automato finito

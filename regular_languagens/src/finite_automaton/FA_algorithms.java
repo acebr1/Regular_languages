@@ -499,7 +499,7 @@ public class FA_algorithms {
                 }
             }
             
-            FiniteAutomaton reverse = new FiniteAutomaton(states, FClone.alphabet, newInitial, new StringBuilder(FClone.getName()).reverse().toString());
+            FiniteAutomaton reverse = new FiniteAutomaton(states, FClone.alphabet, newInitial, "Reverse:"+FClone.getName());
             FiniteAutomaton determinized = determinize(reverse);
             f.setReverse(determinized);
             return determinized;
