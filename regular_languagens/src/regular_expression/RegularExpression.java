@@ -5,13 +5,11 @@ package regular_expression;
 public class RegularExpression {
 
 	public String regularExpression;
-        public String name;
 /**
    * Constructor que tem como parâmetro a expressão regular e um nome
 */
 	public RegularExpression(String regularExpression) {
 		this.regularExpression = regularExpression;
-                this.name = name;
 	}
         
         public void setExpression(String s){

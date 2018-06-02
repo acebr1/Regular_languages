@@ -196,7 +196,7 @@ public class Transformation {
                     s.setIsFinal(true);
             }
         }
-        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial, e.name+"AFD");
+        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial,"AF:"+e.getExpression());
         addNewFiniteAutomaton(fa);
         return fa;
     }

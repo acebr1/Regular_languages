@@ -3,10 +3,9 @@ package interfaceWindows;
 
 import finite_automaton.FA_algorithms;
 import javax.swing.DefaultListModel;
-import finite_automaton.*;
 import java.util.HashMap;
 import java.util.Map;
-import regular_expression.*;
+import regular_expression.RegularExpression;
 import regular_grammar.*;
 import transformation.Transformation;
 
