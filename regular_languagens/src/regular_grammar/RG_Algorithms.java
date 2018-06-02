@@ -13,13 +13,6 @@ public class RG_Algorithms{
 */
 	public RG_Algorithms() {}
         
-/**
-   * Transforma uma String em uma Gramática
-*/
-    public RegularGrammar stringINgrammar(String s){
-        RegularGrammar gnew = new RegularGrammar();      
-        return gnew;
-    } 
 
 /**
    * Renomear os símbolos não-terminais da gramática gb,
@@ -74,6 +67,7 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
+            gnew.setName(GAClone.getName()+"U"+GBClone.getName());
             String initialSymbol = "U";
             gnew.setInitialSymbol(initialSymbol);
             RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
@@ -109,6 +103,7 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar GBClone = gb.getClone();
             RegularGrammar gnew = new RegularGrammar();
+            gnew.setName(GAClone.getName()+""+GBClone.getName());
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
             RegularGrammar gtemp = renameGrammar(GAClone, GBClone);
             boolean flag = false;
@@ -195,6 +190,7 @@ public class RG_Algorithms{
 	public RegularGrammar closure(RegularGrammar ga) {
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar gnew = new RegularGrammar();
+            gnew.setName("("+GAClone.getName()+")*");
             gnew.setInitialSymbol(GAClone.getInitialSymbol());
             gnew.setProductions(GAClone.getProductions());
             for (String key : GAClone.productions.keySet() ) {

@@ -18,12 +18,14 @@ public class Transformation {
     ArrayList<RegularExpression> listRE;
     ArrayList<RegularGrammar> listRG;
     FA_algorithms alg;
+    RG_Algorithms rgalg;
     MainWindow mw = null;
 /*
  * Construtor sem parâmetros com inicilização das listas
  */
     public Transformation(MainWindow mw){
         this.alg = new FA_algorithms();
+        this.rgalg = new RG_Algorithms();
         listRG = new ArrayList<>();
         listRE = new ArrayList<>();
         listFA = new ArrayList<>();
@@ -284,11 +286,14 @@ public class Transformation {
     
     public void addNewRegularExpression(RegularExpression f){
         listRE.add(f);
+        
         mw.atualiza();
     }
     
     public void addNewRegularGrammar(RegularGrammar f){
         listRG.add(f);
+        if(!mw.mapRG.containsKey(f.getName()))
+            mw.mapRG.put(f.getName(), f);
         mw.atualiza();
     }
     
@@ -299,11 +304,14 @@ public class Transformation {
     
     public void RemoveRegularExpression(RegularExpression f){
         listRE.remove(f);
+        
         mw.atualiza();
     }
     
     public void RemoveRegularGrammar(RegularGrammar f){
         listRG.remove(f);
+        if(mw.mapRG.containsKey(f.getName()))
+            mw.mapRG.remove(f.getName(), f);
         mw.atualiza();
     }
     
@@ -319,4 +327,15 @@ public class Transformation {
         return listRG;
     }
     
+    public void union(RegularGrammar g1, RegularGrammar g2){
+        addNewRegularGrammar(rgalg.union(g1, g2));
+    }
+    
+    public void concatenation(RegularGrammar g1, RegularGrammar g2){
+        addNewRegularGrammar(rgalg.concatenation(g1, g2));
+    }
+    
+    public void closure (RegularGrammar g1){
+        addNewRegularGrammar(rgalg.closure(g1));
+    }
 }

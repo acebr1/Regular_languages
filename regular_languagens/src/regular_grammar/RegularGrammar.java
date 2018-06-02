@@ -111,12 +111,31 @@ public class RegularGrammar{
 */ 
         @Override
         public String toString(){
-            String resp = "InitialSymbol:"+initialSymbol+"\nProductions:";
+            /*String resp = "InitialSymbol:"+initialSymbol+"\nProductions:";
             //System.out.println(resp);
             resp += initialSymbol+"->"+productions.get(initialSymbol)+"\n";          
             for(String key : productions.keySet()){
                 if(!key.equals(initialSymbol))
                     resp += key+"->"+productions.get(key)+"\n";  
+            }
+            return resp;*/
+            String resp = initialSymbol+"->";
+            ArrayList<String> prodI = productions.get(initialSymbol);
+            for(String key: prodI){
+                resp += key+"|";
+            }
+            resp = resp.substring(0, resp.length()-1);
+            resp+="\n";
+            for(String key : productions.keySet()){
+                if(!key.equals(initialSymbol)){
+                    resp += key+"->";
+                    ArrayList<String> prodT = productions.get(key); 
+                    for(String key2: prodT){
+                        resp += key2+"|";
+                    }
+                    resp = resp.substring(0, resp.length()-1);
+                    resp+="\n";
+                }
             }
             return resp;
         }
@@ -132,6 +151,7 @@ public class RegularGrammar{
                     gClone.setProductions(key+"", s+"");
                 }
             }
+            gClone.setName(getName());
             return gClone;
         }
 }

@@ -1,10 +1,13 @@
 package interfaceWindows;
 
 
-import finite_automaton.FA_algorithms;
+import finite_automaton.*;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import regular_expression.RegularExpression;
 import regular_grammar.*;
 import transformation.Transformation;
@@ -15,7 +18,9 @@ public class MainWindow extends javax.swing.JFrame {
     Transformation transformation;
     RG_Algorithms rgalg;
     FA_algorithms faalg;
-    Map<String,RegularExpression> mapRE = new HashMap<>();
+    public Map<String,RegularExpression> mapRE = new HashMap<>();
+    public Map<String,RegularGrammar> mapRG = new HashMap<>();
+    public Map<String,FiniteAutomaton> mapFA = new HashMap<>();
     
     public MainWindow() {
         initComponents(); 
@@ -87,24 +92,23 @@ public class MainWindow extends javax.swing.JFrame {
         jBRevGR = new javax.swing.JButton();
         jCBGR2 = new javax.swing.JComboBox<>();
         jCBGR3 = new javax.swing.JComboBox<>();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jSeparator8 = new javax.swing.JSeparator();
-        jBFechoGR = new javax.swing.JButton();
         jBUniaoGR = new javax.swing.JButton();
         jBConcGR = new javax.swing.JButton();
-        jCBGR4 = new javax.swing.JComboBox<>();
-        jCBGR5 = new javax.swing.JComboBox<>();
-        jLabel24 = new javax.swing.JLabel();
+        jBFechoGR = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTANovaGR = new javax.swing.JTextArea();
         jTNomeGR = new javax.swing.JTextField();
         jBCriarGR1 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTAEditarGR = new javax.swing.JTextArea();
+        jBEditarGR = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jBEditGR = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jListGR = new javax.swing.JList<>();
         jBExcluirGR = new javax.swing.JButton();
@@ -580,7 +584,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel19.setText("Selecione as Gramáticas:");
 
         jCBGR1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBGR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jBRevGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBRevGR.setText("Reverso");
@@ -591,10 +594,32 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jCBGR2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jCBGR3.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBGR3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jBUniaoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBUniaoGR.setText("União");
+        jBUniaoGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUniaoGRActionPerformed(evt);
+            }
+        });
+
+        jBConcGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBConcGR.setText("Concatenação");
+        jBConcGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcGRActionPerformed(evt);
+            }
+        });
+
+        jBFechoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBFechoGR.setText("Fechamento");
+        jBFechoGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFechoGRActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -603,6 +628,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBFechoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
@@ -622,7 +648,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jBDifGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBIntersGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCBGR2, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE)
-                        .addComponent(jCBGR3, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE))))
+                        .addComponent(jCBGR3, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jBConcGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBUniaoGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,7 +668,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBGRtoAF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBFechoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jLabel19)
@@ -651,50 +682,18 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jBIntersGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBDifGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBUniaoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBConcGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         jLabel17.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel17.setText("Operações para GR");
-
-        jLabel18.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jLabel18.setText("Selecione as Gramáticas:");
-
-        jBFechoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jBFechoGR.setText("Fechamento");
-        jBFechoGR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFechoGRActionPerformed(evt);
-            }
-        });
-
-        jBUniaoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jBUniaoGR.setText("União");
-        jBUniaoGR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBUniaoGRActionPerformed(evt);
-            }
-        });
-
-        jBConcGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jBConcGR.setText("Concatenação");
-        jBConcGR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConcGRActionPerformed(evt);
-            }
-        });
-
-        jCBGR4.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBGR4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jCBGR5.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBGR5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel24.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jLabel24.setText("Crie uma nova GR");
+        jLabel17.setText("Crie uma nova GR");
 
         jLabel25.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel25.setText("Nome:");
@@ -715,35 +714,44 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel21.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel21.setText("Altere uma GR");
+
+        jTAEditarGR.setColumns(20);
+        jTAEditarGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jTAEditarGR.setRows(5);
+        jScrollPane5.setViewportView(jTAEditarGR);
+
+        jBEditarGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBEditarGR.setText("Alterar Gramática");
+        jBEditarGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarGRActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jBConcGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jBFechoGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel18))
-                            .addComponent(jCBGR4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBGR5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBUniaoGR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel24)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                                .addComponent(jTNomeGR, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jBCriarGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jTNomeGR, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(3, 3, 3))
+                    .addComponent(jSeparator8)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jBCriarGR1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jBEditarGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         jPanel10Layout.setVerticalGroup(
@@ -751,31 +759,23 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jTNomeGR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBCriarGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCBGR4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBGR5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jBUniaoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBConcGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBFechoGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jBEditarGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -784,16 +784,12 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(51, 51, 51));
         jLabel23.setText("Lista de Gramáticas");
 
-        jBEditGR.setBackground(new java.awt.Color(204, 204, 204));
-        jBEditGR.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jBEditGR.setText("Editar");
-        jBEditGR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditGRActionPerformed(evt);
+        jListGR.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
+        jListGR.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListGRValueChanged(evt);
             }
         });
-
-        jListGR.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
         jScrollPane7.setViewportView(jListGR);
 
         jBExcluirGR.setBackground(new java.awt.Color(204, 204, 204));
@@ -814,7 +810,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jBExcluirGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBEditGR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
@@ -827,9 +822,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBExcluirGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEditGR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -843,7 +836,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1164,31 +1157,8 @@ public class MainWindow extends javax.swing.JFrame {
     DefaultListModel model3 = new DefaultListModel();
     DefaultListModel model1 = new DefaultListModel();
     
-    private void jBEditGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditGRActionPerformed
-        //remove dos combobox
-        jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
-        jCBGR2.removeItemAt(jCBGR2.getSelectedIndex());
-        jCBGR3.removeItemAt(jCBGR3.getSelectedIndex());
-        jCBGR4.removeItemAt(jCBGR4.getSelectedIndex());
-        jCBGR5.removeItemAt(jCBGR5.getSelectedIndex());
-        
-        //altera
-        String aux = jTANovaGR.getText();
-        jTANovaGR.setName(aux);
-        
-        //add nos combobox
-        jCBGR1.addItem(jTANovaGR.getText());
-        jCBGR2.addItem(jTANovaGR.getText());
-        jCBGR3.addItem(jTANovaGR.getText());
-        jCBGR4.addItem(jTANovaGR.getText());
-        jCBGR5.addItem(jTANovaGR.getText());
-        
-        model2.addElement(jTANovaGR.getText());
-        jListGR.setModel(model2); 
-    }//GEN-LAST:event_jBEditGRActionPerformed
-
     private void jBGRtoAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGRtoAFActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
+        RegularGrammar g1 = mapRG.get(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
         transformation.RGtoAF(g1);
     }//GEN-LAST:event_jBGRtoAFActionPerformed
 
@@ -1227,7 +1197,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(jCBER1.getItemCount() != 0 && !model1.isEmpty()){
             transformation.RemoveRegularExpression(mapRE.get(jListER.getSelectedValue()));
             mapRE.remove(jListER.getSelectedValue());
-        }
+        } 
         
     }//GEN-LAST:event_jBExcluirERActionPerformed
 
@@ -1283,61 +1253,117 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBER3ActionPerformed
 
     private void jBExcluirGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirGRActionPerformed
-        if(jCBGR1.getItemCount() != 0 && !model2.isEmpty()){
-            jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
-            jCBGR2.removeItemAt(jCBGR2.getSelectedIndex());
-            jCBGR3.removeItemAt(jCBGR3.getSelectedIndex());
-            jCBGR4.removeItemAt(jCBGR2.getSelectedIndex());
-            jCBGR5.removeItemAt(jCBGR3.getSelectedIndex());
-
-            model2.removeElement(jTANovaGR.getSelectedText());
-            jListGR.setModel(model2);
+        try {
+            transformation.RemoveRegularGrammar(mapRG.get(jListGR.getSelectedValue()));
+            mapRG.remove(jListGR.getSelectedValue());
+        } catch (Exception e) {
+            System.out.println("erro aqui");
         }
+
     }//GEN-LAST:event_jBExcluirGRActionPerformed
 
     private void jBCriarGR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarGR1ActionPerformed
-        jCBGR1.addItem(jTANovaGR.getText());
-        jCBGR2.addItem(jTANovaGR.getText());
-        jCBGR3.addItem(jTANovaGR.getText());
-        jCBGR4.addItem(jTANovaGR.getText());
-        jCBGR5.addItem(jTANovaGR.getText());
+        RegularGrammar ga = new RegularGrammar();
+        String name = jTNomeGR.getText();
+        if("".equals(name)) return;
+        ga.setName(name);
+        if("".equals(jTANovaGR.getText())) return;
+        String[] e = jTANovaGR.getText().split("\n");
+        ga.setInitialSymbol(e[0].charAt(0)+"");
+        for(String line: e){
+            if(line.length() <= 3) return;
+            char Nonterminal = line.charAt(0);
+            if(line.charAt(1) == '-' && line.charAt(2) == '>'){
+                int i = 3;
+                while(i < line.length()){
+                    char term = line.charAt(i);
+                    if(i+1 == line.length() || line.charAt(i+1) == '|'){
+                        ga.setProductions(""+Nonterminal, term+"");
+                        i=i+2;
+                    } else if (i+2 == line.length() || line.charAt(i+2) == '|'){
+                        ga.setProductions(""+Nonterminal, term+""+line.charAt(i+1));
+                        i=i+3;
+                    } else{
+                        System.out.println("erro");    
+                    }
+                }
+            } else {
+                return;
+            }
+        }
+        Pattern nont = Pattern.compile("[a-z]");
+        Pattern ter = Pattern.compile("[A-Z]");
+        for(String s: ga.getProductions().keySet()){
+            ArrayList<String> prod = ga.getProductions().get(s);
+            if(!ter.matcher(s).matches())
+                return;
+            for(String produc : prod) {
+                switch (produc.length()) {
+                    case 2:
+                        {
+                            Matcher nonterm = nont.matcher(produc.charAt(0)+"");
+                            Matcher term = ter.matcher(produc.charAt(1)+"");
+                            if(!nonterm.matches() || !term.matches()){
+                                return;
+                            }  
+                            if(!ga.getProductions().keySet().contains(produc.charAt(1)+"")){
+                                return;
+                            } 
+                            break;
+                        }
+                    case 1:
+                        {
+                            Matcher nonterm = nont.matcher(produc.charAt(0)+"");
+                            if(!nonterm.matches()){
+                                return;
+                            }      
+                            break;
+                        }
+                    default:
+                        return;
+                }
+            }
+        }
+        jTNomeGR.setText("");
+        jTANovaGR.setText("");
+        transformation.addNewRegularGrammar(ga);
+        //mapRG.put(ga.getName(), ga);
         
-        model2.addElement(jTANovaGR.getText());
-        jListGR.setModel(model2);
+        
     }//GEN-LAST:event_jBCriarGR1ActionPerformed
 
     private void jBRevGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
+        RegularGrammar g1 = mapRG.get(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
         transformation.Reverse(g1);
     }//GEN-LAST:event_jBRevGRActionPerformed
 
     private void jBIntersGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
-        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        RegularGrammar g1 = mapRG.get(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = mapRG.get(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
         transformation.Intersection(g1, g2);
     }//GEN-LAST:event_jBIntersGRActionPerformed
 
     private void jBDifGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
-        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        RegularGrammar g1 = mapRG.get(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = mapRG.get(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
         transformation.Difference(g1, g2);
     }//GEN-LAST:event_jBDifGRActionPerformed
 
     private void jBUniaoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUniaoGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
-        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR5.getItemAt(jCBGR5.getSelectedIndex()));
-        rgalg.union(g1, g2);
+        RegularGrammar g1 = mapRG.get(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = mapRG.get(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        transformation.union(g1, g2);
     }//GEN-LAST:event_jBUniaoGRActionPerformed
 
     private void jBConcGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
-        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR5.getItemAt(jCBGR5.getSelectedIndex()));
-        rgalg.concatenation(g1, g2);
+        RegularGrammar g1 = mapRG.get(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = mapRG.get(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        transformation.concatenation(g1, g2);
     }//GEN-LAST:event_jBConcGRActionPerformed
 
     private void jBFechoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFechoGRActionPerformed
-        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
-        rgalg.closure(g1);
+        RegularGrammar g1 = mapRG.get(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
+        transformation.closure(g1);
     }//GEN-LAST:event_jBFechoGRActionPerformed
 
     private void jBDetAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDetAFActionPerformed
@@ -1395,6 +1421,84 @@ public class MainWindow extends javax.swing.JFrame {
     private void jListERValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListERValueChanged
         jTAEditER.setText(jListER.getSelectedValue());
     }//GEN-LAST:event_jListERValueChanged
+
+    private void jBEditarGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarGRActionPerformed
+        RegularGrammar ga = new RegularGrammar();
+        String name = jListGR.getSelectedValue();
+        if("".equals(name)) return;
+        ga.setName(name);
+        if("".equals(jTAEditarGR.getText())) return;
+        String[] e = jTAEditarGR.getText().split("\n");
+        ga.setInitialSymbol(e[0].charAt(0)+"");
+        for(String line: e){
+            if(line.length() <= 3) return;
+            char Nonterminal = line.charAt(0);
+            if(line.charAt(1) == '-' && line.charAt(2) == '>'){
+                int i = 3;
+                while(i < line.length()){
+                    char term = line.charAt(i);
+                    if(i+1 == line.length() || line.charAt(i+1) == '|'){
+                        ga.setProductions(""+Nonterminal, term+"");
+                        i=i+2;
+                    } else if (i+2 == line.length() || line.charAt(i+2) == '|'){
+                        ga.setProductions(""+Nonterminal, term+""+line.charAt(i+1));
+                        i=i+3;
+                    } else{
+                        System.out.println("erro");    
+                    }
+                }
+            } else {
+                return;
+            }
+        }
+        Pattern nont = Pattern.compile("[a-z]");
+        Pattern ter = Pattern.compile("[A-Z]");
+        for(String s: ga.getProductions().keySet()){
+            ArrayList<String> prod = ga.getProductions().get(s);
+            if(!ter.matcher(s).matches())
+                return;
+            for(String produc : prod) {
+                switch (produc.length()) {
+                    case 2:
+                        {
+                            Matcher nonterm = nont.matcher(produc.charAt(0)+"");
+                            Matcher term = ter.matcher(produc.charAt(1)+"");
+                            if(!nonterm.matches() || !term.matches()){
+                                return;
+                            }  
+                            if(!ga.getProductions().keySet().contains(produc.charAt(1)+"")){
+                                return;
+                            } 
+                            break;
+                        }
+                    case 1:
+                        {
+                            Matcher nonterm = nont.matcher(produc.charAt(0)+"");
+                            if(!nonterm.matches()){
+                                return;
+                            }      
+                            break;
+                        }
+                    default:
+                        return;
+                }
+            }
+        }
+        transformation.RemoveRegularGrammar(mapRG.get(name));
+        mapRG.remove(name);
+        transformation.addNewRegularGrammar(ga);
+        //mapRG.put(ga.getName(), ga);
+        
+        jTAEditarGR.setText("");
+    }//GEN-LAST:event_jBEditarGRActionPerformed
+
+    private void jListGRValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGRValueChanged
+        if(jListGR.getSelectedValue() != null && mapRG.containsKey(jListGR.getSelectedValue())) {
+            jTAEditarGR.setText(mapRG.get(jListGR.getSelectedValue()).toString());
+        } else {
+            jTAEditarGR.setText("");
+        }
+    }//GEN-LAST:event_jListGRValueChanged
    
     public void atualiza() {
         model3 = new DefaultListModel();
@@ -1403,9 +1507,21 @@ public class MainWindow extends javax.swing.JFrame {
         }
         jListAF.setModel(model3);
         
+        /* Seta as informações nas listas e nas combos da GR*/
         model2 = new DefaultListModel();
+        jCBGR1.removeAllItems();
+        jCBGR2.removeAllItems();
+        jCBGR3.removeAllItems();
+        //jCBGR4.removeAllItems();
+        //jCBGR5.removeAllItems();
         for(regular_grammar.RegularGrammar rg: transformation.getListRG()){
             model2.addElement(rg.getName());
+            jCBGR1.addItem(rg.getName());
+            jCBGR2.addItem(rg.getName());
+            jCBGR3.addItem(rg.getName());
+            //jCBGR4.addItem(rg.getName());
+            //jCBGR5.addItem(rg.getName());
+        
         }
         jListGR.setModel(model2);
         
@@ -1469,8 +1585,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBDifAF;
     private javax.swing.JButton jBDifER;
     private javax.swing.JButton jBDifGR;
-    private javax.swing.JButton jBEditGR;
     private javax.swing.JButton jBEditarER;
+    private javax.swing.JButton jBEditarGR;
     private javax.swing.JButton jBEnumAF;
     private javax.swing.JButton jBExcluirAF;
     private javax.swing.JButton jBExcluirER;
@@ -1496,8 +1612,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBGR1;
     private javax.swing.JComboBox<String> jCBGR2;
     private javax.swing.JComboBox<String> jCBGR3;
-    private javax.swing.JComboBox<String> jCBGR4;
-    private javax.swing.JComboBox<String> jCBGR5;
     private javax.swing.JCheckBox jCComEquiv;
     private javax.swing.JCheckBox jCComplem;
     private javax.swing.JCheckBox jCCompleto;
@@ -1512,13 +1626,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1551,6 +1664,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
@@ -1564,6 +1678,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextArea jTAEditER;
+    private javax.swing.JTextArea jTAEditarGR;
     private javax.swing.JTextArea jTANovaER;
     private javax.swing.JTextArea jTANovaGR;
     private javax.swing.JTextField jTNomeGR;
