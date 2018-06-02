@@ -4,12 +4,12 @@ package regular_expression;
 
 public class RegularExpression {
 
-	protected String regularExpression;
+	public String regularExpression;
         public String name;
 /**
    * Constructor que tem como parâmetro a expressão regular e um nome
 */
-	public RegularExpression(String regularExpression, String name) {
+	public RegularExpression(String regularExpression) {
 		this.regularExpression = regularExpression;
                 this.name = name;
 	}

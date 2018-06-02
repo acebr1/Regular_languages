@@ -2,9 +2,11 @@
 
 package transformation;
 
+import interfaceWindows.MainWindow;
 import finite_automaton.*;
 import regular_expression.*;
 import regular_grammar.*;
+import interfaceWindows.MainWindow;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,19 +14,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class Transformation {
-    protected ArrayList<FiniteAutomaton> listFA;
-    protected ArrayList<RegularExpression> listRE;
-    protected ArrayList<RegularGrammar> listRG;
+    ArrayList<FiniteAutomaton> listFA;
+    ArrayList<RegularExpression> listRE;
+    ArrayList<RegularGrammar> listRG;
     FA_algorithms alg;
- 
+    MainWindow mw = null;
 /*
  * Construtor sem parâmetros com inicilização das listas
  */
-    public Transformation(){
+    public Transformation(MainWindow mw){
         this.alg = new FA_algorithms();
         listRG = new ArrayList<>();
         listRE = new ArrayList<>();
         listFA = new ArrayList<>();
+        this.mw = mw;
         
     }
  
@@ -70,7 +73,7 @@ public class Transformation {
             }
             
         }
-        listRG.add(gnew);
+        addNewRegularGrammar(gnew);
         return gnew;
     }
 
@@ -117,7 +120,7 @@ public class Transformation {
         }
         
         FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "AF:"+GClone.getName());
-        listFA.add(fnew);
+        addNewFiniteAutomaton(fnew);
         return fnew;
     }
  
@@ -194,7 +197,7 @@ public class Transformation {
             }
         }
         FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial, e.name+"AFD");
-        listFA.add(fa);
+        addNewFiniteAutomaton(fa);
         return fa;
     }
     
@@ -216,7 +219,7 @@ public class Transformation {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
     
 /**
@@ -227,7 +230,7 @@ public class Transformation {
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.intersection(a1, a2);
         System.out.println(a3);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
  
 /**
@@ -237,7 +240,7 @@ public class Transformation {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a2 = RGtoAF(g2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
 
 /**
@@ -248,7 +251,7 @@ public class Transformation {
         FiniteAutomaton a2 = DeSimone(e2);
         FiniteAutomaton a3 = alg.difference(a1, a2);
         System.out.println(a3);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
 
 /**
@@ -257,7 +260,7 @@ public class Transformation {
     public void Reverse(RegularGrammar g1) {
         FiniteAutomaton a1 = RGtoAF(g1);
         FiniteAutomaton a3 = alg.reverse(a1);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
     
 /**
@@ -266,7 +269,49 @@ public class Transformation {
     public void Reverse(RegularExpression e1) {
         FiniteAutomaton a1 = DeSimone(e1);
         FiniteAutomaton a3 = alg.reverse(a1);
-        listFA.add(a3);
+        addNewFiniteAutomaton(a3);
     }
-        
+    
+    public void addNewFiniteAutomaton(FiniteAutomaton f){
+        listFA.add(f);
+        mw.atualiza();
+    }
+    
+    public void addNewRegularExpression(RegularExpression f){
+        listRE.add(f);
+        mw.atualiza();
+    }
+    
+    public void addNewRegularGrammar(RegularGrammar f){
+        listRG.add(f);
+        mw.atualiza();
+    }
+    
+    public void RemoveFiniteAutomaton(FiniteAutomaton f){
+        listFA.remove(f);
+        mw.atualiza();
+    }
+    
+    public void RemoveRegularExpression(RegularExpression f){
+        listRE.remove(f);
+        mw.atualiza();
+    }
+    
+    public void RemoveRegularGrammar(RegularGrammar f){
+        listRG.remove(f);
+        mw.atualiza();
+    }
+    
+    public ArrayList<FiniteAutomaton> getListFA(){
+        return listFA;
+    }
+    
+    public ArrayList<RegularExpression> getListRE(){
+        return listRE;
+    }
+    
+    public ArrayList<RegularGrammar> getListRG(){
+        return listRG;
+    }
+    
 }

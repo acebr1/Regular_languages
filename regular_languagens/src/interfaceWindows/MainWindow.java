@@ -1,10 +1,13 @@
+package interfaceWindows;
+
 
 import finite_automaton.FA_algorithms;
 import javax.swing.DefaultListModel;
-import regular_expression.Parser;
-import regular_expression.RegularExpression;
-import regular_grammar.RG_Algorithms;
-import regular_grammar.RegularGrammar;
+import finite_automaton.*;
+import java.util.HashMap;
+import java.util.Map;
+import regular_expression.*;
+import regular_grammar.*;
 import transformation.Transformation;
 
 
@@ -13,10 +16,11 @@ public class MainWindow extends javax.swing.JFrame {
     Transformation transformation;
     RG_Algorithms rgalg;
     FA_algorithms faalg;
+    Map<String,RegularExpression> mapRE = new HashMap<>();
     
     public MainWindow() {
         initComponents(); 
-        transformation = new Transformation();
+        transformation = new Transformation(this);
         rgalg = new RG_Algorithms();
         faalg = new FA_algorithms();
     }
@@ -121,17 +125,19 @@ public class MainWindow extends javax.swing.JFrame {
         jCBER3 = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jBEditER = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         jListER = new javax.swing.JList<>();
         jBExcluirER = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTANovaER = new javax.swing.JTextArea();
-        jTNomeER = new javax.swing.JTextField();
         jBCriarER = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTAEditER = new javax.swing.JTextArea();
+        jBEditarER = new javax.swing.JButton();
+        jSeparator11 = new javax.swing.JSeparator();
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -972,16 +978,12 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
         jLabel22.setText("Lista de Expressões");
 
-        jBEditER.setBackground(new java.awt.Color(204, 204, 204));
-        jBEditER.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jBEditER.setText("Editar");
-        jBEditER.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditERActionPerformed(evt);
+        jListER.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
+        jListER.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListERValueChanged(evt);
             }
         });
-
-        jListER.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
         jScrollPane6.setViewportView(jListER);
 
         jBExcluirER.setBackground(new java.awt.Color(204, 204, 204));
@@ -999,7 +1001,6 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBEditER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBExcluirER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel15Layout.createSequentialGroup()
@@ -1019,9 +1020,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBExcluirER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEditER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -1029,15 +1028,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
         jLabel27.setText("Crie uma nova ER");
 
-        jLabel28.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jLabel28.setText("Nome:");
-
         jTANovaER.setColumns(20);
         jTANovaER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jTANovaER.setRows(5);
         jScrollPane3.setViewportView(jTANovaER);
-
-        jTNomeER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
 
         jBCriarER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBCriarER.setText("Criar Expressão");
@@ -1047,40 +1041,73 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel28.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 16)); // NOI18N
+        jLabel28.setText("Altere uma ER ");
+
+        jTAEditER.setColumns(20);
+        jTAEditER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jTAEditER.setRows(5);
+        jScrollPane4.setViewportView(jTAEditER);
+
+        jBEditarER.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBEditarER.setText("Alterar Expressão");
+        jBEditarER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarERActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTNomeER, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jBCriarER, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBEditarER, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBCriarER, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(18, Short.MAX_VALUE)))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel27)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(jTNomeER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBCriarER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBEditarER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createSequentialGroup()
+                    .addGap(293, 293, 293)
+                    .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(294, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1094,7 +1121,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1134,28 +1161,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void jBRecAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRecAFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBRecAFActionPerformed
-    
-    DefaultListModel model1 = new DefaultListModel();
-    private void jBEditERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditERActionPerformed
-        //remove dos combobox
-        jCBER1.removeItemAt(jCBER1.getSelectedIndex());
-        jCBER2.removeItemAt(jCBER2.getSelectedIndex());
-        jCBER3.removeItemAt(jCBER3.getSelectedIndex());
-        
-        //altera
-        String aux = jTANovaER.getText();
-        jTANovaER.setName(aux);
-        
-        //add nos combobox
-        jCBER1.addItem(jTANovaER.getText());
-        jCBER2.addItem(jTANovaER.getText());
-        jCBER3.addItem(jTANovaER.getText());
-        
-        model1.addElement(jTANovaER.getText());
-        jListER.setModel(model1);  
-    }//GEN-LAST:event_jBEditERActionPerformed
-
     DefaultListModel model2 = new DefaultListModel();
+    DefaultListModel model3 = new DefaultListModel();
+    DefaultListModel model1 = new DefaultListModel();
+    
     private void jBEditGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditGRActionPerformed
         //remove dos combobox
         jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
@@ -1199,17 +1208,14 @@ public class MainWindow extends javax.swing.JFrame {
             exp = exp.concat(s);
         }
         exp = exp.replace(" ", "");
-        System.out.println(exp);
         if(!exp.equals("")){
             try {
-                RegularExpression regex = new RegularExpression(exp, "");
-                transformation.DeSimone(regex);
-                jCBER1.addItem(jTANovaER.getText());
-                jCBER2.addItem(jTANovaER.getText());
-                jCBER3.addItem(jTANovaER.getText());
-        
-                model1.addElement(jTANovaER.getText());
-        jListER.setModel(model1);
+                RegularExpression regex = new RegularExpression(exp);
+                new Transformation(this).DeSimone(regex);
+                transformation.addNewRegularExpression(regex);
+                mapRE.put(exp, regex);
+                jTANovaER.setText("");
+                atualiza();
             } catch (Exception exc) {
                 System.out.println("erro");
             }
@@ -1220,37 +1226,52 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jBExcluirERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirERActionPerformed
         if(jCBER1.getItemCount() != 0 && !model1.isEmpty()){
-            jCBER1.removeItemAt(jCBER1.getSelectedIndex());
-            jCBER2.removeItemAt(jCBER2.getSelectedIndex());
-            jCBER3.removeItemAt(jCBER3.getSelectedIndex());
-
-            model1.removeElement(jTANovaER.getSelectedText());
-            jListER.setModel(model1);
+            transformation.RemoveRegularExpression(mapRE.get(jListER.getSelectedValue()));
+            mapRE.remove(jListER.getSelectedValue());
         }
         
     }//GEN-LAST:event_jBExcluirERActionPerformed
 
     private void jBRevERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevERActionPerformed
-        RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()),"");
-        transformation.Reverse(e);
+        try {
+            RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+            transformation.Reverse(e);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBRevERActionPerformed
 
     private void jBDeSimoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeSimoneActionPerformed
+        try {
+            RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+            transformation.DeSimone(e);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
         
-        RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()),"");
-        transformation.DeSimone(e);
     }//GEN-LAST:event_jBDeSimoneActionPerformed
 
     private void jBIntersERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersERActionPerformed
-        RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()),"");
-        RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()),"");
-        transformation.Intersection(e1, e2);
+        try {
+            RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+            RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+            transformation.Intersection(e1, e2);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBIntersERActionPerformed
 
     private void jBDifERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifERActionPerformed
-        RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()),"");
-        RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()),"");
-        transformation.Difference(e1, e2);
+        try {
+            RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+            RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+            transformation.Difference(e1, e2);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBDifERActionPerformed
 
 
@@ -1348,6 +1369,61 @@ public class MainWindow extends javax.swing.JFrame {
         //transformation.AFtoRG(f1);
     }//GEN-LAST:event_jBAFtoGRActionPerformed
 
+    private void jBEditarERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarERActionPerformed
+        String Selected = jListER.getSelectedValue();
+        String[] e = jTAEditER.getText().split("\n");
+        String exp = "";
+        for(String s : e){
+            exp = exp.concat(s);
+        }
+        exp = exp.replace(" ", "");
+        if(!exp.equals("")){
+            try {
+                RegularExpression regex = new RegularExpression(exp);
+                new Transformation(this).DeSimone(regex);
+                
+                transformation.addNewRegularExpression(regex);
+                mapRE.put(exp, regex);
+                transformation.RemoveRegularExpression(mapRE.get(Selected));
+                mapRE.remove(Selected);
+                
+            } catch (Exception exc) {
+                System.out.println("erro");
+            }
+        }
+    }//GEN-LAST:event_jBEditarERActionPerformed
+
+    private void jListERValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListERValueChanged
+        jTAEditER.setText(jListER.getSelectedValue());
+    }//GEN-LAST:event_jListERValueChanged
+   
+    public void atualiza() {
+        model3 = new DefaultListModel();
+        for(finite_automaton.FiniteAutomaton fa: transformation.getListFA()){
+            model3.addElement(fa.getName());
+        }
+        jListAF.setModel(model3);
+        
+        model2 = new DefaultListModel();
+        for(regular_grammar.RegularGrammar rg: transformation.getListRG()){
+            model2.addElement(rg.getName());
+        }
+        jListGR.setModel(model2);
+        
+        /* Seta as informações nas Listas e nas Combobox da ER*/
+        model1 = new DefaultListModel();
+        jCBER1.removeAllItems();
+        jCBER2.removeAllItems();
+        jCBER3.removeAllItems();
+        for(regular_expression.RegularExpression re : transformation.getListRE()){
+            model1.addElement(re.getExpression());
+            jCBER1.addItem(re.getExpression());
+            jCBER2.addItem(re.getExpression());
+            jCBER3.addItem(re.getExpression());
+        }
+        jListER.setModel(model1);
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -1394,8 +1470,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBDifAF;
     private javax.swing.JButton jBDifER;
     private javax.swing.JButton jBDifGR;
-    private javax.swing.JButton jBEditER;
     private javax.swing.JButton jBEditGR;
+    private javax.swing.JButton jBEditarER;
     private javax.swing.JButton jBEnumAF;
     private javax.swing.JButton jBExcluirAF;
     private javax.swing.JButton jBExcluirER;
@@ -1475,10 +1551,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1486,9 +1564,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextArea jTAEditER;
     private javax.swing.JTextArea jTANovaER;
     private javax.swing.JTextArea jTANovaGR;
-    private javax.swing.JTextField jTNomeER;
     private javax.swing.JTextField jTNomeGR;
     private javax.swing.JTextField jTSentAF;
     private javax.swing.JTabbedPane jTabbedPane1;

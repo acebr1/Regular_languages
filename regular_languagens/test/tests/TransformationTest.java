@@ -8,6 +8,7 @@ package tests;
 import finite_automaton.FA_algorithms;
 import finite_automaton.FiniteAutomaton;
 import finite_automaton.State;
+import interfaceWindows.MainWindow;
 import transformation.Transformation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +85,7 @@ public class TransformationTest {
         grammar.setProductions("C", "cC");
         grammar.setProductions("C", "a");
         
-        Transformation t = new Transformation();
+        Transformation t = new Transformation(new MainWindow());
         //System.out.println(automaton);
         //System.out.println(grammar);
         RegularGrammar rg = t.AFtoRG(automaton);
@@ -153,7 +154,7 @@ public class TransformationTest {
               
         FiniteAutomaton automaton = new FiniteAutomaton(st, alphabet, init, "a"); 
        
-        Transformation t = new Transformation();
+        Transformation t = new Transformation(new MainWindow());
         
         FA_algorithms f = new FA_algorithms();
         
@@ -190,8 +191,8 @@ public class TransformationTest {
         alphabet.add('1');
     
         FiniteAutomaton automaton = new FiniteAutomaton(statesA, alphabet, initialA,"A");  
-        RegularExpression a12 = new RegularExpression("1?(01)*0?", "12a");
-        Transformation t = new Transformation();
+        RegularExpression a12 = new RegularExpression("1?(01)*0?");
+        Transformation t = new Transformation(new MainWindow());
         FA_algorithms f = new FA_algorithms();
         FiniteAutomaton REAFD = t.DeSimone(a12);
         
@@ -205,7 +206,7 @@ public class TransformationTest {
             assertEquals(false, f.recognize(REAFD, s));
         }
         
-        RegularExpression b12 = new RegularExpression("1?1?(00?11?)*0?0?", "12b");
+        RegularExpression b12 = new RegularExpression("1?1?(00?11?)*0?0?");
         FiniteAutomaton afb12 = t.DeSimone(b12);
         
         q0 = new State("q0", true);
@@ -246,7 +247,7 @@ public class TransformationTest {
             assertEquals(false, f.recognize(afb12, s));
         }
         
-        RegularExpression erro = new RegularExpression("a***", "erro");
+        RegularExpression erro = new RegularExpression("a***");
         assertEquals(true, f.recognize(t.DeSimone(erro), "aaaaaaaaaaaaaaaaa"));
     }
     
