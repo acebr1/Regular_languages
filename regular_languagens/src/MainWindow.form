@@ -919,6 +919,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Intersec&#xe7;&#xe3;o"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBIntersGRActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jBDifGR">
                   <Properties>
@@ -927,6 +930,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Diferen&#xe7;a"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDifGRActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>

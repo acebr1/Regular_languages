@@ -1,12 +1,15 @@
 
 import javax.swing.DefaultListModel;
 import regular_expression.RegularExpression;
+import regular_grammar.RG_Algorithms;
+import regular_grammar.RegularGrammar;
 import transformation.Transformation;
 
 
 public class MainWindow extends javax.swing.JFrame {
 
     Transformation transformation;
+    RG_Algorithms rgalg;
     
     public MainWindow() {
         initComponents();
@@ -524,9 +527,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         jBIntersGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBIntersGR.setText("Intersecção");
+        jBIntersGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBIntersGRActionPerformed(evt);
+            }
+        });
 
         jBDifGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBDifGR.setText("Diferença");
+        jBDifGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDifGRActionPerformed(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel19.setText("Selecione as Gramáticas:");
@@ -1110,7 +1123,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEditGRActionPerformed
 
     private void jBGRtoAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGRtoAFActionPerformed
-        // TODO add your handling code here:
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
+        transformation.RGtoAF(g1);
     }//GEN-LAST:event_jBGRtoAFActionPerformed
 
     private void jBExcluirAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirAFActionPerformed
@@ -1189,8 +1203,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCriarGR1ActionPerformed
 
     private void jBRevGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevGRActionPerformed
-        
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
+        transformation.Reverse(g1);
     }//GEN-LAST:event_jBRevGRActionPerformed
+
+    private void jBIntersGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersGRActionPerformed
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        transformation.Intersection(g1, g2);
+    }//GEN-LAST:event_jBIntersGRActionPerformed
+
+    private void jBDifGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifGRActionPerformed
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR2.getItemAt(jCBGR2.getSelectedIndex()));
+        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
+        transformation.Difference(g1, g2);
+    }//GEN-LAST:event_jBDifGRActionPerformed
 
     /**
      * @param args the command line arguments

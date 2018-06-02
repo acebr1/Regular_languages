@@ -35,7 +35,7 @@ public class RegularGrammar{
             this.name = name;
             this.productions = new HashMap<>();
         }
-
+   
 /**
    * Pegar nome da gramática
 */        
