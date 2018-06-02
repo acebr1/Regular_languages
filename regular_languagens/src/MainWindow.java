@@ -1,6 +1,7 @@
 
 import finite_automaton.FA_algorithms;
 import javax.swing.DefaultListModel;
+import regular_expression.Parser;
 import regular_expression.RegularExpression;
 import regular_grammar.RG_Algorithms;
 import regular_grammar.RegularGrammar;
@@ -1192,12 +1193,29 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBIntersAFActionPerformed
     
     private void jBCriarERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarERActionPerformed
-        jCBER1.addItem(jTANovaER.getText());
-        jCBER2.addItem(jTANovaER.getText());
-        jCBER3.addItem(jTANovaER.getText());
+        String[] e = jTANovaER.getText().split("\n");
+        String exp = "";
+        for(String s : e){
+            exp = exp.concat(s);
+        }
+        exp = exp.replace(" ", "");
+        System.out.println(exp);
+        if(!exp.equals("")){
+            try {
+                RegularExpression regex = new RegularExpression(exp, "");
+                transformation.DeSimone(regex);
+                jCBER1.addItem(jTANovaER.getText());
+                jCBER2.addItem(jTANovaER.getText());
+                jCBER3.addItem(jTANovaER.getText());
         
-        model1.addElement(jTANovaER.getText());
+                model1.addElement(jTANovaER.getText());
         jListER.setModel(model1);
+            } catch (Exception exc) {
+                System.out.println("erro");
+            }
+        }
+        
+        
     }//GEN-LAST:event_jBCriarERActionPerformed
 
     private void jBExcluirERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirERActionPerformed
@@ -1235,7 +1253,7 @@ public class MainWindow extends javax.swing.JFrame {
         transformation.Difference(e1, e2);
     }//GEN-LAST:event_jBDifERActionPerformed
 
-<<<<<<< HEAD
+
     private void jCBER2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBER2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBER2ActionPerformed
@@ -1243,7 +1261,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jCBER3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBER3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBER3ActionPerformed
-=======
+
     private void jBExcluirGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirGRActionPerformed
         if(jCBGR1.getItemCount() != 0 && !model2.isEmpty()){
             jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
@@ -1329,7 +1347,7 @@ public class MainWindow extends javax.swing.JFrame {
         //FiniteAutomaton f1 = new FiniteAutomaton();
         //transformation.AFtoRG(f1);
     }//GEN-LAST:event_jBAFtoGRActionPerformed
->>>>>>> 04cd13068fd9d1d1f8085df88bb2075fb8f64305
+
 
     /**
      * @param args the command line arguments
