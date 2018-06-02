@@ -90,7 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTANovaGR = new javax.swing.JTextArea();
         jTNomeGR = new javax.swing.JTextField();
-        jBUniaoGR1 = new javax.swing.JButton();
+        jBCriarGR1 = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jBEditGR = new javax.swing.JButton();
@@ -536,6 +536,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jBRevGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBRevGR.setText("Reverso");
+        jBRevGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRevGRActionPerformed(evt);
+            }
+        });
 
         jCBGR2.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCBGR2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -639,8 +644,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTNomeGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
 
-        jBUniaoGR1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jBUniaoGR1.setText("Criar Gramática");
+        jBCriarGR1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jBCriarGR1.setText("Criar Gramática");
+        jBCriarGR1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCriarGR1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -669,7 +679,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jTNomeGR, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jBUniaoGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBCriarGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
                 .addGap(18, 18, 18))
         );
@@ -687,7 +697,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBUniaoGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBCriarGR1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -726,6 +736,11 @@ public class MainWindow extends javax.swing.JFrame {
         jBExcluirGR.setBackground(new java.awt.Color(204, 204, 204));
         jBExcluirGR.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jBExcluirGR.setText("Excluir");
+        jBExcluirGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirGRActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1049,6 +1064,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jBRecAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRecAFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBRecAFActionPerformed
+    
     DefaultListModel model1 = new DefaultListModel();
     private void jBEditERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditERActionPerformed
         //remove dos combobox
@@ -1069,8 +1085,28 @@ public class MainWindow extends javax.swing.JFrame {
         jListER.setModel(model1);  
     }//GEN-LAST:event_jBEditERActionPerformed
 
+    DefaultListModel model2 = new DefaultListModel();
     private void jBEditGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditGRActionPerformed
-        // TODO add your handling code here:
+        //remove dos combobox
+        jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
+        jCBGR2.removeItemAt(jCBGR2.getSelectedIndex());
+        jCBGR3.removeItemAt(jCBGR3.getSelectedIndex());
+        jCBGR4.removeItemAt(jCBGR4.getSelectedIndex());
+        jCBGR5.removeItemAt(jCBGR5.getSelectedIndex());
+        
+        //altera
+        String aux = jTANovaGR.getText();
+        jTANovaGR.setName(aux);
+        
+        //add nos combobox
+        jCBGR1.addItem(jTANovaGR.getText());
+        jCBGR2.addItem(jTANovaGR.getText());
+        jCBGR3.addItem(jTANovaGR.getText());
+        jCBGR4.addItem(jTANovaGR.getText());
+        jCBGR5.addItem(jTANovaGR.getText());
+        
+        model2.addElement(jTANovaGR.getText());
+        jListGR.setModel(model2); 
     }//GEN-LAST:event_jBEditGRActionPerformed
 
     private void jBGRtoAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGRtoAFActionPerformed
@@ -1128,6 +1164,34 @@ public class MainWindow extends javax.swing.JFrame {
         transformation.Difference(e1, e2);
     }//GEN-LAST:event_jBDifERActionPerformed
 
+    private void jBExcluirGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirGRActionPerformed
+        if(jCBGR1.getItemCount() != 0 && !model2.isEmpty()){
+            jCBGR1.removeItemAt(jCBGR1.getSelectedIndex());
+            jCBGR2.removeItemAt(jCBGR2.getSelectedIndex());
+            jCBGR3.removeItemAt(jCBGR3.getSelectedIndex());
+            jCBGR4.removeItemAt(jCBGR2.getSelectedIndex());
+            jCBGR5.removeItemAt(jCBGR3.getSelectedIndex());
+
+            model2.removeElement(jTANovaGR.getSelectedText());
+            jListGR.setModel(model2);
+        }
+    }//GEN-LAST:event_jBExcluirGRActionPerformed
+
+    private void jBCriarGR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarGR1ActionPerformed
+        jCBGR1.addItem(jTANovaGR.getText());
+        jCBGR2.addItem(jTANovaGR.getText());
+        jCBGR3.addItem(jTANovaGR.getText());
+        jCBGR4.addItem(jTANovaGR.getText());
+        jCBGR5.addItem(jTANovaGR.getText());
+        
+        model2.addElement(jTANovaGR.getText());
+        jListGR.setModel(model2);
+    }//GEN-LAST:event_jBCriarGR1ActionPerformed
+
+    private void jBRevGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevGRActionPerformed
+        
+    }//GEN-LAST:event_jBRevGRActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1167,6 +1231,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBAFtoGR;
     private javax.swing.JButton jBConcGR;
     private javax.swing.JButton jBCriarER;
+    private javax.swing.JButton jBCriarGR1;
     private javax.swing.JButton jBDeSimone;
     private javax.swing.JButton jBDetAF;
     private javax.swing.JButton jBDifAF;
@@ -1189,7 +1254,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBRevER;
     private javax.swing.JButton jBRevGR;
     private javax.swing.JButton jBUniaoGR;
-    private javax.swing.JButton jBUniaoGR1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCBAF;
     private javax.swing.JComboBox<String> jCBAF1;
