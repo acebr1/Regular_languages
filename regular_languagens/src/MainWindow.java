@@ -1,4 +1,5 @@
 
+import finite_automaton.FA_algorithms;
 import javax.swing.DefaultListModel;
 import regular_expression.RegularExpression;
 import regular_grammar.RG_Algorithms;
@@ -10,10 +11,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     Transformation transformation;
     RG_Algorithms rgalg;
+    FA_algorithms faalg;
     
     public MainWindow() {
-        initComponents();
+        initComponents(); 
         transformation = new Transformation();
+        rgalg = new RG_Algorithms();
+        faalg = new FA_algorithms();
     }
 
     @SuppressWarnings("unchecked")
@@ -279,14 +283,29 @@ public class MainWindow extends javax.swing.JFrame {
         jBDetAF.setMaximumSize(new java.awt.Dimension(100, 25));
         jBDetAF.setMinimumSize(new java.awt.Dimension(100, 25));
         jBDetAF.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBDetAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDetAFActionPerformed(evt);
+            }
+        });
 
         jBMinAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBMinAF.setText("Minimizar");
         jBMinAF.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBMinAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMinAFActionPerformed(evt);
+            }
+        });
 
         jBRevAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBRevAF.setText("Reverso");
         jBRevAF.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBRevAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRevAFActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -317,9 +336,19 @@ public class MainWindow extends javax.swing.JFrame {
         jBAFtoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBAFtoGR.setText("Conversão de AF para GR");
         jBAFtoGR.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBAFtoGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAFtoGRActionPerformed(evt);
+            }
+        });
 
         jCBAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCBAF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBAFActionPerformed(evt);
+            }
+        });
 
         jSNum.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jSNum.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
@@ -630,12 +659,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         jBFechoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBFechoGR.setText("Fechamento");
+        jBFechoGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFechoGRActionPerformed(evt);
+            }
+        });
 
         jBUniaoGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBUniaoGR.setText("União");
+        jBUniaoGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUniaoGRActionPerformed(evt);
+            }
+        });
 
         jBConcGR.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBConcGR.setText("Concatenação");
+        jBConcGR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConcGRActionPerformed(evt);
+            }
+        });
 
         jCBGR4.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCBGR4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1218,6 +1262,51 @@ public class MainWindow extends javax.swing.JFrame {
         RegularGrammar g2 = rgalg.stringINgrammar(jCBGR3.getItemAt(jCBGR3.getSelectedIndex()));
         transformation.Difference(g1, g2);
     }//GEN-LAST:event_jBDifGRActionPerformed
+
+    private void jBUniaoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUniaoGRActionPerformed
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
+        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR5.getItemAt(jCBGR5.getSelectedIndex()));
+        rgalg.union(g1, g2);
+    }//GEN-LAST:event_jBUniaoGRActionPerformed
+
+    private void jBConcGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConcGRActionPerformed
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
+        RegularGrammar g2 = rgalg.stringINgrammar(jCBGR5.getItemAt(jCBGR5.getSelectedIndex()));
+        rgalg.concatenation(g1, g2);
+    }//GEN-LAST:event_jBConcGRActionPerformed
+
+    private void jBFechoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFechoGRActionPerformed
+        RegularGrammar g1 = rgalg.stringINgrammar(jCBGR4.getItemAt(jCBGR4.getSelectedIndex()));
+        rgalg.closure(g1);
+    }//GEN-LAST:event_jBFechoGRActionPerformed
+
+    private void jBDetAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDetAFActionPerformed
+        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
+        //FiniteAutomaton f1 = new FiniteAutomaton();
+        //faalg.determinize(f1);
+    }//GEN-LAST:event_jBDetAFActionPerformed
+
+    private void jCBAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBAFActionPerformed
+
+    private void jBMinAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMinAFActionPerformed
+        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
+        //FiniteAutomaton f1 = new FiniteAutomaton();
+        //faalg.minimize(f1);
+    }//GEN-LAST:event_jBMinAFActionPerformed
+
+    private void jBRevAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevAFActionPerformed
+        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
+        //FiniteAutomaton f1 = new FiniteAutomaton();
+        //faalg.reverse(f1);
+    }//GEN-LAST:event_jBRevAFActionPerformed
+
+    private void jBAFtoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAFtoGRActionPerformed
+        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
+        //FiniteAutomaton f1 = new FiniteAutomaton();
+        //transformation.AFtoRG(f1);
+    }//GEN-LAST:event_jBAFtoGRActionPerformed
 
     /**
      * @param args the command line arguments
