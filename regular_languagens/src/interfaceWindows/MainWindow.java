@@ -75,7 +75,6 @@ public class MainWindow extends javax.swing.JFrame {
         jTSentAF = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jCCompleto = new javax.swing.JCheckBox();
         jCSemInal = new javax.swing.JCheckBox();
         jCSemMort = new javax.swing.JCheckBox();
         jCDeterministico = new javax.swing.JCheckBox();
@@ -468,9 +467,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel9.setText("Selecione os AF Intermedários");
 
-        jCCompleto.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCCompleto.setText("Completo");
-
         jCSemInal.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCSemInal.setText("Sem estados inalcançaveis");
         jCSemInal.addActionListener(new java.awt.event.ActionListener() {
@@ -517,8 +513,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jCSemMort)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(jCSemInal)
-                    .addComponent(jCCompleto))
+                    .addComponent(jCSemInal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -529,16 +524,14 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addComponent(jCCompleto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCSemInal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCSemMort)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCDeterministico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCUniao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCComplem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -670,7 +663,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jBRevGR, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                        .addComponent(jBGRtoAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, Short.MAX_VALUE))
                     .addComponent(jLabel19)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jBDifGR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -958,9 +951,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCBER2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCBER1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addComponent(jCBER1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -1764,7 +1756,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBGR2;
     private javax.swing.JComboBox<String> jCBGR3;
     private javax.swing.JCheckBox jCComplem;
-    private javax.swing.JCheckBox jCCompleto;
     private javax.swing.JCheckBox jCDeterministico;
     private javax.swing.JCheckBox jCSemInal;
     private javax.swing.JCheckBox jCSemMort;
