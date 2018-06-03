@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/MainWindow.java</file>
-            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/FiniteAutomaton.java</file>
+            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/interfaceWindows/ListWords.java</file>
+            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/regular_expression/Node.java</file>
+            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/regular_expression/Parser.java</file>
+            <file>file:/home/fabiola/gitreposity/Regular_languages/regular_languagens/src/transformation/Transformation.java</file>
         </group>
     </open-files>
 </project-private>

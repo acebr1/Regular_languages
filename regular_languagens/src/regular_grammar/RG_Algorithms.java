@@ -191,15 +191,20 @@ public class RG_Algorithms{
             RegularGrammar GAClone = ga.getClone();
             RegularGrammar gnew = new RegularGrammar();
             gnew.setName("("+GAClone.getName()+")*");
-            gnew.setInitialSymbol(GAClone.getInitialSymbol());
+            String initialSymbol = "Z";
+            gnew.setInitialSymbol(initialSymbol);
             gnew.setProductions(GAClone.getProductions());
             for (String key : GAClone.productions.keySet() ) {
                 ArrayList<String> temp = GAClone.productions.get(key);
                 for(String s : temp){
                     gnew.setProductions(key, s);
-                    if (s.length() < 2 && !"&".equals(s)){
-                      gnew.setProductions(key, s.charAt(0) + gnew.getInitialSymbol());  
+                    if (key.equals(GAClone.getInitialSymbol())) {
+                        gnew.setProductions(initialSymbol+"", s+"");
                     }
+                    if (s.length() < 2 && !"&".equals(s)){
+                      gnew.setProductions(key, s.charAt(0) + GAClone.getInitialSymbol());  
+                    }
+                    gnew.setProductions(initialSymbol, "&");
                 }
             }
             return gnew;

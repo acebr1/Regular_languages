@@ -150,7 +150,7 @@ public class RG_AlgorithmsTest {
     public void testClosure() {
         RegularGrammar ga = new RegularGrammar();
         ga.setInitialSymbol("S");
-        ga.setProductions("S", "&");
+        //ga.setProductions("S", "&");
         ga.setProductions("S", "aA");
         ga.setProductions("S", "a");
         ga.setProductions("S", "bB");
