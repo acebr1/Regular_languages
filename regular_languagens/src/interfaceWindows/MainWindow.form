@@ -132,7 +132,7 @@
                               <Component id="jLabel1" min="-2" pref="155" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jButton3" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jBVisualizar" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jBExcluirAF" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -148,7 +148,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jBVisualizar" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jBExcluirAF" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -195,13 +195,16 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListAFValueChanged"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JButton" name="jBVisualizar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -211,6 +214,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Visualizar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBVisualizarActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -317,6 +323,9 @@
                       <Dimension value="[100, 25]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDifAFActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jCBAF1">
                   <Properties>
@@ -542,6 +551,9 @@
                       <Dimension value="[100, 25]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEnumAFActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator1">
                 </Component>
@@ -609,12 +621,7 @@
                       <Font name="Source Sans Pro" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -662,7 +669,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jCComplem" min="-2" max="-2" attributes="0"/>
                               <Component id="jCUniao" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCComEquiv" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCDeterministico" min="-2" max="-2" attributes="0"/>
                               <Component id="jCSemMort" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -687,7 +694,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCSemMort" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCComEquiv" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCDeterministico" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCUniao" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -736,13 +743,16 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCSemMortActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jCComEquiv">
+                <Component class="javax.swing.JCheckBox" name="jCDeterministico">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Source Sans Pro" size="12" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Com estados equivalentes"/>
+                    <Property name="text" type="java.lang.String" value="Determin&#xed;stico"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCDeterministicoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCUniao">
                   <Properties>

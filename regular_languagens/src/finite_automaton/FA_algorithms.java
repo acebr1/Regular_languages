@@ -112,8 +112,8 @@ public class FA_algorithms {
                 }
             }
             
-            FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial,"AFD:"+FAClone.getName());
-            //System.out.println(determinized);
+            FiniteAutomaton determinized = new FiniteAutomaton(newStates, FAClone.alphabet, initial,"AFD"+FAClone.getName());
+
             f.setDeterministic(determinized);
             return determinized;
 	}
@@ -147,11 +147,14 @@ public class FA_algorithms {
 */
 	public FiniteAutomaton minimize(FiniteAutomaton f) {
             FiniteAutomaton FClone = f.getClone();
-            if (!isDeterministic(FClone))
+            if (!isDeterministic(FClone)) {
                 FClone = determinize(FClone);
-            FiniteAutomaton resp = equivalent_state(remove_dead(remove_unreachable(FClone)));
-            f.setMinimized(resp);
-            return resp;
+                f.setDeterministic(FClone);
+            }
+            f.setWithoutUnReac(remove_unreachable(FClone));
+            f.setWithoutDead(remove_dead(f.withoutUnreac));
+            f.setMinimized(equivalent_state(f.withoutDead));
+            return f.minimized;
 	}
 
 /**
@@ -178,7 +181,7 @@ public class FA_algorithms {
                 } 
             }
             
-            return new FiniteAutomaton(new ArrayList<State>(reachable), FClone.alphabet, FClone.getInitial(), FClone.getName());
+            return new FiniteAutomaton(new ArrayList<State>(reachable), FClone.alphabet, FClone.getInitial(), "Sem inalc:"+FClone.getName());
 	}
 
 /**
@@ -214,7 +217,7 @@ public class FA_algorithms {
                 State q0 = new State(FClone.initial.getName(), false);
                 ArrayList<State> states = new ArrayList<>();
                 states.add(q0);
-                return new FiniteAutomaton(states, FClone.alphabet, q0, FClone.getName());
+                return new FiniteAutomaton(states, FClone.alphabet, q0, "Sem Mortos:"+FClone.getName());
             }
             ArrayList<State> states = new ArrayList<>();
             ArrayList<Character> caracters = new ArrayList<>();
@@ -232,7 +235,7 @@ public class FA_algorithms {
             for(int i=0; i < states.size(); i++) {
                 states.get(i).transition.remove(caracters.get(i));
             }
-            return new FiniteAutomaton(new ArrayList<State>(alive),FClone.alphabet, FClone.getInitial(),FClone.getName());
+            return new FiniteAutomaton(new ArrayList<State>(alive),FClone.alphabet, FClone.getInitial(),"Sem Mortos:"+FClone.getName());
 
 	}   
         
@@ -331,7 +334,7 @@ public class FA_algorithms {
                     }
                 }
             }
-            FiniteAutomaton resp = new FiniteAutomaton(states, FClone.alphabet, newInitial, FClone.getName()+" Minimized");
+            FiniteAutomaton resp = new FiniteAutomaton(states, FClone.alphabet, newInitial, "Min:"+FClone.getName());
             return resp;
 	}
  
@@ -444,10 +447,17 @@ public class FA_algorithms {
                 }
             }
             FiniteAutomaton CompA = complement(FAclone);
+            CompA.setName("("+FAclone.getName()+")'");
+            fa.setComplement(CompA);
             FiniteAutomaton CompB = complement(FBclone);
+            CompB.setName("("+FBclone.getName()+")'");
+            fb.setComplement(CompB);
             FiniteAutomaton unio = union(CompA, CompB);
+            unio.setName(CompA.getName()+"U"+CompB.getName());
             FiniteAutomaton compR = complement(unio);
-            return minimize(compR);
+            compR.setName("("+unio.getName()+")'");
+            compR.setUnion(unio);
+            return compR;
 	}
 
 /**

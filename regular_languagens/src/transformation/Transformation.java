@@ -75,6 +75,7 @@ public class Transformation {
             }
             
         }
+        gnew.setName("FA:"+FAClone.getName());
         addNewRegularGrammar(gnew);
         return gnew;
     }
@@ -120,8 +121,7 @@ public class Transformation {
                 }
             }
         }
-        
-        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "AF:"+GClone.getName());
+        FiniteAutomaton fnew = new FiniteAutomaton(states, alphabet, initial, "RG:"+GClone.getName());
         addNewFiniteAutomaton(fnew);
         return fnew;
     }
@@ -198,7 +198,7 @@ public class Transformation {
                     s.setIsFinal(true);
             }
         }
-        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial,"deSimone:"+e.getExpression());
+        FiniteAutomaton fa = new FiniteAutomaton(states, alf, initial,e.getExpression());
         addNewFiniteAutomaton(fa);
         return fa;
     }
@@ -280,17 +280,30 @@ public class Transformation {
     }
     
     public void addNewFiniteAutomaton(FiniteAutomaton f){
+        for(FiniteAutomaton fa: listFA){
+            if(fa.getName().equals(f.getName()))
+                return;
+        }
         listFA.add(f);
+        mw.mapFA.put(f.getName(), f);
         mw.atualiza();
     }
     
     public void addNewRegularExpression(RegularExpression f){
+        for(RegularExpression re: listRE){
+            if(re.getExpression().equals(f.getExpression()))
+                return;
+        }
+        mw.mapRE.put(f.regularExpression, f);
         listRE.add(f);
-        
         mw.atualiza();
     }
     
     public void addNewRegularGrammar(RegularGrammar f){
+        for(RegularGrammar rg: listRG){
+            if(rg.getName().equals(f.getName()))
+                return;
+        }
         listRG.add(f);
         if(!mw.mapRG.containsKey(f.getName()))
             mw.mapRG.put(f.getName(), f);
@@ -298,7 +311,11 @@ public class Transformation {
     }
     
     public void RemoveFiniteAutomaton(FiniteAutomaton f){
+        //System.out.println(f);
+        ///System.out.println(listFA);
+        //System.out.println(listFA.contains(f));
         listFA.remove(f);
+        //System.out.println(listFA);
         mw.atualiza();
     }
     

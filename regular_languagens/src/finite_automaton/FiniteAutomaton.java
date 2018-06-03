@@ -12,9 +12,13 @@ public class FiniteAutomaton{
         FiniteAutomaton reverse;
         FiniteAutomaton complete;
         FiniteAutomaton noEpsilon;
+        FiniteAutomaton withoutUnreac;
+        FiniteAutomaton withoutDead;
+        FiniteAutomaton union;
+
         
 	public ArrayList<State> states;
-	protected ArrayList<Character> alphabet;
+	public ArrayList<Character> alphabet;
 	State initial;
 	public String name = "";
 
@@ -67,7 +71,55 @@ public class FiniteAutomaton{
         public void setReverse (FiniteAutomaton f) {
             this.reverse = f;
         }
- 
+        
+/**
+   * Atribuir o automato finito sem estado inalcançaveis variável
+*/       
+        public void setWithoutUnReac(FiniteAutomaton f) {
+            this.withoutUnreac = f;
+        }        
+
+ /**
+   * Atribuir o automato finito sem estados mortos a variável
+*/       
+        public void setWithoutDead (FiniteAutomaton f) {
+            this.withoutDead = f;
+        }
+ /**
+   * Atribuir o automato finito união
+*/       
+        public void setUnion (FiniteAutomaton f) {
+            this.union = f;
+        }
+        
+/**
+   * Pegar o automato finito uniao
+*/       
+        public FiniteAutomaton getUnion() {
+            return this.union;
+        }  
+        
+/**
+   * Pegar o automato finito sem estado inalcançaveis variável
+*/       
+        public FiniteAutomaton getWithoutUnReac() {
+            return this.withoutUnreac;
+        }        
+
+ /**
+   * pegar o automato finito sem estados mortos a variável
+*/       
+        public FiniteAutomaton getWithoutDead () {
+            return this.withoutDead;
+        }
+ /**
+   * pegar o automato finito minimo
+*/       
+        public FiniteAutomaton getMin () {
+            return this.minimized;
+        }
+        
+        
 /**
    * Atribuir o automato finito completo a variável
 */
@@ -109,6 +161,13 @@ public class FiniteAutomaton{
         public FiniteAutomaton getReverse() {
             return this.reverse;
         }
+        
+/**
+   * Pegar o automato finito reverso 
+*/
+        public FiniteAutomaton getComplement() {
+            return this.complement;
+        }
  
 /**
    * Pegar os estados do automato finito x
@@ -143,6 +202,10 @@ public class FiniteAutomaton{
         
         public void setName(String name){
             this.name = name;
+        }
+        
+        public ArrayList<Character> getAlpha(){
+            return this.alphabet;
         }
  
 /**

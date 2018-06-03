@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JList;
 import regular_expression.RegularExpression;
 import regular_grammar.*;
 import transformation.Transformation;
@@ -20,8 +22,10 @@ public class MainWindow extends javax.swing.JFrame {
     FA_algorithms faalg;
     public Map<String,RegularExpression> mapRE = new HashMap<>();
     public Map<String,RegularGrammar> mapRG = new HashMap<>();
-    public Map<String,FiniteAutomaton> mapFA = new HashMap<>();
-    
+    public Map<String,finite_automaton.FiniteAutomaton> mapFA = new HashMap<>();
+    DefaultListModel model2 = new DefaultListModel();
+    DefaultListModel model3 = new DefaultListModel();
+    DefaultListModel model1 = new DefaultListModel();
     public MainWindow() {
         initComponents(); 
         transformation = new Transformation(this);
@@ -41,7 +45,7 @@ public class MainWindow extends javax.swing.JFrame {
         jBExcluirAF = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListAF = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        jBVisualizar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -74,7 +78,7 @@ public class MainWindow extends javax.swing.JFrame {
         jCCompleto = new javax.swing.JCheckBox();
         jCSemInal = new javax.swing.JCheckBox();
         jCSemMort = new javax.swing.JCheckBox();
-        jCComEquiv = new javax.swing.JCheckBox();
+        jCDeterministico = new javax.swing.JCheckBox();
         jCUniao = new javax.swing.JCheckBox();
         jCComplem = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
@@ -177,11 +181,21 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jListAF.setFont(new java.awt.Font("Source Sans Pro", 0, 11)); // NOI18N
+        jListAF.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListAFValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListAF);
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
-        jButton3.setText("Visualizar");
+        jBVisualizar.setBackground(new java.awt.Color(204, 204, 204));
+        jBVisualizar.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        jBVisualizar.setText("Visualizar");
+        jBVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVisualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -193,7 +207,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBExcluirAF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
@@ -205,7 +219,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBExcluirAF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -232,6 +246,11 @@ public class MainWindow extends javax.swing.JFrame {
         jBDifAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBDifAF.setText("Diferença");
         jBDifAF.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBDifAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDifAFActionPerformed(evt);
+            }
+        });
 
         jCBAF1.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCBAF1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -324,6 +343,11 @@ public class MainWindow extends javax.swing.JFrame {
         jBEnumAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jBEnumAF.setText("Enumere");
         jBEnumAF.setPreferredSize(new java.awt.Dimension(100, 25));
+        jBEnumAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEnumAFActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
         jLabel7.setText("Sentença:");
@@ -353,7 +377,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jCBAF.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCBAF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCBAF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBAFActionPerformed(evt);
@@ -464,8 +487,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jCComEquiv.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
-        jCComEquiv.setText("Com estados equivalentes");
+        jCDeterministico.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
+        jCDeterministico.setText("Determinístico");
+        jCDeterministico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCDeterministicoActionPerformed(evt);
+            }
+        });
 
         jCUniao.setFont(new java.awt.Font("Source Sans Pro", 0, 12)); // NOI18N
         jCUniao.setText("União");
@@ -485,7 +513,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCComplem)
                     .addComponent(jCUniao)
-                    .addComponent(jCComEquiv)
+                    .addComponent(jCDeterministico)
                     .addComponent(jCSemMort)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
@@ -507,7 +535,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCSemMort)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCComEquiv)
+                .addComponent(jCDeterministico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCUniao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1151,11 +1179,20 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jCSemMortActionPerformed
 
     private void jBRecAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRecAFActionPerformed
-        // TODO add your handling code here:
+        try {
+            String sentence = jTSentAF.getText();
+            finite_automaton.FiniteAutomaton f1 =  mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            if(faalg.recognize(f1, sentence)){
+                jLReconhecer.setText("Aceitou");
+            } else {
+                jLReconhecer.setText("Rejeitou");
+            }
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBRecAFActionPerformed
-    DefaultListModel model2 = new DefaultListModel();
-    DefaultListModel model3 = new DefaultListModel();
-    DefaultListModel model1 = new DefaultListModel();
+
     
     private void jBGRtoAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGRtoAFActionPerformed
         RegularGrammar g1 = mapRG.get(jCBGR1.getItemAt(jCBGR1.getSelectedIndex()));
@@ -1163,11 +1200,31 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBGRtoAFActionPerformed
 
     private void jBExcluirAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirAFActionPerformed
-        // TODO add your handling code here:
+        try {
+            transformation.RemoveFiniteAutomaton(mapFA.get(jListAF.getSelectedValue()));
+            mapFA.remove(jListAF.getSelectedValue()); 
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBExcluirAFActionPerformed
 
     private void jBIntersAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersAFActionPerformed
-        // TODO add your handling code here:
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF1.getItemAt(jCBAF1.getSelectedIndex()));
+            finite_automaton.FiniteAutomaton f2 = mapFA.get(jCBAF2.getItemAt(jCBAF2.getSelectedIndex()));
+            finite_automaton.FiniteAutomaton inters = faalg.intersection(f1, f2);
+            if(jCComplem.isSelected()){
+                transformation.addNewFiniteAutomaton(f1.getComplement());
+                transformation.addNewFiniteAutomaton(f2.getComplement());
+            }
+            if(jCUniao.isSelected()){
+                transformation.addNewFiniteAutomaton(inters.getUnion());
+            }
+            transformation.addNewFiniteAutomaton(inters);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
     }//GEN-LAST:event_jBIntersAFActionPerformed
     
     private void jBCriarERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarERActionPerformed
@@ -1180,9 +1237,8 @@ public class MainWindow extends javax.swing.JFrame {
         if(!exp.equals("")){
             try {
                 RegularExpression regex = new RegularExpression(exp);
-                new Transformation(this).DeSimone(regex);
+                new Transformation(new MainWindow()).DeSimone(regex);
                 transformation.addNewRegularExpression(regex);
-                mapRE.put(exp, regex);
                 jTANovaER.setText("");
                 atualiza();
             } catch (Exception exc) {
@@ -1203,7 +1259,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jBRevERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevERActionPerformed
         try {
-            RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+            RegularExpression e = mapRE.get(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
             transformation.Reverse(e);
         } catch (Exception e) {
             System.out.println("erro");
@@ -1213,7 +1269,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jBDeSimoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeSimoneActionPerformed
         try {
-            RegularExpression e = new RegularExpression(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
+            RegularExpression e = mapRE.get(jCBER1.getItemAt(jCBER1.getSelectedIndex()));
             transformation.DeSimone(e);
         } catch (Exception e) {
             System.out.println("erro");
@@ -1223,8 +1279,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jBIntersERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIntersERActionPerformed
         try {
-            RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
-            RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+            RegularExpression e1 = mapRE.get(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+            RegularExpression e2 = mapRE.get(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
             transformation.Intersection(e1, e2);
         } catch (Exception e) {
             System.out.println("erro");
@@ -1234,8 +1290,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jBDifERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifERActionPerformed
         try {
-            RegularExpression e1 = new RegularExpression(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
-            RegularExpression e2 = new RegularExpression(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
+            RegularExpression e1 = mapRE.get(jCBER2.getItemAt(jCBER2.getSelectedIndex()));
+            RegularExpression e2 = mapRE.get(jCBER3.getItemAt(jCBER3.getSelectedIndex()));
             transformation.Difference(e1, e2);
         } catch (Exception e) {
             System.out.println("erro");
@@ -1303,7 +1359,7 @@ public class MainWindow extends javax.swing.JFrame {
                         {
                             Matcher nonterm = nont.matcher(produc.charAt(0)+"");
                             Matcher term = ter.matcher(produc.charAt(1)+"");
-                            if(!nonterm.matches() || !term.matches()){
+                            if(!nonterm.matches() || (!term.matches() && produc.charAt(0) != '&')){
                                 return;
                             }  
                             if(!ga.getProductions().keySet().contains(produc.charAt(1)+"")){
@@ -1314,7 +1370,7 @@ public class MainWindow extends javax.swing.JFrame {
                     case 1:
                         {
                             Matcher nonterm = nont.matcher(produc.charAt(0)+"");
-                            if(!nonterm.matches()){
+                            if(!nonterm.matches() && produc.charAt(0) != '&'){
                                 return;
                             }      
                             break;
@@ -1367,9 +1423,14 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jBFechoGRActionPerformed
 
     private void jBDetAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDetAFActionPerformed
-        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
-        //FiniteAutomaton f1 = new FiniteAutomaton();
-        //faalg.determinize(f1);
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            finite_automaton.FiniteAutomaton determ = faalg.determinize(f1);
+            transformation.addNewFiniteAutomaton(determ);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBDetAFActionPerformed
 
     private void jCBAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAFActionPerformed
@@ -1377,21 +1438,44 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBAFActionPerformed
 
     private void jBMinAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMinAFActionPerformed
-        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
-        //FiniteAutomaton f1 = new FiniteAutomaton();
-        //faalg.minimize(f1);
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            faalg.minimize(f1);
+            if(jCDeterministico.isSelected() && f1.getDeterministic() != null){
+                transformation.addNewFiniteAutomaton(f1.getDeterministic());
+            }
+            if(jCSemInal.isSelected() && f1.getWithoutUnReac() != null){
+                transformation.addNewFiniteAutomaton(f1.getWithoutUnReac());
+            }
+            if(jCSemMort.isSelected() && f1.getWithoutDead()!= null){
+                transformation.addNewFiniteAutomaton(f1.getWithoutDead());
+            }
+            transformation.addNewFiniteAutomaton(f1.getMin());
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBMinAFActionPerformed
 
     private void jBRevAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRevAFActionPerformed
-        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
-        //FiniteAutomaton f1 = new FiniteAutomaton();
-        //faalg.reverse(f1);
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            transformation.addNewFiniteAutomaton(faalg.reverse(f1));
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
+        
     }//GEN-LAST:event_jBRevAFActionPerformed
 
     private void jBAFtoGRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAFtoGRActionPerformed
-        //FiniteAutomaton f1 = new FiniteAutomaton(jCBFA.getItemAt(jCBFA.getSelectedIndex()));
-        //FiniteAutomaton f1 = new FiniteAutomaton();
-        //transformation.AFtoRG(f1);
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            transformation.AFtoRG(f1);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+        
     }//GEN-LAST:event_jBAFtoGRActionPerformed
 
     private void jBEditarERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarERActionPerformed
@@ -1408,7 +1492,6 @@ public class MainWindow extends javax.swing.JFrame {
                 new Transformation(this).DeSimone(regex);
                 
                 transformation.addNewRegularExpression(regex);
-                mapRE.put(exp, regex);
                 transformation.RemoveRegularExpression(mapRE.get(Selected));
                 mapRE.remove(Selected);
                 
@@ -1463,7 +1546,7 @@ public class MainWindow extends javax.swing.JFrame {
                         {
                             Matcher nonterm = nont.matcher(produc.charAt(0)+"");
                             Matcher term = ter.matcher(produc.charAt(1)+"");
-                            if(!nonterm.matches() || !term.matches()){
+                            if(!nonterm.matches() || (!term.matches() && produc.charAt(0) != '&')){
                                 return;
                             }  
                             if(!ga.getProductions().keySet().contains(produc.charAt(1)+"")){
@@ -1474,7 +1557,7 @@ public class MainWindow extends javax.swing.JFrame {
                     case 1:
                         {
                             Matcher nonterm = nont.matcher(produc.charAt(0)+"");
-                            if(!nonterm.matches()){
+                            if(!nonterm.matches() && produc.charAt(0) != '&'){
                                 return;
                             }      
                             break;
@@ -1499,11 +1582,83 @@ public class MainWindow extends javax.swing.JFrame {
             jTAEditarGR.setText("");
         }
     }//GEN-LAST:event_jListGRValueChanged
+
+    private void jListAFValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAFValueChanged
+        
+    }//GEN-LAST:event_jListAFValueChanged
+
+    private void jBVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVisualizarActionPerformed
+        try {
+            interfaceWindows.FiniteAutomaton fa = new interfaceWindows.FiniteAutomaton(mapFA.get(jListAF.getSelectedValue()));
+            fa.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+
+    }//GEN-LAST:event_jBVisualizarActionPerformed
+
+    private void jCDeterministicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCDeterministicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCDeterministicoActionPerformed
+
+    private void jBEnumAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnumAFActionPerformed
+        try {
+            int tam = (int) jSNum.getValue();
+            finite_automaton.FiniteAutomaton f1 =  mapFA.get(jCBAF.getItemAt(jCBAF.getSelectedIndex()));
+            Set<String> words = faalg.enumeration(f1, tam);
+            ListWords list = new ListWords(words);
+            list.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+    }//GEN-LAST:event_jBEnumAFActionPerformed
+
+    private void jBDifAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDifAFActionPerformed
+        try {
+            finite_automaton.FiniteAutomaton f1 = mapFA.get(jCBAF1.getItemAt(jCBAF1.getSelectedIndex()));
+            finite_automaton.FiniteAutomaton f2 = mapFA.get(jCBAF2.getItemAt(jCBAF2.getSelectedIndex()));
+            if(!f1.alphabet.equals(f2.alphabet)){
+                for(Character c: f1.alphabet){
+                    if(!f2.alphabet.contains(c)){
+                        f2.alphabet.add(c);
+                    }
+                }
+                for(Character c: f2.alphabet){
+                    if(!f1.alphabet.contains(c)){
+                        f1.alphabet.add(c);
+                    }
+                }
+            }
+            finite_automaton.FiniteAutomaton f2n = faalg.complement(f2);
+            f2n.setName("("+f2.getName()+")'");
+            if(jCComplem.isSelected()){
+                transformation.addNewFiniteAutomaton(f2n);
+            }
+            finite_automaton.FiniteAutomaton inters = faalg.intersection(f1, f2n);
+            if(jCComplem.isSelected()){
+                transformation.addNewFiniteAutomaton(f1.getComplement());
+                transformation.addNewFiniteAutomaton(f2n.getComplement());
+            }
+            if(jCUniao.isSelected()){
+                transformation.addNewFiniteAutomaton(inters.getUnion());
+            }
+            transformation.addNewFiniteAutomaton(inters);
+
+        } catch (Exception e) {
+            System.out.println("erro");
+        }
+    }//GEN-LAST:event_jBDifAFActionPerformed
    
     public void atualiza() {
         model3 = new DefaultListModel();
+        jCBAF.removeAllItems();
+        jCBAF1.removeAllItems();
+        jCBAF2.removeAllItems();
         for(finite_automaton.FiniteAutomaton fa: transformation.getListFA()){
             model3.addElement(fa.getName());
+            jCBAF.addItem(fa.getName());
+            jCBAF1.addItem(fa.getName());
+            jCBAF2.addItem(fa.getName());
         }
         jListAF.setModel(model3);
         
@@ -1512,16 +1667,11 @@ public class MainWindow extends javax.swing.JFrame {
         jCBGR1.removeAllItems();
         jCBGR2.removeAllItems();
         jCBGR3.removeAllItems();
-        //jCBGR4.removeAllItems();
-        //jCBGR5.removeAllItems();
         for(regular_grammar.RegularGrammar rg: transformation.getListRG()){
             model2.addElement(rg.getName());
             jCBGR1.addItem(rg.getName());
             jCBGR2.addItem(rg.getName());
             jCBGR3.addItem(rg.getName());
-            //jCBGR4.addItem(rg.getName());
-            //jCBGR5.addItem(rg.getName());
-        
         }
         jListGR.setModel(model2);
         
@@ -1602,7 +1752,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jBRevER;
     private javax.swing.JButton jBRevGR;
     private javax.swing.JButton jBUniaoGR;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBVisualizar;
     private javax.swing.JComboBox<String> jCBAF;
     private javax.swing.JComboBox<String> jCBAF1;
     private javax.swing.JComboBox<String> jCBAF2;
@@ -1612,9 +1762,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBGR1;
     private javax.swing.JComboBox<String> jCBGR2;
     private javax.swing.JComboBox<String> jCBGR3;
-    private javax.swing.JCheckBox jCComEquiv;
     private javax.swing.JCheckBox jCComplem;
     private javax.swing.JCheckBox jCCompleto;
+    private javax.swing.JCheckBox jCDeterministico;
     private javax.swing.JCheckBox jCSemInal;
     private javax.swing.JCheckBox jCSemMort;
     private javax.swing.JCheckBox jCUniao;
