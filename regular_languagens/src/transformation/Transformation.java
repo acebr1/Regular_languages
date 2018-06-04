@@ -66,10 +66,13 @@ public class Transformation {
             for(Character key : list ){
                 ArrayList<State> list2 = s.getTransitions().get(key);
                 for(State s2 : list2){
-                    gnew.setProductions(StaToStr.get(s), key + StaToStr.get(s2));
-                    if(s2.getIsFinal()){
-                        gnew.setProductions(StaToStr.get(s), key+"");
-                    }
+                    //aqui
+                        if(!s2.transition.keySet().isEmpty()){
+                            gnew.setProductions(StaToStr.get(s), key + StaToStr.get(s2));
+                        }
+                        if(s2.getIsFinal()){
+                            gnew.setProductions(StaToStr.get(s), key+"");
+                        }
                 }
                 
             }
